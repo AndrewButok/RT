@@ -1,0 +1,52 @@
+{
+  "figures":
+  [
+    {
+      "type": "sphere",
+      "center": [0.0, -1.0, 3.0],
+      "radius": 1,
+      "color": "0xff0000",
+      "reflection": 200
+    },
+    {
+      "type": "plane",
+      "normale": [0.0, -1.0, 0.0],
+      "d": -3,
+      "color": "0x00000ff",
+      "reflection": 200
+    },
+    {
+      "type": "cylinder",
+      "start": [0.0, 0.0, 10],
+      "vector": [0.0, 1.0, 1.0],
+      "radius": 1,
+      "color": "0x00000ff",
+      "reflection": 200
+    },
+    {
+      "type": "cone",
+      "start": [6.0, 0.0, 10],
+      "vector": [0.0, 1.0, 1.0],
+      "radius": 1,
+      "color": "0x00000ff",
+      "reflection": 200
+    }
+  ],
+  "lights":
+  [
+    {
+      "type": "ambient",
+      "intensivity": 0.5
+    },
+    {
+      "type": "point",
+      "position": [5.0, 5.0, -1.0],
+      "intensivity": 0.5
+    }
+  ],
+  "cam":
+  {
+    "position": [0.0, 0.0, 0.0],
+    "rotation": [0.0, 0.0, 0.0]
+  }
+}
