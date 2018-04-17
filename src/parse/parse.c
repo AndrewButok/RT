@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 11:47:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/17 13:56:05 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:51:34 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static void			parse_figure(JSON_Object *figure, t_view *view)
 	if (!json_object_dothas_value_of_type(figure, "type", JSONString))
 	{
 		ft_putendl_fd("Unknown figure found. Skipped", STDERR_FILENO);
-		return;
+		return ;
 	}
 	type = (char*)json_object_get_string(figure, "type");
 	if (ft_strequ(type, "sphere"))
@@ -54,7 +54,8 @@ static void			parse_figures(JSON_Object *root, t_view *view)
 	else if (json_object_dothas_value_of_type(root, "figures", JSONObject))
 		parse_figure(json_object_dotget_object(root, "figures"), view);
 	else
-		ft_putendl_fd("Figures field is not present. Please check your input.", STDERR_FILENO);
+		ft_putendl_fd("Figures field is not present. Please check your input.",
+				STDERR_FILENO);
 }
 
 static void			parse_light(JSON_Object *light, t_view *view)
@@ -64,7 +65,7 @@ static void			parse_light(JSON_Object *light, t_view *view)
 	if (!json_object_dothas_value_of_type(light, "type", JSONString))
 	{
 		ft_putendl_fd("Unknown light found. Skipped", STDERR_FILENO);
-		return;
+		return ;
 	}
 	type = (char*)json_object_get_string(light, "type");
 	if (ft_strequ(type, "ambient"))
@@ -96,7 +97,7 @@ static void			parse_lights(JSON_Object *root, t_view *view)
 		parse_light(json_object_dotget_object(root, "lights"), view);
 }
 
-void			parse_scene(char *filename, t_view *view)
+void				parse_scene(char *filename, t_view *view)
 {
 	JSON_Value		*root;
 	JSON_Value_Type	type;

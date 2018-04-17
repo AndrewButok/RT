@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/16 23:35:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/16 23:35:00 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:09:15 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,4 +37,3 @@ void		parse_cone(JSON_Object *cone, t_view *view)
 	parse_color_reflection(cone, fcone);
 	add_figure(fcone, view);
 }
-

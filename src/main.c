@@ -26,7 +26,7 @@ static void	view_init(t_view **view_ptr, char *filename)
 	*view_ptr = view;
 	space_init(filename, view);
 	view->mlx = mlx_init();
-	view->win = mlx_new_window(view->mlx, WIN_WIDTH, WIN_HEIGHT, "RTv1");
+	view->win = mlx_new_window(view->mlx, WIN_WIDTH, WIN_HEIGHT, "RT");
 	view->img = mlx_new_image(view->mlx, WIN_WIDTH, WIN_HEIGHT);
 	view->scene = (int*)mlx_get_data_addr(view->img, &view->bits_per_pixel,
 			&view->size_line, &view->endian);
@@ -55,7 +55,7 @@ int			main(int argc, char **argv)
 
 	if (argc != 2)
 	{
-		ft_putstr("usage: RTv1 scene_filename\n");
+		ft_putstr("usage: RT scene_filename\n");
 		return (0);
 	}
 	view_init(&view, argv[1]);
