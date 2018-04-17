@@ -39,10 +39,11 @@ void			parse_figures(JSON_Object *root, t_view *view)
 	{
 		array = json_object_dotget_array(root, "figures");
 		i = json_array_get_count(array);
-		while (--i > 0)
+		while (i > 0)
 		{
 			if ((figure = json_array_get_object(array, i - 1)) != NULL)
 				parse_figure(figure, view);
+			i--;
 		}
 	}
 	if (json_object_dothas_value_of_type(root, "figure", JSONObject))
