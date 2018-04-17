@@ -6,30 +6,35 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/13 11:47:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/13 11:47:00 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/17 13:56:05 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			parse_figure(JSON_Object *figure, t_view *view)
+static void			parse_figure(JSON_Object *figure, t_view *view)
 {
 	char	*type;
 
 	if (!json_object_dothas_value_of_type(figure, "type", JSONString))
-		return ;
+	{
+		ft_putendl_fd("Unknown figure found. Skipped", STDERR_FILENO);
+		return;
+	}
 	type = (char*)json_object_get_string(figure, "type");
 	if (ft_strequ(type, "sphere"))
 		parse_sphere(figure, view);
-	if (ft_strequ(type, "plane"))
+	else if (ft_strequ(type, "plane"))
 		parse_plane(figure, view);
-	if (ft_strequ(type, "cylinder"))
+	else if (ft_strequ(type, "cylinder"))
 		parse_cylinder(figure, view);
-	if (ft_strequ(type, "cone"))
+	else if (ft_strequ(type, "cone"))
 		parse_cone(figure, view);
+	else
+		ft_putendl_fd("Unknown figure found. Skipped", STDERR_FILENO);
 }
 
-void			parse_figures(JSON_Object *root, t_view *view)
+static void			parse_figures(JSON_Object *root, t_view *view)
 {
 	JSON_Array	*array;
 	JSON_Object	*figure;
@@ -46,8 +51,49 @@ void			parse_figures(JSON_Object *root, t_view *view)
 			i--;
 		}
 	}
-	if (json_object_dothas_value_of_type(root, "figure", JSONObject))
+	else if (json_object_dothas_value_of_type(root, "figures", JSONObject))
 		parse_figure(json_object_dotget_object(root, "figures"), view);
+	else
+		ft_putendl_fd("Figures field is not present. Please check your input.", STDERR_FILENO);
+}
+
+static void			parse_light(JSON_Object *light, t_view *view)
+{
+	char	*type;
+
+	if (!json_object_dothas_value_of_type(light, "type", JSONString))
+	{
+		ft_putendl_fd("Unknown light found. Skipped", STDERR_FILENO);
+		return;
+	}
+	type = (char*)json_object_get_string(light, "type");
+	if (ft_strequ(type, "ambient"))
+		parse_ambient(light, view);
+	else if (ft_strequ(type, "point"))
+		parse_point(light, view);
+	else
+		ft_putendl_fd("Unknown light found. Skipped", STDERR_FILENO);
+}
+
+static void			parse_lights(JSON_Object *root, t_view *view)
+{
+	JSON_Array	*array;
+	JSON_Object	*figure;
+	size_t		i;
+
+	if (json_object_dothas_value_of_type(root, "lights", JSONArray))
+	{
+		array = json_object_dotget_array(root, "lights");
+		i = json_array_get_count(array);
+		while (i > 0)
+		{
+			if ((figure = json_array_get_object(array, i - 1)) != NULL)
+				parse_light(figure, view);
+			i--;
+		}
+	}
+	else if (json_object_dothas_value_of_type(root, "lights", JSONObject))
+		parse_light(json_object_dotget_object(root, "lights"), view);
 }
 
 void			parse_scene(char *filename, t_view *view)
@@ -63,5 +109,7 @@ void			parse_scene(char *filename, t_view *view)
 		root_parse_error(view);
 	root_obj = json_value_get_object(root);
 	parse_figures(root_obj, view);
+	parse_lights(root_obj, view);
+	parse_cam(root_obj, view);
 	json_value_free(root);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   rtv1.h                                             :+:      :+:    :+:   */
+/*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/13 20:15:37 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/17 13:43:27 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -160,9 +160,15 @@ t_vector				parse_vector(JSON_Array *vector, t_vector def);
 int						check_hex(const char *str);
 int						ft_hexatoi(const char *str);
 void					add_figure(t_figure *figure, t_view *view);
-void					parse_color_reflection(JSON_Object *sphere, t_figure *figure);
+void					add_light(t_light *light, t_view *view);
+void					parse_color_reflection(JSON_Object *sphere,
+		t_figure *figure);
 void					parse_plane(JSON_Object *plane, t_view *view);
 void					parse_cylinder(JSON_Object *cylinder, t_view *view);
 void					parse_cone(JSON_Object *cone, t_view *view);
+void					parse_ambient(JSON_Object *light, t_view *view);
+void					parse_point(JSON_Object *light, t_view *view);
+void					parse_cam(JSON_Object *root, t_view *view);
+
 
 #endif
