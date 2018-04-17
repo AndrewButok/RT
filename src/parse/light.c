@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/17 13:20:20 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/17 14:48:54 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/17 14:49:00 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,6 @@ void	parse_ambient(JSON_Object *light, t_view *view)
 		ft_putendl_fd("Unknown or invalid ambient light intensity."
 						"Default applied",
 				STDERR_FILENO);
-	printf("%lf\n", llight->inten);
 	add_light(llight, view);
 }
 
@@ -43,9 +42,5 @@ void	parse_point(JSON_Object *light, t_view *view)
 		ft_putendl_fd("Unknown or invalid spot intensity."
 						"Default applied",
 				STDERR_FILENO);
-	printf("%lf\n", llight->o.x);
-	printf("%lf\n", llight->o.y);
-	printf("%lf\n", llight->o.z);
-	printf("%lf\n", llight->inten);
 	add_light(llight, view);
 }
