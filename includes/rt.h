@@ -153,23 +153,16 @@ double					check_cone_intersection(t_ray *ray, t_figure *figure);
 t_vector				get_cone_normale(t_vector p, t_figure *figure);
 t_figure				*cone_init(t_ray *axis, double k, int color,
 		double reflection);
-void					opening_error(t_view *view);
 void					parse_scene(char *filename, t_view *view);
-void					del_strs(char ***strs);
-double					ft_atod(char *str);
-void					parse_cam(char **params, t_view *view);
-int						check_paramnum(char **param, size_t n);
-t_vector				parse_vector(char *str, t_vector vector);
-void					vector_error(void);
-void					parse_fplane(char **params, t_view *view);
-void					add_light(t_light *light, t_view *view);
+void					root_parse_error(t_view *view);
+void					parse_sphere(JSON_Object *sphere, t_view *view);
+t_vector				parse_vector(JSON_Array *vector, t_vector def);
+int						check_hex(const char *str);
+int						ft_hexatoi(const char *str);
 void					add_figure(t_figure *figure, t_view *view);
-int						ft_hexatoi(char *str);
-int						check_hex(char *str);
-void					parse_fsphere(char **params, t_view *view);
-void					parse_fcylinder(char **params, t_view *view);
-void					parse_fcone(char **params, t_view *view);
-void					parse_light(char **params, t_view *view);
-double					get_double_param(char *str, char *name);
+void					parse_color_reflection(JSON_Object *sphere, t_figure *figure);
+void					parse_plane(JSON_Object *plane, t_view *view);
+void					parse_cylinder(JSON_Object *cylinder, t_view *view);
+void					parse_cone(JSON_Object *cone, t_view *view);
 
 #endif

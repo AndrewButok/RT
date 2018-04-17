@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   parse_error.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 19:02:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/03/16 19:02:00 by abutok           ###   ########.fr       */
+/*   Created: 2018/04/16 18:02:00 by abutok            #+#    #+#             */
+/*   Updated: 2018/04/16 18:02:00 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_light		*light_init(char type, t_vector o, double inten)
+void	root_parse_error(t_view *view)
 {
-	t_light *new_light;
-
-	new_light = (t_light*)malloc(sizeof(t_light));
-	new_light->type = type;
-	new_light->o = o;
-	new_light->inten = inten;
-	new_light->next = NULL;
-	return (new_light);
+	if (errno)
+		perror("File reading error");
+	else
+		ft_putendl("Invalid JSON file");
+	exit_x(view);
 }

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 static int				set_spectrum_brightness(int val, double brightness,
 		double bbrightness)

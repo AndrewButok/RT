@@ -10,9 +10,9 @@ find_library(APPKIT AppKit)
 AUX_SOURCE_DIRECTORY(libft LIBFT_SRC)
 set(PARSON_SRC parson/parson.c)
 set(SOURCE_FILES
-        includes/rtv1.h
+        includes/rt.h
         src/main.c
-        includes/rtv1.h
+        includes/rt.h
         src/vector/vector.c
         src/figure/sphere.c
         src/figure/figure.c
@@ -26,7 +26,7 @@ set(SOURCE_FILES
         src/figure/plane.c
         src/figure/cone.c
         src/parse/parse.c
-        src/parse/ft_hexatoi.c)
+        src/parse/ft_hexatoi.c src/parse/parse_error.c src/parse/parse_sphere.c src/parse/parse_plane.c src/parse/parse_cylinder.c src/parse/parse_cone.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})

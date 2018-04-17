@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 double			check_plane_intersection(t_ray *ray, t_figure *figure)
 {

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 double			check_cylinder_intersection(t_ray *ray, t_figure *figure)
 {

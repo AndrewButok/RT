@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 double		rt_lightr(t_vector l, t_vector normale,
 		t_vector view, t_vector buf)

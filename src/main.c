@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 #define ESC_KEY 53
 
 static void	view_init(t_view **view_ptr, char *filename)

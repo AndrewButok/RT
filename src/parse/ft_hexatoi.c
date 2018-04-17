@@ -10,17 +10,15 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
-int				check_hex(char *str)
+int				check_hex(const char *str)
 {
 	if (*str == '0' && *(str + 1) == 'x')
 		str += 2;
 	while ((*str >= '0' && *str <= '9') || (*str >= 'a' && *str <= 'f')
 			|| (*str >= 'A' && *str <= 'F'))
 		str++;
-	if (*str)
-		ft_putendl_fd("Invalid color. Default applied.", STDERR_FILENO);
 	return (*str == '\0');
 }
 
@@ -38,7 +36,7 @@ static int		hex_to_dec(char ch)
 	return (i);
 }
 
-int				ft_hexatoi(char *str)
+int				ft_hexatoi(const char *str)
 {
 	int val;
 

@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rtv1.h"
+#include "rt.h"
 
 void		add_light(t_light *light, t_view *view)
 {
@@ -49,8 +49,9 @@ void		space_init(char *filename, t_view *view)
 	view->space->figures = NULL;
 	view->space->lights = NULL;
 	parse_scene(filename, view);
+	add_light(light_init(LIGHT_TYPE_POINT, (t_vector){10, 0, -10}, 1), view);
 	if (view->space->cam == NULL)
-		view->space->cam = ray_init((t_vector){0, 0, 0},
+		view->space->cam = ray_init((t_vector){0, 0, -10},
 				(t_vector){0, 0, 0});
 }
 

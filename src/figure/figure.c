@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include <sys/types.h>
-#include "rtv1.h"
+#include "rt.h"
 
 t_ray		*ray_init(t_vector origin, t_vector vector)
 {
