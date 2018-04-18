@@ -107,7 +107,7 @@ typedef struct			s_triangle
 {
 	t_vector		points[3];
 	t_vector		normale;
-};
+}						t_triangle;
 
 typedef struct			s_figure
 {
