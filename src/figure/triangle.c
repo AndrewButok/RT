@@ -20,7 +20,7 @@ t_vector	count_triangle_normale(t_vector a[3]) // ataranov
 
     ab = vsub(a[0], a[1]);
     bc = vsub(a[1], a[2]);
-    return (vnormalize(vectors_miltuple(ab, bc)));
+    return (vnormalize(vmultiple(ab, bc)));
 }
 
 t_figure	*triangle_init(t_ray *ray, t_vector third_point, int color,

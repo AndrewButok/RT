@@ -97,7 +97,7 @@ typedef struct			s_icone
 
 typedef struct			s_icylinder
 {
-	t_vector		start;
+	t_vector		vertex;
 	t_vector		vector;
 	double			radius;
 
@@ -108,8 +108,6 @@ typedef struct			s_triangle
 	t_vector		points[3];
 	t_vector		normale;
 }						t_triangle;
-
-/* ************************************************************************** */
 
 typedef struct          s_squard
 {
@@ -124,8 +122,6 @@ typedef struct          s_cube
     t_vector        scale;
     t_squard        planes[6];
 }                       t_cube;
-
-/* ************************************************************************** */
 
 typedef struct			s_figure
 {
@@ -174,7 +170,7 @@ int						set_brightness(int color, double brightness,
 t_vector				vector_init(double x, double y, double z);
 double					vscalar_multiple(t_vector a, t_vector b);
 t_vector				vk_multiple(t_vector vector, double k);
-t_vector	            vectors_miltuple(t_vector a, t_vector b);
+t_vector	            vmultiple(t_vector a, t_vector b);
 t_vector				vsum(t_vector a, t_vector b);
 t_vector				vsub(t_vector a, t_vector b);
 t_vector				vnormalize(t_vector a);
