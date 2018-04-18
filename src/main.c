@@ -64,3 +64,4 @@ int			main(int argc, char **argv)
 	mlx_loop(view->mlx);
 	return (0);
 }
+
