@@ -42,6 +42,11 @@ void		add_figure(t_figure *figure, t_view *view)
 	figure1->next = figure;
 }
 
+t_vector	get_intersection(t_ray *ray, double k)
+{
+	return (vsum(vk_multiple(ray->v, k), ray->o));
+}
+
 void		space_init(char *filename, t_view *view)
 {
 	view->space = (t_space*)malloc(sizeof(t_space));

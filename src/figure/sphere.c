@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 11:58:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/03/16 11:58:00 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/18 15:24:41 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ double			get_sqr_solve(double a, double b, double d)
 	return (x1 <= x2 ? x1 : x2);
 }
 
-double			check_sphere_intersection(t_ray *ray, t_figure *figure)
+double			check_sphere_intersection(t_ray *ray, t_sphere *figure)
 {
 	t_vector	buf;
 	double		a;
@@ -47,7 +47,7 @@ double			check_sphere_intersection(t_ray *ray, t_figure *figure)
 		return (get_sqr_solve(a, b, d));
 }
 
-t_vector		get_sphere_normale(t_vector p, t_figure *f)
+t_vector		get_sphere_normale(t_vector p, t_sphere *f)
 {
 	return (vnormalize(vsub(p, f->center)));
 }
@@ -56,11 +56,14 @@ t_figure		*sphere_init(t_vector center, double r, int color,
 		double reflection)
 {
 	t_figure *new_figure;
+	t_sphere *sphere;
 
 	new_figure = (t_figure*)malloc(sizeof(t_figure));
-	new_figure->type = FIGURE_TYPE_SPHERE;
-	new_figure->center = center;
-	new_figure->radius = r;
+	new_figure->type = Sphere;
+	sphere = (t_sphere*)malloc(sizeof(t_sphere));
+	new_figure->figure = sphere;
+	sphere->center = center;
+	sphere->radius = r;
 	new_figure->color = color;
 	new_figure->reflection = reflection;
 	new_figure->next = NULL;

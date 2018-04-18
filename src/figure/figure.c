@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 11:58:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/03/16 11:58:00 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/18 16:20:16 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,32 +25,27 @@ t_ray		*ray_init(t_vector origin, t_vector vector)
 
 t_vector	get_normale(t_vector ray, t_figure *f)
 {
-	if (f->type == FIGURE_TYPE_SPHERE)
-		return (get_sphere_normale(ray, f));
-	else if (f->type == FIGURE_TYPE_PLANE)
-		return (get_plane_normale(ray, f));
-	else if (f->type == FIGURE_TYPE_CYLINDER)
-		return (get_cylinder_normale(ray, f));
-	else if (f->type == FIGURE_TYPE_CONE)
-		return (get_cone_normale(ray, f));
+	if (f->type == Sphere)
+		return (get_sphere_normale(ray, f->figure));
+	else if (f->type == InfinitePlane)
+		return (get_plane_normale(f->figure));
+	else if (f->type == InfiniteCylinder)
+		return (get_cylinder_normale(ray, f->figure));
+	else if (f->type == InfiniteCone)
+		return (get_cone_normale(ray, f->figure));
 	return ((t_vector){0, 0, 0});
-}
-
-t_vector	get_intersection(t_ray *ray, double k)
-{
-	return (vsum(vk_multiple(ray->v, k), ray->o));
 }
 
 double		check_intersection(t_ray *ray, t_figure *figure)
 {
-	if (figure->type == FIGURE_TYPE_SPHERE)
-		return (check_sphere_intersection(ray, figure));
-	else if (figure->type == FIGURE_TYPE_PLANE)
-		return (check_plane_intersection(ray, figure));
-	else if (figure->type == FIGURE_TYPE_CYLINDER)
-		return (check_cylinder_intersection(ray, figure));
-	else if (figure->type == FIGURE_TYPE_CONE)
-		return (check_cone_intersection(ray, figure));
+	if (figure->type == Sphere)
+		return (check_sphere_intersection(ray, figure->figure));
+	else if (figure->type == InfinitePlane)
+		return (check_plane_intersection(ray, figure->figure));
+	else if (figure->type == InfiniteCylinder)
+		return (check_cylinder_intersection(ray, figure->figure));
+	else if (figure->type == InfiniteCone)
+		return (check_cone_intersection(ray, figure->figure));
 	return (-1);
 }
 

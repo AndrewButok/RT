@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/17 13:43:27 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,10 +26,6 @@
 # define FOV_Y 30
 # define LIGHT_TYPE_AMBIENT 0
 # define LIGHT_TYPE_POINT 1
-# define FIGURE_TYPE_PLANE 0
-# define FIGURE_TYPE_SPHERE 1
-# define FIGURE_TYPE_CYLINDER 2
-# define FIGURE_TYPE_CONE 3
 
 typedef union			u_color
 {
@@ -71,14 +67,54 @@ typedef struct			s_ray
 	t_vector		v;
 }						t_ray;
 
-typedef struct			s_figure
+typedef enum			e_figure_type
 {
-	char			type;
+	InfinitePlane = 0,
+	Sphere = 1,
+	InfiniteCylinder = 2,
+	InfiniteCone = 3,
+	Triangle = 4
+}						t_figure_type;
+
+typedef struct			s_iplane
+{
+	t_vector		normale;
+	t_vector		point;
+}						t_iplane;
+
+typedef struct			s_sphere
+{
 	t_vector		center;
 	double			radius;
-	t_vector		axis;
+}						t_sphere;
+
+typedef struct			s_icone
+{
+	t_vector		vertex;
+	t_vector		vector;
+	double			radius;
+}						t_icone;
+
+typedef struct			s_icylinder
+{
+	t_vector		vertex;
+	t_vector		vector;
+	double			radius;
+
+}						t_icylinder;
+
+typedef struct			s_triangle
+{
+	t_vector		points[3];
+	t_vector		normale;
+};
+
+typedef struct			s_figure
+{
+	void			*figure;
 	int				color;
 	double			reflection;
+	t_figure_type	type;
 	struct s_figure	*next;
 }						t_figure;
 
@@ -125,16 +161,19 @@ t_vector				vsub(t_vector a, t_vector b);
 t_vector				vnormalize(t_vector a);
 double					vlen(t_vector a);
 t_light					*light_init(char type, t_vector o, double intencity);
-double					check_sphere_intersection(t_ray *ray, t_figure *figure);
+double					check_sphere_intersection(t_ray *ray, t_sphere *sphere);
 double					get_sqr_solve(double a, double b, double d);
 t_vector				get_normale(t_vector ray, t_figure *f);
-t_vector				get_sphere_normale(t_vector p, t_figure *f);
+
+t_vector				get_sphere_normale(t_vector p, t_sphere *f);
 t_figure				*sphere_init(t_vector center, double r, int color,
 		double reflection);
-double					check_plane_intersection(t_ray *ray, t_figure *figure);
-t_vector				get_plane_normale(t_vector p, t_figure *f);
-t_figure				*plane_init(t_vector normale, double d, int color,
+
+t_figure				*plane_init(t_vector normale, t_vector point, int color,
 		double reflection);
+t_vector				get_plane_normale(t_iplane *plane);
+double					check_plane_intersection(t_ray *ray, t_iplane *plane);
+
 double					check_intersection(t_ray *ray, t_figure *figure);
 int						check_intersections(t_ray *ray, t_figure *figures);
 t_vector				get_intersection(t_ray *ray, double k);
@@ -144,15 +183,18 @@ void					cam_rotate(t_ray *ray, t_vector vector);
 void					rotate_x(t_vector *ps, double l);
 void					rotate_y(t_vector *ps, double l);
 void					rotate_z(t_vector *ps, double l);
+
 double					check_cylinder_intersection(t_ray *ray,
-		t_figure *figure);
+		t_icylinder *cylinder);
 t_figure				*cylinder_init(t_ray *axis, double radius, int color,
 		double reflection);
-t_vector				get_cylinder_normale(t_vector p, t_figure *figure);
-double					check_cone_intersection(t_ray *ray, t_figure *figure);
-t_vector				get_cone_normale(t_vector p, t_figure *figure);
+t_vector				get_cylinder_normale(t_vector p, t_icylinder *cylinder);
+
+double					check_cone_intersection(t_ray *ray, t_icone *cone);
+t_vector				get_cone_normale(t_vector p, t_icone *cone);
 t_figure				*cone_init(t_ray *axis, double k, int color,
 		double reflection);
+
 void					parse_scene(char *filename, t_view *view);
 void					root_parse_error(t_view *view);
 void					parse_sphere(JSON_Object *sphere, t_view *view);

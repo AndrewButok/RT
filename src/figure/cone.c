@@ -6,13 +6,13 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/04 14:33:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/04 14:33:00 by abutok           ###   ########.fr       */
+/*   Updated: 2018/04/18 16:08:54 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-double			check_cone_intersection(t_ray *ray, t_figure *figure)
+double			check_cone_intersection(t_ray *ray, t_icone *cone)
 {
 	double a;
 	double b;
@@ -20,29 +20,29 @@ double			check_cone_intersection(t_ray *ray, t_figure *figure)
 	double d;
 
 	a = vscalar_multiple(ray->v, ray->v) -
-			((1 + pow(figure->radius, 2)) *
-			(pow(vscalar_multiple(ray->v, figure->axis), 2)));
-	b = 2 * (vscalar_multiple(ray->v, vsub(ray->o, figure->center)) -
-			((1 + pow(figure->radius, 2)) *
-			vscalar_multiple(ray->v, figure->axis) *
-			vscalar_multiple(vsub(ray->o, figure->center), figure->axis)));
-	c = vscalar_multiple(vsub(ray->o, figure->center),
-			vsub(ray->o, figure->center)) -
-			((1 + pow(figure->radius, 2)) *
-			(pow(vscalar_multiple(vsub(ray->o, figure->center),
-					figure->axis), 2)));
+			((1 + pow(cone->radius, 2)) *
+			(pow(vscalar_multiple(ray->v, cone->vector), 2)));
+	b = 2 * (vscalar_multiple(ray->v, vsub(ray->o, cone->vertex)) -
+			((1 + pow(cone->radius, 2)) *
+			vscalar_multiple(ray->v, cone->vector) *
+			vscalar_multiple(vsub(ray->o, cone->vertex), cone->vector)));
+	c = vscalar_multiple(vsub(ray->o, cone->vertex),
+			vsub(ray->o, cone->vertex)) -
+			((1 + pow(cone->radius, 2)) *
+			(pow(vscalar_multiple(vsub(ray->o, cone->vertex),
+					cone->vector), 2)));
 	d = pow(b, 2) - 4 * a * c;
 	return (get_sqr_solve(a, b, d));
 }
 
-t_vector		get_cone_normale(t_vector p, t_figure *figure)
+t_vector		get_cone_normale(t_vector p, t_icone *cone)
 {
 	double		m;
 	t_vector	res;
 
-	m = pow(vlen(vsub(p, figure->center)), 2) / vscalar_multiple(vsub(p,
-			figure->center), figure->axis);
-	res = vsum(figure->center, vk_multiple(figure->axis, m));
+	m = pow(vlen(vsub(p, cone->vertex)), 2) / vscalar_multiple(vsub(p,
+			cone->vertex), cone->vector);
+	res = vsum(cone->vertex, vk_multiple(cone->vector, m));
 	res = vnormalize(vsub(p, res));
 	return (res);
 }
@@ -50,16 +50,19 @@ t_vector		get_cone_normale(t_vector p, t_figure *figure)
 t_figure		*cone_init(t_ray *axis, double k, int color,
 		double reflection)
 {
-	t_figure *new_figure;
+	t_figure	*new_figure;
+	t_icone		*cone;
 
 	new_figure = (t_figure*)malloc(sizeof(t_figure));
-	new_figure->type = FIGURE_TYPE_CONE;
-	new_figure->center = axis->o;
-	new_figure->radius = k;
+	new_figure->type = InfiniteCone;
+	cone = (t_icone*)malloc(sizeof(t_icone));
+	new_figure->figure = cone;
+	cone->vertex = axis->o;
+	cone->radius = k;
 	new_figure->color = color;
 	new_figure->reflection = reflection;
-	new_figure->next = NULL;
-	new_figure->axis = vnormalize(axis->v);
+	cone->vector = vnormalize(axis->v);
 	free(axis);
+	new_figure->next = NULL;
 	return (new_figure);
 }
