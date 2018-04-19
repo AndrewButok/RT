@@ -97,7 +97,7 @@ typedef struct			s_icone
 
 typedef struct			s_icylinder
 {
-	t_vector		start;
+	t_vector		vertex;
 	t_vector		vector;
 	double			radius;
 
