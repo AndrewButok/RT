@@ -97,7 +97,7 @@ typedef struct			s_icone
 
 typedef struct			s_icylinder
 {
-	t_vector		vertex;
+	t_vector		start;
 	t_vector		vector;
 	double			radius;
 
@@ -211,6 +211,7 @@ void					parse_cone(JSON_Object *cone, t_view *view);
 void					parse_ambient(JSON_Object *light, t_view *view);
 void					parse_point(JSON_Object *light, t_view *view);
 void					parse_cam(JSON_Object *root, t_view *view);
+void					parse_triangle(JSON_Object *triangle, t_view *view);
 
 
 #endif

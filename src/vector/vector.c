@@ -32,9 +32,9 @@ t_vector	vk_multiple(t_vector vector, double k)
 	return ((t_vector){vector.x * k, vector.y * k, vector.z * k});
 }
 
-t_vector	vis_equal(t_vector vector1, t_vector vector2)
+int			vis_equal(t_vector vector1, t_vector vector2)
 {
 	return (vector1.x == vector2.x &&
 			vector1.y == vector2.y &&
-			vector1.z == vector2.z)
+			vector1.z == vector2.z);
 }

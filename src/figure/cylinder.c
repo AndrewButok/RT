@@ -21,13 +21,13 @@ double			check_cylinder_intersection(t_ray *ray, t_icylinder *cylinder)
 
 	a = vscalar_multiple(ray->v, ray->v) -
 			pow(vscalar_multiple(ray->v, cylinder->vector), 2);
-	b = (vscalar_multiple(ray->v, vsub(ray->o, cylinder->vertex)) -
+	b = (vscalar_multiple(ray->v, vsub(ray->o, cylinder->start)) -
 			vscalar_multiple(ray->v, cylinder->vector) *
-			vscalar_multiple(vsub(ray->o, cylinder->vertex), cylinder->vector))
+			vscalar_multiple(vsub(ray->o, cylinder->start), cylinder->vector))
 			* 2;
-	c = vscalar_multiple(vsub(ray->o, cylinder->vertex),
-		vsub(ray->o, cylinder->vertex)) -
-		pow(vscalar_multiple(vsub(ray->o, cylinder->vertex), cylinder->vector),
+	c = vscalar_multiple(vsub(ray->o, cylinder->start),
+		vsub(ray->o, cylinder->start)) -
+		pow(vscalar_multiple(vsub(ray->o, cylinder->start), cylinder->vector),
 				2) -
 		pow(cylinder->radius, 2);
 	d = pow(b, 2) - 4 * a * c;
@@ -39,8 +39,8 @@ t_vector		get_cylinder_normale(t_vector p, t_icylinder *cylinder)
 	double		m;
 	t_vector	res;
 
-	m = vscalar_multiple(vsub(p, cylinder->vertex), cylinder->vector);
-	res = vsum(cylinder->vertex, vk_multiple(cylinder->vector, m));
+	m = vscalar_multiple(vsub(p, cylinder->start), cylinder->vector);
+	res = vsum(cylinder->start, vk_multiple(cylinder->vector, m));
 	res = vnormalize(vsub(p, res));
 	return (res);
 }
@@ -55,7 +55,7 @@ t_figure		*cylinder_init(t_ray *axis, double radius, int color,
 	new_figure->type = InfiniteCylinder;
 	cylinder = (t_icylinder*)malloc(sizeof(t_icylinder));
 	new_figure->figure = cylinder;
-	cylinder->vertex = axis->o;
+	cylinder->start = axis->o;
 	cylinder->vector = vnormalize(axis->v);
 	cylinder->radius = radius;
 	new_figure->color = color;
