@@ -14,26 +14,26 @@ set(SOURCE_FILES
         src/main.c
         includes/rt.h
         src/vector/vector.c
-        src/figure/sphere.c
+        src/figure/fsphere.c
         src/figure/figure.c
-        src/figure/cylinder.c
+        src/figure/fcylinder.c
         src/vector/vector2.c
         src/light/light.c
         src/do_rt.c
         src/color/color.c
         src/space.c
         src/vector/rotate.c
-        src/figure/plane.c
-        src/figure/cone.c
+        src/figure/fplane.c
+        src/figure/fcone.c
         src/parse/parse.c
         src/parse/ft_hexatoi.c
-        src/parse/error.c
-        src/parse/sphere.c
-        src/parse/plane.c
-        src/parse/cylinder.c
-        src/parse/cone.c src/parse/light.c src/parse/cam.c
-        src/parse/triangle.c
-        src/figure/triangle.c)
+        src/parse/perror.c
+        src/parse/psphere.c
+        src/parse/pplane.c
+        src/parse/pcylinder.c
+        src/parse/pcone.c src/parse/plight.c src/parse/pcam.c
+        src/parse/ptriangle.c
+        src/figure/ftriangle.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})

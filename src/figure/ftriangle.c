@@ -14,7 +14,6 @@
 
 t_vector	count_triangle_normale(t_vector a[3])
 {
-    t_vector    normale;
     t_vector    ab;
     t_vector    bc;
 

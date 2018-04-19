@@ -137,7 +137,18 @@
       "radius": 0.5,
       "color": "0xff0000",
       "reflection": 10
-    }
+    },
+	{
+		"type": "triangle",
+		"points":
+				[
+					[0, 0, 0],
+					[0, 1, 1],
+					[0, 0, 1]
+				],
+		"color": "0xff0000",
+		"reflection": 10
+	}
   ],
   "lights":
   [

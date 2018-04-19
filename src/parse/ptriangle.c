@@ -12,11 +12,13 @@
 
 #include "rt.h"
 
-int		check_array_type(JSON_Array *array, JSON_Value_Type type)
+int			check_array(JSON_Array *array, JSON_Value_Type type, size_t len)
 {
 	size_t	i;
 
 	i = json_array_get_count(array);
+	if (i != len)
+		return (0);
 	while (i > 0 && json_value_get_type(json_array_get_value(array, i - 1)) ==
 			type)
 		i--;
@@ -25,7 +27,18 @@ int		check_array_type(JSON_Array *array, JSON_Value_Type type)
 	return (0);
 }
 
-void	parse_triangle(JSON_Object *triangle, t_view *view)
+int			check_triangle_points(t_vector vector[3])
+{
+	int a;
+
+	if ((a = vis_equal(vector[0],vector[1]) || vis_equal(vector[2],vector[1]) ||
+			vis_equal(vector[0],vector[2])))
+		ft_putendl_fd("Triangle cannot have equal points. Figure skipped",
+				STDERR_FILENO);
+	return (a);
+}
+
+void		parse_triangle(JSON_Object *triangle, t_view *view)
 {
 	JSON_Array	*points;
 	t_figure	*figure;
@@ -33,20 +46,20 @@ void	parse_triangle(JSON_Object *triangle, t_view *view)
 	size_t		i;
 
 	if ((points = json_object_get_array(triangle, "points")) == NULL &&
-			json_array_get_count(points) != 3 &&
-			check_array_type(points, JSONArray) &&
-			check_array_type(json_array_get_array(points, 0), JSONNumber) &&
-			check_array_type(json_array_get_array(points, 1), JSONNumber) &&
-			check_array_type(json_array_get_array(points, 2), JSONNumber))
+			check_array(points, JSONArray, 3))
 		ft_putendl_fd("Triangle have no points array or this array is broken. "
 				"Figure skipped",
 				STDERR_FILENO);
 	i = 3;
 	while (i > 0)
 	{
+		v[i - 1] = parse_vector(json_array_get_array(points, i - 1),
+				(t_vector){0, 0, 0});
 		i--;
 	}
-
-	
-	
+	if (check_triangle_points(v))
+		return ;
+	figure = triangle_init(ray_init(v[0],v[1]), v[2], 0xffffff, 0);
+	parse_color_reflection(triangle, figure);
+	add_figure(figure, view);
 }

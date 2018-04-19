@@ -1,4 +1,4 @@
-NAME = libparson
+NAME = libparson.a
 GCC = gcc -Wall -Wextra -Werror -c
 SRC = parson.c
 OBJ = parson.o
@@ -18,3 +18,5 @@ clean:
 
 fclean: clean
 	if [ -f "libparson.a" ]; then rm -rf libparson.a; fi
+
+re: fclean all

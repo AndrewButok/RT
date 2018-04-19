@@ -11,6 +11,7 @@
 # **************************************************************************** #
 
 NAME = RT
+PARSON = ./parson/libparson.a
 #	C compiler and his default flags
 GCC = gcc -Wall -Wextra -Werror
 #	Libft linking
@@ -28,11 +29,11 @@ PARSEDIR = ./src/parse/
 #	Source files
 SRCFILES = do_rt.c main.c space.c
 COLORFILES = color.c
-FIGUREFILES = figure.c sphere.c plane.c cylinder.c cone.c triangle.c
+FIGUREFILES = fsphere.c fplane.c fcylinder.c fcone.c ftriangle.c figure.c
 LIGHTFILES = light.c
 VECTORFILES = vector.c vector2.c rotate.c
-PARSEFILES = cam.c cone.c cylinder.c error.c ft_hexatoi.c light.c parse.c plane.c \
-			sphere.c triangle.c
+PARSEFILES = pcam.c pcone.c pcylinder.c perror.c ft_hexatoi.c plight.c parse.c \
+				pplane.c psphere.c ptriangle.c
 #	Header folder
 INCLUDE = ./includes
 #	Binaries folder
@@ -56,7 +57,8 @@ PARSONINCLUDE = ./parson
 all: $(LIBFT) $(PARSON) $(NAME)
 
 $(NAME): $(BINDIR) $(BIN)
-	$(GCC) $(LINKLIB) -o $(NAME) $(BIN) -I $(LIBFTINCLUDE) -I $(INCLUDE) -I $(PARSONINCLUDE)
+	$(GCC) $(LINKLIB) -o $(NAME) $(BIN) -I $(LIBFTINCLUDE) -I $(INCLUDE) \
+		-I $(PARSONINCLUDE)
 
 $(BINDIR):
 	@if [ ! -d "$(BINDIR)" ]; then mkdir $(BINDIR); fi

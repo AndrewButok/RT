@@ -175,6 +175,7 @@ t_vector				vsum(t_vector a, t_vector b);
 t_vector				vsub(t_vector a, t_vector b);
 t_vector				vnormalize(t_vector a);
 double					vlen(t_vector a);
+int						vis_equal(t_vector vector1, t_vector vector2);
 t_light					*light_init(char type, t_vector o, double intencity);
 double					check_sphere_intersection(t_ray *ray, t_sphere *sphere);
 double					get_sqr_solve(double a, double b, double d);
@@ -208,6 +209,9 @@ t_vector				get_cylinder_normale(t_vector p, t_icylinder *cylinder);
 double					check_cone_intersection(t_ray *ray, t_icone *cone);
 t_vector				get_cone_normale(t_vector p, t_icone *cone);
 t_figure				*cone_init(t_ray *axis, double k, int color,
+		double reflection);
+
+t_figure				*triangle_init(t_ray *ray, t_vector third_point, int color,
 		double reflection);
 
 void					parse_scene(char *filename, t_view *view);
