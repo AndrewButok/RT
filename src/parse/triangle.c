@@ -30,13 +30,23 @@ void	parse_triangle(JSON_Object *triangle, t_view *view)
 	JSON_Array	*points;
 	t_figure	*figure;
 	t_vector	v[3];
+	size_t		i;
 
-	if ((points = json_object_get_array(triangle, "points")) == NULL ||
-			json_array_get_count(points) != 3 || check_array_type(points,
-			JSONArray))
+	if ((points = json_object_get_array(triangle, "points")) == NULL &&
+			json_array_get_count(points) != 3 &&
+			check_array_type(points, JSONArray) &&
+			check_array_type(json_array_get_array(points, 0), JSONNumber) &&
+			check_array_type(json_array_get_array(points, 1), JSONNumber) &&
+			check_array_type(json_array_get_array(points, 2), JSONNumber))
 		ft_putendl_fd("Triangle have no points array or this array is broken. "
 				"Figure skipped",
 				STDERR_FILENO);
+	i = 3;
+	while (i > 0)
+	{
+		i--;
+	}
+
 	
 	
 }
