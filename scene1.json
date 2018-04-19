@@ -23,6 +23,20 @@
       "reflection": 0
     },
     {
+      "type": "plane",
+      "normale":[1, 0, 0],
+      "point": [4, 0, 0],
+      "color": "0x00000aa",
+      "reflection": 0
+    },
+    {
+      "type": "plane",
+      "normale":[1, 0, 0],
+      "point": [-4, 0, 0],
+      "color": "0x00000aa",
+      "reflection": 0
+    },
+    {
       "type": "cylinder",
       "start": [-3.0, 0.0, 4],
       "vector": [0.0, 1.0, 0.0],
@@ -129,12 +143,12 @@
   [
     {
       "type": "point",
-      "position": [-7.0, 0.0, 0.0],
+      "position": [-3.0, 0.0, 0.0],
       "intensity": 0.5
     },
     {
       "type": "point",
-      "position": [7.0, 0.0, 0.0],
+      "position": [3.0, 0.0, 0.0],
       "intensity": 0.5
     }
   ],
