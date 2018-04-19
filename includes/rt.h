@@ -73,7 +73,8 @@ typedef enum			e_figure_type
 	Sphere = 1,
 	InfiniteCylinder = 2,
 	InfiniteCone = 3,
-	Triangle = 4
+	Triangle = 4,
+	Cube = 5
 }						t_figure_type;
 
 typedef struct			s_iplane

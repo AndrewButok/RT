@@ -25,14 +25,14 @@
     {
       "type": "plane",
       "normale":[1, 0, 0],
-      "point": [4, 0, 0],
+      "point": [5, 0, 0],
       "color": "0x00000aa",
       "reflection": 0
     },
     {
       "type": "plane",
       "normale":[1, 0, 0],
-      "point": [-4, 0, 0],
+      "point": [-5, 0, 0],
       "color": "0x00000aa",
       "reflection": 0
     },

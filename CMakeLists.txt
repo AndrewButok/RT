@@ -33,7 +33,7 @@ set(SOURCE_FILES
         src/parse/pcylinder.c
         src/parse/pcone.c src/parse/plight.c src/parse/pcam.c
         src/parse/ptriangle.c
-        src/figure/ftriangle.c)
+        src/figure/ftriangle.c src/figure/fcube.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})
