@@ -19,9 +19,9 @@ void		parse_cylinder(JSON_Object *cylinder, t_view *view)
 	fcylinder = cylinder_init(ray_init((t_vector){0, 0, 0},
 			(t_vector){0, -1, 0}), 1, 0xffffff, 0);
 	if (json_object_has_value_of_type(cylinder, "start", JSONArray))
-		((t_icylinder*)fcylinder->figure)->vertex =
+		((t_icylinder*)fcylinder->figure)->start =
 				parse_vector(json_object_get_array(cylinder,
-				"start"), ((t_icylinder*)fcylinder->figure)->vertex);
+				"start"), ((t_icylinder*)fcylinder->figure)->start);
 	else
 		ft_putendl_fd("Unknown cylinder start. Default applied", STDERR_FILENO);
 	if (json_object_has_value_of_type(cylinder, "vector", JSONArray))

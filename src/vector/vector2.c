@@ -12,6 +12,11 @@
 
 #include "rt.h"
 
+t_vector	vectors_miltuple(t_vector a, t_vector b)  // ataranov
+{
+    return ((t_vector){a.x * b.x, a.y * b.y, a.z * b.z});
+}
+
 t_vector	vsum(t_vector a, t_vector b)
 {
 	return ((t_vector){a.x + b.x,

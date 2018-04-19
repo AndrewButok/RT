@@ -97,7 +97,7 @@ typedef struct			s_icone
 
 typedef struct			s_icylinder
 {
-	t_vector		vertex;
+	t_vector		start;
 	t_vector		vector;
 	double			radius;
 
@@ -107,7 +107,25 @@ typedef struct			s_triangle
 {
 	t_vector		points[3];
 	t_vector		normale;
-};
+}						t_triangle;
+
+/* ************************************************************************** */
+
+typedef struct          s_squard
+{
+    t_vector		points[4];
+    t_vector		normale;
+}                       t_squard;
+
+typedef struct          s_cube
+{
+    t_vector        position;
+    t_vector        rotation;
+    t_vector        scale;
+    t_squard        planes[6];
+}                       t_cube;
+
+/* ************************************************************************** */
 
 typedef struct			s_figure
 {
@@ -156,6 +174,7 @@ int						set_brightness(int color, double brightness,
 t_vector				vector_init(double x, double y, double z);
 double					vscalar_multiple(t_vector a, t_vector b);
 t_vector				vk_multiple(t_vector vector, double k);
+t_vector	            vectors_miltuple(t_vector a, t_vector b);
 t_vector				vsum(t_vector a, t_vector b);
 t_vector				vsub(t_vector a, t_vector b);
 t_vector				vnormalize(t_vector a);
@@ -211,6 +230,7 @@ void					parse_cone(JSON_Object *cone, t_view *view);
 void					parse_ambient(JSON_Object *light, t_view *view);
 void					parse_point(JSON_Object *light, t_view *view);
 void					parse_cam(JSON_Object *root, t_view *view);
+void					parse_triangle(JSON_Object *triangle, t_view *view);
 
 
 #endif

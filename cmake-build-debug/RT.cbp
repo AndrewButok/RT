@@ -1,0 +1,450 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="RT"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RT">
+				<Option output="/Users/ataranov/RTClion/cmake-build-debug/RT" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ataranov/RTClion/includes"/>
+					<Add directory="/Users/ataranov/RTClion/parson"/>
+					<Add directory="/Users/ataranov/RTClion/libft/includes"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 RT"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="RT/fast">
+				<Option output="/Users/ataranov/RTClion/cmake-build-debug/RT" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ataranov/RTClion/includes"/>
+					<Add directory="/Users/ataranov/RTClion/parson"/>
+					<Add directory="/Users/ataranov/RTClion/libft/includes"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 RT/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="parson">
+				<Option output="/Users/ataranov/RTClion/cmake-build-debug/libparson.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ataranov/RTClion/includes"/>
+					<Add directory="/Users/ataranov/RTClion/parson"/>
+					<Add directory="/Users/ataranov/RTClion/libft/includes"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 parson"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="parson/fast">
+				<Option output="/Users/ataranov/RTClion/cmake-build-debug/libparson.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ataranov/RTClion/includes"/>
+					<Add directory="/Users/ataranov/RTClion/parson"/>
+					<Add directory="/Users/ataranov/RTClion/libft/includes"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 parson/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ft">
+				<Option output="/Users/ataranov/RTClion/cmake-build-debug/libft.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ataranov/RTClion/includes"/>
+					<Add directory="/Users/ataranov/RTClion/parson"/>
+					<Add directory="/Users/ataranov/RTClion/libft/includes"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="ft/fast">
+				<Option output="/Users/ataranov/RTClion/cmake-build-debug/libft.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/ataranov/RTClion/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/ataranov/RTClion/includes"/>
+					<Add directory="/Users/ataranov/RTClion/parson"/>
+					<Add directory="/Users/ataranov/RTClion/libft/includes"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/9.0.0/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 ft/fast"/>
+					<CompileFile command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j4 -f &quot;/Users/ataranov/RTClion/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/ataranov/RTClion/includes/rt.h">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_atoi.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_bzero.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_cshift.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_isalnum.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_isalpha.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_isascii.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_isdigit.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_islower.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_isprint.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_isupper.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_itoa.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_lstadd.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_lstdel.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_lstdelone.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_lstiter.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_lstmap.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_lstnew.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memalloc.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memccpy.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memchr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memcmp.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memcpy.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memdel.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memmove.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_memset.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putchar.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putchar_fd.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putendl.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putendl_fd.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putnbr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putnbr_fd.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putstr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_putstr_fd.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_sqrt.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strcat.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strchr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strclr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strcmp.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strcpy.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strdel.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strdup.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strequ.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_striter.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_striteri.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strjoin.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strlcat.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strlen.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strmap.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strmapi.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strncat.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strncmp.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strncpy.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strnequ.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strnew.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strnstr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strrchr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strsplit.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strstr.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strsub.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_strtrim.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_swap.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_tolower.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/ft_toupper.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/libft/get_next_line.c">
+			<Option target="ft"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/parson/parson.c">
+			<Option target="parson"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/parson/parson.h">
+			<Option target="parson"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/color/color.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/do_rt.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/figure/cone.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/figure/cylinder.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/figure/figure.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/figure/plane.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/figure/sphere.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/light/light.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/main.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/cam.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/cone.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/cylinder.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/error.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/ft_hexatoi.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/light.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/parse.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/plane.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/parse/sphere.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/space.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/vector/rotate.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/vector/vector.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/src/vector/vector2.c">
+			<Option target="RT"/>
+		</Unit>
+		<Unit filename="/Users/ataranov/RTClion/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

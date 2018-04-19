@@ -30,6 +30,8 @@ static void			parse_figure(JSON_Object *figure, t_view *view)
 		parse_cylinder(figure, view);
 	else if (ft_strequ(type, "cone"))
 		parse_cone(figure, view);
+//	else if (ft_strequ(type, "triangle"))
+//		parse_triangle(figure, view);
 	else
 		ft_putendl_fd("Unknown figure found. Skipped", STDERR_FILENO);
 }
