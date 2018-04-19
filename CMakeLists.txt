@@ -31,7 +31,9 @@ set(SOURCE_FILES
         src/parse/sphere.c
         src/parse/plane.c
         src/parse/cylinder.c
-        src/parse/cone.c src/parse/light.c src/parse/cam.c)
+        src/parse/cone.c src/parse/light.c src/parse/cam.c
+        src/parse/triangle.c
+        src/figure/triangle.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})

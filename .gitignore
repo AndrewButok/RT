@@ -1,2 +1,6 @@
 .idea/
 cmake-build-debug/
+obj
+objs
+libft.a
+libparson.a
