@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-t_vector	count_triangle_normale(t_vector a[3]) // ataranov
+t_vector	count_triangle_normale(t_vector a[3])
 {
     t_vector    normale;
     t_vector    ab;
