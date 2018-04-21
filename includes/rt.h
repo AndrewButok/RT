@@ -232,6 +232,8 @@ void					parse_ambient(JSON_Object *light, t_view *view);
 void					parse_point(JSON_Object *light, t_view *view);
 void					parse_cam(JSON_Object *root, t_view *view);
 void					parse_triangle(JSON_Object *triangle, t_view *view);
+t_figure				*cube_init(t_ray *pnr, t_vector scale, int color,
+		double reflection);
 
 
 #endif
