@@ -32,13 +32,6 @@ static void	view_init(t_view **view_ptr, char *filename)
 	SDL_UpdateWindowSurface(view->window);
 }
 
-int			do_keyboard(int key, t_view *view)
-{
-	if (key == SDLK_ESCAPE)
-		exit_x(view);
-	return (1);
-}
-
 int			exit_x(t_view *view)
 {
 	exit(1);
@@ -59,15 +52,14 @@ int			main(int argc, char **argv)
 	}
 	h = 0;
 	view_init(&view, argv[1]);
-	while (1)
+	while (!h)
     {
         while (SDL_PollEvent(&event))
-            if (event.type == SDL_KEYDOWN)
+            if (event.type == SDL_KEYDOWN &&
+				event.key.keysym.sym == SDLK_ESCAPE)
                 h = 1;
             else if (event.type == SDL_WINDOWEVENT &&
 					 event.window.event == SDL_WINDOWEVENT_CLOSE)
             	h = 1;
-		if (h)
-           	break;
     }
 }

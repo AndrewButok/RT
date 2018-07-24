@@ -20,8 +20,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <SDL.h>
-# define WIN_WIDTH 1280
-# define WIN_HEIGHT 720
+# define WIN_WIDTH 1440
+# define WIN_HEIGHT 900
 # define FOV_X 30
 # define FOV_Y 30
 # define LIGHT_TYPE_AMBIENT 0
