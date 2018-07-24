@@ -3,7 +3,7 @@ project(RT C)
 
 set(CMAKE_C_STANDARD 99)
 
-find_library(MLX mlx)
+find_library(SDL sdl2)
 find_library(OPENGL OpenGL)
 find_library(APPKIT AppKit)
 
@@ -33,10 +33,10 @@ set(SOURCE_FILES
         src/parse/pcylinder.c
         src/parse/pcone.c src/parse/plight.c src/parse/pcam.c
         src/parse/ptriangle.c
-        src/figure/ftriangle.c src/figure/fcube.c src/parse/pcube.c)
+        src/figure/ftriangle.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})
 add_executable(RT ${SOURCE_FILES})
-target_link_libraries(RT ft parson ${OPENGL} ${APPKIT} ${MLX} ${OPENCL})
-include_directories(includes parson libft/includes /usr/local/include)
+target_link_libraries(RT ft parson ${OPENGL} ${APPKIT} ${SDL} ${OPENCL})
+include_directories(includes parson libft/includes /usr/local/include /Library/Frameworks/SDL2.framework/Headers)

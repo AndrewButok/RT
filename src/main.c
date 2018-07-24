@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "rt.h"
-#define ESC_KEY 53
 
 static void	view_init(t_view **view_ptr, char *filename)
 {
@@ -25,19 +24,17 @@ static void	view_init(t_view **view_ptr, char *filename)
 	}
 	*view_ptr = view;
 	space_init(filename, view);
-	view->mlx = mlx_init();
-	view->win = mlx_new_window(view->mlx, WIN_WIDTH, WIN_HEIGHT, "RT");
-	view->img = mlx_new_image(view->mlx, WIN_WIDTH, WIN_HEIGHT);
-	view->scene = (int*)mlx_get_data_addr(view->img, &view->bits_per_pixel,
-			&view->size_line, &view->endian);
+	view->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
+			SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, 0);
+	view->surface = SDL_GetWindowSurface(view->window);
+	view->scene = (int*)view->surface->pixels;
 	do_rt(view);
-	mlx_put_image_to_window(view->mlx, view->win, view->img, 0, 0);
-	mlx_destroy_image(view->mlx, view->img);
+	SDL_UpdateWindowSurface(view->window);
 }
 
 int			do_keyboard(int key, t_view *view)
 {
-	if (key == ESC_KEY)
+	if (key == SDLK_ESCAPE)
 		exit_x(view);
 	return (1);
 }
@@ -51,16 +48,26 @@ int			exit_x(t_view *view)
 
 int			main(int argc, char **argv)
 {
-	t_view *view;
+	t_view		*view;
+	SDL_Event	event;
+	char		h;
 
 	if (argc != 2)
 	{
 		ft_putstr("usage: RT scene_filename\n");
 		return (0);
 	}
+	h = 0;
 	view_init(&view, argv[1]);
-	mlx_hook(view->win, 2, 0, &do_keyboard, view);
-	mlx_hook(view->win, 17, 1L << 17, &exit_x, view);
-	mlx_loop(view->mlx);
-	return (0);
+	while (1)
+    {
+        while (SDL_PollEvent(&event))
+            if (event.type == SDL_KEYDOWN)
+                h = 1;
+            else if (event.type == SDL_WINDOWEVENT &&
+					 event.window.event == SDL_WINDOWEVENT_CLOSE)
+            	h = 1;
+		if (h)
+           	break;
+    }
 }

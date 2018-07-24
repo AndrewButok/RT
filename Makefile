@@ -18,7 +18,7 @@ GCC = gcc -Wall -Wextra -Werror
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
 #	Libs linking
-LINKLIB = -framework OpenGL -framework AppKit -lmlx $(LINKLIBFT) $(LINKPARSON)
+LINKLIB = -framework OpenGL -framework AppKit -framework SDL2 $(LINKLIBFT) $(LINKPARSON)
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/
@@ -33,7 +33,7 @@ FIGUREFILES = fsphere.c fplane.c fcylinder.c fcone.c ftriangle.c figure.c
 LIGHTFILES = light.c
 VECTORFILES = vector.c vector2.c rotate.c
 PARSEFILES = pcam.c pcone.c pcylinder.c perror.c ft_hexatoi.c plight.c parse.c \
-				pplane.c psphere.c ptriangle.c fcube.c
+				pplane.c psphere.c ptriangle.c
 #	Header folder
 INCLUDE = ./includes
 #	Binaries folder
@@ -51,6 +51,8 @@ LIBFT = ./libft/libft.a
 LIBFTINCLUDE = ./libft/includes
 #	Parson header
 PARSONINCLUDE = ./parson
+#	SDL2 include
+SDLINCLUDE = /Library/Frameworks/SDL2.framework/Headers
 
 .NOTPARALLEL = all fclean clean re $(NAME)
 
@@ -58,28 +60,28 @@ all: $(LIBFT) $(PARSON) $(NAME)
 
 $(NAME): $(BINDIR) $(BIN)
 	$(GCC) $(LINKLIB) -o $(NAME) $(BIN) -I $(LIBFTINCLUDE) -I $(INCLUDE) \
-		-I $(PARSONINCLUDE)
+		-I $(PARSONINCLUDE) -I $(SDLINCLUDE)
 
 $(BINDIR):
 	@if [ ! -d "$(BINDIR)" ]; then mkdir $(BINDIR); fi
 
 $(BINDIR)%.o: $(PARSEDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(SRCDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(COLORDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(FIGUREDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(LIGHTDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(VECTORDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 clean:
 	make -C ./libft/ clean

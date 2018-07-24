@@ -39,5 +39,6 @@ t_figure	*triangle_init(t_ray *ray, t_vector third_point, int color,
 	new_figure->color = color;
 	new_figure->reflection = reflection;
 	new_figure->next = NULL;
+	new_figure->figure = triangle;
 	return (new_figure);
 }

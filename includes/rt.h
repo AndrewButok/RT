@@ -17,9 +17,9 @@
 # include "parson.h"
 # include <errno.h>
 # include <stdio.h>
-# include <mlx.h>
 # include <math.h>
 # include <fcntl.h>
+# include <SDL.h>
 # define WIN_WIDTH 1280
 # define WIN_HEIGHT 720
 # define FOV_X 30
@@ -110,20 +110,6 @@ typedef struct			s_triangle
 	t_vector		normale;
 }						t_triangle;
 
-typedef struct          s_squard
-{
-    t_vector		points[4];
-    t_vector		normale;
-}                       t_squard;
-
-typedef struct          s_cube
-{
-    t_vector        position;
-    t_vector        rotation;
-    t_vector        scale;
-    t_squard        planes[6];
-}                       t_cube;
-
 typedef struct			s_figure
 {
 	void			*figure;
@@ -154,13 +140,9 @@ typedef	struct			s_lrt
 
 typedef struct			s_view
 {
-	void			*mlx;
-	void			*win;
-	void			*img;
+	SDL_Window		*window;
+	SDL_Surface		*surface;
 	int				*scene;
-	int				bits_per_pixel;
-	int				size_line;
-	int				endian;
 	t_space			*space;
 }						t_view;
 
@@ -232,8 +214,5 @@ void					parse_ambient(JSON_Object *light, t_view *view);
 void					parse_point(JSON_Object *light, t_view *view);
 void					parse_cam(JSON_Object *root, t_view *view);
 void					parse_triangle(JSON_Object *triangle, t_view *view);
-t_figure				*cube_init(t_ray *pnr, t_vector scale, int color,
-		double reflection);
-
 
 #endif
