@@ -8,32 +8,26 @@ find_library(OPENGL OpenGL)
 find_library(APPKIT AppKit)
 
 AUX_SOURCE_DIRECTORY(libft LIBFT_SRC)
-set(PARSON_SRC parson/parson.c)
+set(PARSON_SRC parson/parson.c )
 set(SOURCE_FILES
         includes/rt.h
-        src/main.c
-        includes/rt.h
-        src/vector/vector.c
-        src/figure/fsphere.c
-        src/figure/figure.c
-        src/figure/fcylinder.c
-        src/vector/vector2.c
-        src/light/light.c
-        src/do_rt.c
-        src/color/color.c
-        src/space.c
-        src/vector/rotate.c
-        src/figure/fplane.c
-        src/figure/fcone.c
-        src/parse/parse.c
         src/parse/ft_hexatoi.c
-        src/parse/perror.c
-        src/parse/psphere.c
-        src/parse/pplane.c
-        src/parse/pcylinder.c
-        src/parse/pcone.c src/parse/plight.c src/parse/pcam.c
-        src/parse/ptriangle.c
-        src/figure/ftriangle.c)
+        src/main.c
+        src/parse/get_space.c
+        src/parse/get_sphere.c
+        src/parse/get_vector.c
+        src/parse/get_color_reflection.c
+        src/parse/get_infinite_plane.c
+        src/parse/get_infinite_cone.c
+        src/figures/ray.c
+        src/vector/vector.c
+        src/figures/infinite_cylinder.c
+        src/parse/get_infinite_cylinder.c
+        src/parse/get_light.c
+        src/figures/sphere.c
+        src/figures/infinite_plane.c
+        src/figures/infinite_cone.c
+        src/figures/infinite_cylinder.c src/figures/light_init.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})

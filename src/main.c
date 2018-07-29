@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 01:11:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/14 15:50:41 by abutok           ###   ########.fr       */
+/*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
+/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	view_init(t_view **view_ptr, char *filename)
+void view_init(t_view **view_ptr, char *filename)
 {
 	t_view		*view;
 
@@ -20,46 +20,44 @@ static void	view_init(t_view **view_ptr, char *filename)
 	view = (t_view*)malloc(sizeof(t_view));
 	if (errno != 0)
 	{
-		perror("View malloc error");
+		perror("View malloc error.");
+		return;
 	}
 	*view_ptr = view;
-	space_init(filename, view);
+	view->figures_count = 0;
+	view->lights_count = 0;
 	view->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
 			SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, 0);
 	view->surface = SDL_GetWindowSurface(view->window);
-	view->scene = (int*)view->surface->pixels;
-	do_rt(view);
+	view->scene = view->surface->pixels;
+	view->figures = NULL;
+	view->lights = NULL;
+	get_space(view, filename);
 	SDL_UpdateWindowSurface(view->window);
 }
 
-int			exit_x(t_view *view)
-{
-	exit(1);
-	view = NULL;
-	return (0);
-}
-
-int			main(int argc, char **argv)
+int		main(int argc, char** argv)
 {
 	t_view		*view;
-	SDL_Event	event;
-	char		h;
+	int			flag;
+	SDL_Event	event_iterator;
 
 	if (argc != 2)
-	{
 		ft_putstr("usage: RT scene_filename\n");
-		return (0);
+	else
+	{
+		view_init(&view, argv[1]);
+		flag = 0;
+		while (flag == 0)
+		{
+			while (SDL_PollEvent(&event_iterator))
+				if (event_iterator.type == SDL_KEYDOWN &&
+					event_iterator.key.keysym.sym == SDLK_ESCAPE)
+					flag = 1;
+				else if (event_iterator.type == SDL_WINDOWEVENT &&
+						 event_iterator.window.event == SDL_WINDOWEVENT_CLOSE)
+					flag = 1;
+		}
 	}
-	h = 0;
-	view_init(&view, argv[1]);
-	while (!h)
-    {
-        while (SDL_PollEvent(&event))
-            if (event.type == SDL_KEYDOWN &&
-				event.key.keysym.sym == SDLK_ESCAPE)
-                h = 1;
-            else if (event.type == SDL_WINDOWEVENT &&
-					 event.window.event == SDL_WINDOWEVENT_CLOSE)
-            	h = 1;
-    }
 }
+

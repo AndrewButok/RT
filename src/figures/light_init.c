@@ -1,22 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error.c                                            :+:      :+:    :+:   */
+/*   light_init.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/16 18:02:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/17 14:08:56 by abutok           ###   ########.fr       */
+/*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
+/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	root_parse_error(t_view *view)
+t_light		light_init(enum e_light type, cl_float3 position,
+		cl_float intensity)
 {
-	if (errno)
-		perror("File reading error");
-	else
-		ft_putendl("Invalid JSON file");
-	exit_x(view);
+	t_light light;
+
+	light.type = type;
+	light.position = position;
+	light.intensity = intensity;
+	return (light);
 }

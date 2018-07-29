@@ -38,7 +38,7 @@
     },
     {
       "type": "cylinder",
-      "start": [-3.0, 0.0, 4],
+      "point": [-3.0, 0.0, 4],
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
@@ -46,7 +46,7 @@
     },
     {
       "type": "cylinder",
-      "start": [3.0, 0.0, 4],
+      "point": [3.0, 0.0, 4],
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
@@ -54,7 +54,7 @@
     },
     {
       "type": "cylinder",
-      "start": [3.0, 0.0, 12],
+      "point": [3.0, 0.0, 12],
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
@@ -62,7 +62,7 @@
     },
     {
       "type": "cylinder",
-      "start": [-3.0, 0.0, 12],
+      "point": [-3.0, 0.0, 12],
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
@@ -138,17 +138,17 @@
       "color": "0xff0000",
       "reflection": 10
     },
-	{
-		"type": "triangle",
-		"points":
-				[
-					[0, 0, 0],
-					[0, 1, 1],
-					[0, 0, 1]
-				],
-		"color": "0xff0000",
-		"reflection": 10
-	}
+    {
+      "type": "triangle",
+      "points":
+      [
+        [0, 0, 0],
+        [0, 1, 1],
+        [0, 0, 1]
+      ],
+      "color": "0xff0000",
+      "reflection": 10
+    }
   ],
   "lights":
   [

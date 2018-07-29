@@ -22,29 +22,32 @@ LINKLIB = -framework OpenGL -framework AppKit -framework SDL2 $(LINKLIBFT) $(LIN
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/
-FIGUREDIR = ./src/figure/
+FIGUREDIR = ./src/figures/
 LIGHTDIR = ./src/light/
 VECTORDIR = ./src/vector/
 PARSEDIR = ./src/parse/
 #	Source files
-SRCFILES = do_rt.c main.c space.c
-COLORFILES = color.c
-FIGUREFILES = fsphere.c fplane.c fcylinder.c fcone.c ftriangle.c figure.c
-LIGHTFILES = light.c
-VECTORFILES = vector.c vector2.c rotate.c
-PARSEFILES = pcam.c pcone.c pcylinder.c perror.c ft_hexatoi.c plight.c parse.c \
-				pplane.c psphere.c ptriangle.c
+SRCFILES = main.c
+#COLORFILES = color.c
+FIGUREFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c ray.c
+#LIGHTFILES = light.c
+VECTORFILES = vector.c
+PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
+				get_color_reflection.c get_infinite_plane.c \
+				get_infinite_cone.c get_infinite_cylinder.c \
+				get_light.c
 #	Header folder
 INCLUDE = ./includes
 #	Binaries folder
 BINDIR = ./obj/
 #	Binaries list
 BIN = $(addprefix $(BINDIR), $(SRCFILES:.c=.o)) \
-		$(addprefix $(BINDIR), $(COLORFILES:.c=.o)) \
 		$(addprefix $(BINDIR), $(FIGUREFILES:.c=.o)) \
-		$(addprefix $(BINDIR), $(LIGHTFILES:.c=.o)) \
 		$(addprefix $(BINDIR), $(VECTORFILES:.c=.o)) \
 		$(addprefix $(BINDIR), $(PARSEFILES:.c=.o))
+#		$(addprefix $(BINDIR), $(COLORFILES:.c=.o)) \
+#		$(addprefix $(BINDIR), $(LIGHTFILES:.c=.o)) \
+
 #	Libft
 LIBFT = ./libft/libft.a
 #	Libft header
@@ -65,23 +68,26 @@ $(NAME): $(BINDIR) $(BIN)
 $(BINDIR):
 	@if [ ! -d "$(BINDIR)" ]; then mkdir $(BINDIR); fi
 
-$(BINDIR)%.o: $(PARSEDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(SRCDIR)%.c
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-$(BINDIR)%.o: $(COLORDIR)%.c
+$(BINDIR)%.o: $(PARSEDIR)%.c
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(FIGUREDIR)%.c
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-$(BINDIR)%.o: $(LIGHTDIR)%.c
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
-
 $(BINDIR)%.o: $(VECTORDIR)%.c
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+
+#$(BINDIR)%.o: $(COLORDIR)%.c
+#	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+
+#$(BINDIR)%.o: $(LIGHTDIR)%.c
+#	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+
+#
 
 clean:
 	make -C ./libft/ clean

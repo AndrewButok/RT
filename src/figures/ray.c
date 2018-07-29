@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   light.c                                            :+:      :+:    :+:   */
+/*   ray.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 19:02:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/03/16 19:02:00 by abutok           ###   ########.fr       */
+/*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
+/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-t_light		*light_init(char type, t_vector o, double inten)
+t_ray	ray_init(cl_float3 o, cl_float3 v)
 {
-	t_light *new_light;
+	t_ray ray;
 
-	new_light = (t_light*)malloc(sizeof(t_light));
-	new_light->type = type;
-	new_light->o = o;
-	new_light->inten = inten;
-	new_light->next = NULL;
-	return (new_light);
+	ray.o = o;
+	ray.v = v;
+	return (ray);
 }
