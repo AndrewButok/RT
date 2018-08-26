@@ -5,6 +5,7 @@ set(CMAKE_C_STANDARD 99)
 
 find_library(SDL sdl2)
 find_library(OPENGL OpenGL)
+find_library(OPENCL OpenCL)
 find_library(APPKIT AppKit)
 
 AUX_SOURCE_DIRECTORY(libft LIBFT_SRC)
@@ -27,7 +28,7 @@ set(SOURCE_FILES
         src/figures/sphere.c
         src/figures/infinite_plane.c
         src/figures/infinite_cone.c
-        src/figures/infinite_cylinder.c src/figures/light_init.c)
+        src/figures/infinite_cylinder.c src/figures/light_init.c src/cl.c src/cl2.c src/parse/get_cam.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})

@@ -58,7 +58,7 @@ void	get_light(t_view *view, JSON_Object *obj, size_t i)
 		else
 		{
 			ft_putendl_fd("Unknown figure found.Skipped.", STDERR_FILENO);
-			view->figures[i].type = BadFigure;
+			view->lights[i].type = BadLight;
 		}
 	}
 	else

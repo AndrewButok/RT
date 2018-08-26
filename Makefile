@@ -18,7 +18,7 @@ GCC = gcc -Wall -Wextra -Werror
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
 #	Libs linking
-LINKLIB = -framework OpenGL -framework AppKit -framework SDL2 $(LINKLIBFT) $(LINKPARSON)
+LINKLIB = -framework OpenGL -framework AppKit -framework SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/
@@ -27,15 +27,14 @@ LIGHTDIR = ./src/light/
 VECTORDIR = ./src/vector/
 PARSEDIR = ./src/parse/
 #	Source files
-SRCFILES = main.c
-#COLORFILES = color.c
-FIGUREFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c ray.c
-#LIGHTFILES = light.c
+SRCFILES = main.c cl.c cl2.c
+FIGUREFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c \
+				ray.c light_init.c
 VECTORFILES = vector.c
 PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
 				get_color_reflection.c get_infinite_plane.c \
 				get_infinite_cone.c get_infinite_cylinder.c \
-				get_light.c
+				get_light.c get_cam.c
 #	Header folder
 INCLUDE = ./includes
 #	Binaries folder

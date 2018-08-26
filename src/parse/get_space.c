@@ -53,7 +53,7 @@ void	choose_figure_parse(t_view *view, JSON_Value *root)
 		arr = json_value_get_array(root);
 		view->figures_count = json_array_get_count(arr);
 		view->figures = (t_figure*)malloc(sizeof(t_figure) *
-										  view->figures_count);
+				view->figures_count);
 		i = view->figures_count;
 		while (i > 0)
 		{
@@ -99,5 +99,6 @@ void	get_space(t_view *view, char *filename)
 	robj = json_value_get_object(root);
 	get_figures(view, robj);
 	get_lights(view, robj);
+	get_cam(view, robj);
 
 }

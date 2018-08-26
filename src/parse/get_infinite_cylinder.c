@@ -14,8 +14,8 @@
 
 void	get_infinite_cylinder(t_figure *figure, JSON_Object *obj)
 {
-	*figure = infinite_cylinder_init(ray_init((cl_float3){0, 0, 0},
-			(cl_float3){0, -1, 0}), 1, 0xffffff, 0);
+	*figure = infinite_cylinder_init(ray_init((cl_float3){{0, 0, 0}},
+			(cl_float3){{0, -1, 0}}), 1, 0xffffff, 0);
 	if (json_object_has_value_of_type(obj, "point", JSONArray))
 		figure->vector1 = get_vector(json_object_get_array(obj,"point"),
 									 figure->vector1);

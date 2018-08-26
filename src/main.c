@@ -33,6 +33,7 @@ void view_init(t_view **view_ptr, char *filename)
 	view->figures = NULL;
 	view->lights = NULL;
 	get_space(view, filename);
+	cl_init(view);
 	SDL_UpdateWindowSurface(view->window);
 }
 
