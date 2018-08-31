@@ -368,7 +368,7 @@ __kernel void do_rt(__global t_figure *figures, __global t_light *lights,
 {
 	int				i = get_global_id(get_work_dim() - 1), j, k;
 	t_ray			ray;
-	float 			step = 1.0f / (params[6] * params[6]);
+	float 			step = 1.0f / params[6];
 	t_color			buf;
 	unsigned int	r = 0,g = 0,b = 0;
 
@@ -403,5 +403,4 @@ __kernel void do_rt(__global t_figure *figures, __global t_light *lights,
 	buf.spectrum.green = g > 255 ? 255 : g;
 	buf.spectrum.blue = b > 255 ? 255 : b;
 	scene[i] = buf.color;
-	printf("%d\n", i);
 }
