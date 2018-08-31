@@ -53,14 +53,15 @@ void	cl_buf_init(t_view *view)
 										  sizeof(t_light) * view->lights_count, view->lights, &err);
 	view->cl->buf_cam = clCreateBuffer(view->cl->context, CL_MEM_USE_HOST_PTR,
 									   sizeof(t_ray), view->cam, &err);
-	view->params = (cl_int*)malloc(sizeof(cl_int) * 6);
+	view->params = (cl_int*)malloc(sizeof(cl_int) * 7);
 	view->params[0] = WIN_WIDTH;
 	view->params[1] = WIN_HEIGHT;
 	view->params[2] = FOV_X;
 	view->params[3] = FOV_Y;
 	view->params[4] = (int)view->figures_count;
-	view->params[5]= (int)view->lights_count;
-	view->cl->buf_param	= clCreateBuffer(view->cl->context, CL_MEM_USE_HOST_PTR, sizeof(cl_int) * 6,
+	view->params[5] = (int)view->lights_count;
+	view->params[6] = RAYS_PER_PIXEL;
+	view->cl->buf_param	= clCreateBuffer(view->cl->context, CL_MEM_USE_HOST_PTR, sizeof(cl_int) * 7,
 										view->params, &err);
 }
 

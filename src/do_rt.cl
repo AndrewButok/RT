@@ -366,16 +366,42 @@ void	cam_rotate(t_ray *ray, float3 rotate_v)
 __kernel void do_rt(__global t_figure *figures, __global t_light *lights,
 		__global t_ray *cam, __global int *scene, __global int *params)
 {
-	int		i = get_global_id(get_work_dim() - 1);
-	t_ray	ray;
+	int				i = get_global_id(get_work_dim() - 1), j, k;
+	t_ray			ray;
+	float 			step = 1.0f / (params[6] * params[6]);
+	t_color			buf;
+	unsigned int	r = 0,g = 0,b = 0;
 
-	ray.o = cam->o;
-	ray.v.x = (((i % params[0] + 0.5f) / params[0]) * 2.0f - 1.0f) *
-			(((float)params[0]) / params[1]) *
-			tan(M_PI_F / 360 * params[2]);
-	ray.v.y = (1.0f - 2.0f * ((i / params[0] + 0.5f) / params[1])) *
+
+	k = 0;
+	while (k < params[6])
+	{
+		j = 0;
+		while (j < params[6])
+		{
+			ray.o = cam->o;
+			ray.v.x = (((i % params[0] + (j * step)) / params[0]) * 2.0f - 1.0f) *
+				(((float)params[0]) / params[1]) *
+				tan(M_PI_F / 360 * params[2]);
+			ray.v.y = (1.0f - 2.0f * ((i / params[0] + (k * step)) / params[1])) *
 						 tan(M_PI_F / 360.0f * params[3]);
-	ray.v.z = 1;
-	cam_rotate(&ray, cam->v);
-	scene[i] = rt(figures, lights, &ray, params);
+			ray.v.z = 1;
+			cam_rotate(&ray, cam->v);
+			buf.color = rt(figures, lights, &ray, params);
+			r += buf.spectrum.red;
+			g += buf.spectrum.green;
+			b += buf.spectrum.blue;
+			j++;
+		}
+		k++;
+	}
+	buf.color = 0;
+	r /= params[6] * params[6];
+	g /= params[6] * params[6];
+	b /= params[6] * params[6];
+	buf.spectrum.red = r > 255 ? 255 : r;
+	buf.spectrum.green = g > 255 ? 255 : g;
+	buf.spectrum.blue = b > 255 ? 255 : b;
+	scene[i] = buf.color;
+	printf("%d\n", i);
 }

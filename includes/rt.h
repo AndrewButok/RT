@@ -23,6 +23,7 @@
 # include <SDL.h>
 # define WIN_WIDTH 800
 # define WIN_HEIGHT 600
+# define RAYS_PER_PIXEL 10
 # define FOV_X 30
 # define FOV_Y 30
 
@@ -124,7 +125,6 @@ cl_float				vector_length(cl_float3 vector);
 cl_float				vector_scalar_multiple(cl_float3 vector1,
 		cl_float3 vector2);
 void					cl_init(t_view *view);
-void					cl_read_buffer(t_view *view);
 void					cl_run_kernel(t_view *view);
 
 
