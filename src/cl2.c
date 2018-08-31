@@ -16,9 +16,6 @@ void	cl_run_kernel(t_view *view)
 {
 	clEnqueueNDRangeKernel(view->cl->queue, view->cl->kernel, 1, NULL,
 			&view->cl->works, NULL, 0, NULL, NULL);
-	clEnqueueReadBuffer(view->cl->queue, view->cl->buf_img, CL_TRUE, 0,
-						sizeof(cl_int) * WIN_HEIGHT * WIN_WIDTH,
-						view->scene, 0, NULL, NULL);
 	clFinish(view->cl->queue);
 }
 
