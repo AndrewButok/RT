@@ -26,13 +26,14 @@ void view_init(t_view **view_ptr, char *filename)
 	*view_ptr = view;
 	view->figures_count = 0;
 	view->lights_count = 0;
-	view->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, WIN_WIDTH, WIN_HEIGHT, 0);
-	view->surface = SDL_GetWindowSurface(view->window);
-	view->scene = view->surface->pixels;
 	view->figures = NULL;
 	view->lights = NULL;
 	get_space(view, filename);
+	view->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
+			SDL_WINDOWPOS_CENTERED, view->width, view->height, 0);
+	view->surface = SDL_GetWindowSurface(view->window);
+	view->scene = view->surface->pixels;
+
 	cl_init(view);
 	SDL_UpdateWindowSurface(view->window);
 }

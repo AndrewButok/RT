@@ -21,11 +21,6 @@
 # include <fcntl.h>
 # include <OpenCL/cl.h>
 # include <SDL.h>
-# define WIN_WIDTH 800
-# define WIN_HEIGHT 600
-# define RAYS_PER_PIXEL 3
-# define FOV_X 30
-# define FOV_Y 30
 
 enum					e_figure
 {
@@ -93,6 +88,9 @@ typedef struct			s_view
 	t_light			*lights;
 	size_t 			lights_count;
 	cl_int			*params;
+	cl_int 			width;
+	cl_int 			height;
+	cl_int 			rays_count;
 	t_ray			*cam;
 	t_cl			*cl;
 }						t_view;
@@ -109,6 +107,7 @@ void					get_infinite_cylinder(t_figure *figure,
 		JSON_Object *obj);
 void					get_lights(t_view *view, JSON_Object *root);
 void					get_cam(t_view *view, JSON_Object *root);
+void					get_params(t_view *view, JSON_Object *root);
 t_figure				sphere_init(cl_float3 center, cl_float radius,
 		cl_int color, cl_float reflection);
 t_figure				infinite_plane_init(cl_float3 normale, cl_float3 point,
@@ -126,5 +125,6 @@ cl_float				vector_scalar_multiple(cl_float3 vector1,
 		cl_float3 vector2);
 void					cl_init(t_view *view);
 void					cl_run_kernel(t_view *view);
+void					params_init(t_view *view);
 
 #endif

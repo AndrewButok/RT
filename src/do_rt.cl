@@ -222,7 +222,7 @@ int			check_intersections(float3 intersection, float3 light,
 
 	ray.o = intersection;
 	ray.v = light;
-	while (i < params[4])
+	while (i < params[2])
 	{
 		k = check_intersection(&ray, &(figures[i]));
 		if (k < 1 && k >= 1e-3)
@@ -288,7 +288,7 @@ int			count_light(__global t_figure *figures, __global t_light *lights,
 	if (dot(normale, ray->v) >= 0)
 		normale = normale * (-1);
 	i = 0;
-	while (i < params[5])
+	while (i < params[3])
 	{
 		if (lights[i].type == Ambient)
 			bright += lights[i].intensity;
@@ -319,7 +319,7 @@ int			rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 	float			len = INFINITY;
 
 
-	while (index < params[4])
+	while (index < params[2])
 	{
 		lbuf = check_intersection(ray, &(figures[index]));
 		if (lbuf >= 1.0f && lbuf < len)
@@ -350,7 +350,7 @@ void	cam_rotate(t_ray *ray, float3 rotate_v)
 	if (rotate_v.y != 0)
 	{
 		n1 = ray->v.x * cos(rotate_v.y) + ray->v.z * sin(rotate_v.y);
-		n1 = ray->v.z * cos(rotate_v.y) - ray->v.x * sin(rotate_v.y);
+		n2 = ray->v.z * cos(rotate_v.y) - ray->v.x * sin(rotate_v.y);
 		ray->v.x = n1;
 		ray->v.z = n2;
 	}
@@ -368,23 +368,23 @@ __kernel void do_rt(__global t_figure *figures, __global t_light *lights,
 {
 	int				i = get_global_id(get_work_dim() - 1), j, k;
 	t_ray			ray;
-	float 			step = 1.0f / params[6];
+	float 			step = 1.0f / params[4];
 	t_color			buf;
 	unsigned int	r = 0,g = 0,b = 0;
 
 
 	k = 0;
-	while (k < params[6])
+	while (k < params[4])
 	{
 		j = 0;
-		while (j < params[6])
+		while (j < params[4])
 		{
 			ray.o = cam->o;
 			ray.v.x = (((i % params[0] + (j * step)) / params[0]) * 2.0f - 1.0f) *
 				(((float)params[0]) / params[1]) *
-				tan(M_PI_F / 360 * params[2]);
+				tan(M_PI_F / 360 * 30);
 			ray.v.y = (1.0f - 2.0f * ((i / params[0] + (k * step)) / params[1])) *
-						 tan(M_PI_F / 360.0f * params[3]);
+						 tan(M_PI_F / 360.0f * 30);
 			ray.v.z = 1;
 			cam_rotate(&ray, cam->v);
 			buf.color = rt(figures, lights, &ray, params);
@@ -396,9 +396,9 @@ __kernel void do_rt(__global t_figure *figures, __global t_light *lights,
 		k++;
 	}
 	buf.color = 0;
-	r /= params[6] * params[6];
-	g /= params[6] * params[6];
-	b /= params[6] * params[6];
+	r /= params[4] * params[4];
+	g /= params[4] * params[4];
+	b /= params[4] * params[4];
 	buf.spectrum.red = r > 255 ? 255 : r;
 	buf.spectrum.green = g > 255 ? 255 : g;
 	buf.spectrum.blue = b > 255 ? 255 : b;

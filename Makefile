@@ -22,30 +22,28 @@ LINKLIB = -framework OpenGL -framework AppKit -framework SDL2 $(LINKLIBFT) $(LIN
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/
-FIGUREDIR = ./src/figures/
+SCENEDIR = ./src/scene_objects/
 LIGHTDIR = ./src/light/
 VECTORDIR = ./src/vector/
 PARSEDIR = ./src/parse/
 #	Source files
 SRCFILES = main.c cl.c cl2.c
-FIGUREFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c \
+SCENEFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c \
 				ray.c light_init.c
 VECTORFILES = vector.c
 PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
 				get_color_reflection.c get_infinite_plane.c \
 				get_infinite_cone.c get_infinite_cylinder.c \
-				get_light.c get_cam.c
+				get_light.c get_cam.c get_params.c
 #	Header folder
 INCLUDE = ./includes
 #	Binaries folder
 BINDIR = ./obj/
 #	Binaries list
 BIN = $(addprefix $(BINDIR), $(SRCFILES:.c=.o)) \
-		$(addprefix $(BINDIR), $(FIGUREFILES:.c=.o)) \
+		$(addprefix $(BINDIR), $(SCENEFILES:.c=.o)) \
 		$(addprefix $(BINDIR), $(VECTORFILES:.c=.o)) \
 		$(addprefix $(BINDIR), $(PARSEFILES:.c=.o))
-#		$(addprefix $(BINDIR), $(COLORFILES:.c=.o)) \
-#		$(addprefix $(BINDIR), $(LIGHTFILES:.c=.o)) \
 
 #	Libft
 LIBFT = ./libft/libft.a
@@ -74,7 +72,7 @@ $(BINDIR)%.o: $(SRCDIR)%.c
 $(BINDIR)%.o: $(PARSEDIR)%.c
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-$(BINDIR)%.o: $(FIGUREDIR)%.c
+$(BINDIR)%.o: $(SCENEDIR)%.c
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(VECTORDIR)%.c

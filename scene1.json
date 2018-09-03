@@ -172,5 +172,11 @@
   {
     "position": [0.0, 0, -10.0],
     "rotation": [0.0, 0.0, 0.0]
+  },
+  "params":
+  {
+    "width": 800,
+    "height": 600,
+    "antialias": 7
   }
 }

@@ -93,12 +93,12 @@ void	get_space(t_view *view, char *filename)
 	root = json_parse_file(filename);
 	if (root == NULL)
 	{
-		ft_putendl_fd("Parse error. Chech your file", STDERR_FILENO);
+		ft_putendl_fd("Parse error. Check your file", STDERR_FILENO);
 		exit(0);
 	}
 	robj = json_value_get_object(root);
 	get_figures(view, robj);
 	get_lights(view, robj);
 	get_cam(view, robj);
-
+	get_params(view, robj);
 }
