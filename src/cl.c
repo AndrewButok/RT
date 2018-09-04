@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-static char	*get_kernel()
+static char	*get_kernel(void)
 {
 	char	*rslt;
 	char	*a;
