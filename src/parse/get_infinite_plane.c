@@ -14,8 +14,7 @@
 
 void	get_infinite_plane(t_figure *figure, JSON_Object *obj)
 {
-	*figure = infinite_plane_init((cl_float3){{0.0f, 1.0f, 0.0f}}, (cl_float3){{0.0f, 0.0f, 0.0f}},
-			0xffffff, 0);
+	*figure = infinite_plane_init();
 	if (json_object_has_value_of_type(obj, "normale", JSONArray))
 		figure->vector1 = vector_normalize(get_vector(json_object_get_array(obj, "normale"),
 				figure->vector1));

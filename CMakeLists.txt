@@ -20,7 +20,6 @@ set(SOURCE_FILES
         src/parse/get_color_reflection.c
         src/parse/get_infinite_plane.c
         src/parse/get_infinite_cone.c
-        src/scene_objects/ray.c
         src/vector/vector.c
         src/scene_objects/infinite_cylinder.c
         src/parse/get_infinite_cylinder.c
@@ -28,7 +27,7 @@ set(SOURCE_FILES
         src/scene_objects/sphere.c
         src/scene_objects/infinite_plane.c
         src/scene_objects/infinite_cone.c
-        src/scene_objects/infinite_cylinder.c src/scene_objects/light_init.c src/cl.c src/cl2.c src/parse/get_cam.c src/parse/get_params.c)
+        src/scene_objects/infinite_cylinder.c src/scene_objects/light_init.c src/cl.c src/cl2.c src/parse/get_cam.c src/parse/get_params.c src/scene_objects/cylinder.c src/parse/get_cylinder.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})

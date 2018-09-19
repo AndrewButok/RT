@@ -12,16 +12,15 @@
 
 #include "rt.h"
 
-t_figure	infinite_cone_init(t_ray axis, cl_float k, cl_int color,
-					   cl_float reflection)
+t_figure	infinite_cone_init(void)
 {
 	t_figure figure;
 
-	figure.vector1 = axis.o;
-	figure.vector2 = axis.v;
-	figure.param1 = k;
-	figure.color = color;
-	figure.reflection = reflection;
+	figure.vector1 = (cl_float3){{0, 0, 0}};
+	figure.vector2 = (cl_float3){{0, -1, 0}};
+	figure.param1 = 1;
+	figure.color = 0xffffff;
+	figure.reflection = 0;
 	figure.type = InfiniteCone;
 	return (figure);
 }

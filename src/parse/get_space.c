@@ -29,16 +29,18 @@ void	get_figure(t_view *view, JSON_Object *figure, size_t i)
 			get_infinite_plane(&(view->figures[i]), figure);
 		else if (ft_strequ(type, "cone"))
 			get_infinite_cone(&(view->figures[i]),figure);
-		else if (ft_strequ(type, "cylinder"))
+		else if (ft_strequ(type, "infinite_cylinder"))
 			get_infinite_cylinder(&(view->figures[i]),figure);
+		else if (ft_strequ(type, "cylinder"))
+			get_cylinder(&(view->figures[i]),figure);
 		else
 		{
-			ft_putendl_fd("Unknown figure found.Skipped.", STDERR_FILENO);
+			ft_putendl_fd("Unknown figure found. Skipped.", STDERR_FILENO);
 			view->figures[i].type = BadFigure;
 		}
 	}
 	else
-		ft_putendl_fd("Unknown figure type.Skipped.",STDERR_FILENO);
+		ft_putendl_fd("Unknown figure type. Skipped.",STDERR_FILENO);
 
 }
 

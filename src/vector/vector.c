@@ -15,7 +15,7 @@
 cl_float	vector_scalar_multiple(cl_float3 vector1, cl_float3 vector2)
 {
 	return (vector1.x * vector2.x +
-			vector2.y * vector2.y +
+			vector1.y * vector2.y +
 			vector1.z * vector2.z);
 }
 

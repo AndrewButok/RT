@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ray.c                                              :+:      :+:    :+:   */
+/*   infinite_cylinder.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,13 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include <rt.h>
 
-t_ray	ray_init(cl_float3 o, cl_float3 v)
+t_figure	cylinder_init(void)
 {
-	t_ray ray;
+	t_figure figure;
 
-	ray.o = o;
-	ray.v = v;
-	return (ray);
+	figure.type = Cylinder;
+	figure.vector1 = (cl_float3){{0, 0, 0}};
+	figure.vector2 = (cl_float3){{0, -1, 0}};
+	figure.param1 = 1;
+	figure.param2 = 1;
+	figure.color = 0xffffff;
+	figure.reflection = 0;
+	return (figure);
 }

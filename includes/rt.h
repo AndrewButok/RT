@@ -28,7 +28,8 @@ enum					e_figure
 	Sphere = 1,
 	InfinitePlane = 2,
 	InfiniteCylinder = 3,
-	InfiniteCone = 4
+	InfiniteCone = 4,
+	Cylinder = 5
 };
 
 enum					e_light
@@ -105,18 +106,15 @@ void					get_infinite_plane(t_figure *figure, JSON_Object *obj);
 void					get_infinite_cone(t_figure *figure, JSON_Object *obj);
 void					get_infinite_cylinder(t_figure *figure,
 		JSON_Object *obj);
+void					get_cylinder(t_figure *figure, JSON_Object *obj);
 void					get_lights(t_view *view, JSON_Object *root);
 void					get_cam(t_view *view, JSON_Object *root);
 void					get_params(t_view *view, JSON_Object *root);
-t_figure				sphere_init(cl_float3 center, cl_float radius,
-		cl_int color, cl_float reflection);
-t_figure				infinite_plane_init(cl_float3 normale, cl_float3 point,
-		cl_int color, cl_float reflection);
-t_figure				infinite_cylinder_init(t_ray axis, cl_float radius,
-		cl_int color, cl_float reflection);
-t_figure				infinite_cone_init(t_ray axis, cl_float k,
-		cl_int color, cl_float reflection);
-t_ray					ray_init(cl_float3 o, cl_float3 v);
+t_figure				sphere_init();
+t_figure				cylinder_init();
+t_figure				infinite_plane_init();
+t_figure				infinite_cylinder_init();
+t_figure				infinite_cone_init();
 t_light					light_init(enum e_light type, cl_float3 position,
 		cl_float intens);
 cl_float3				vector_normalize(cl_float3 unnormalized);

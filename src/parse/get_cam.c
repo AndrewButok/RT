@@ -20,7 +20,6 @@ void	get_cam(t_view *view, JSON_Object *root)
 	if (cam == NULL)
 		return ;
 	view->cam = (t_ray*)malloc(sizeof(t_ray));
-	*(view->cam) = ray_init((cl_float3){{0, 0, 0}}, (cl_float3){{0, 0, 0}});
 	if (json_object_has_value_of_type(cam, "position", JSONArray))
 		view->cam->o = get_vector(json_object_get_array(cam,
 																 "position"), view->cam->o);

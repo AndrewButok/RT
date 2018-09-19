@@ -12,15 +12,14 @@
 
 #include "rt.h"
 
-t_figure	infinite_plane_init(cl_float3 normale, cl_float3 point, cl_int color,
-							cl_float reflection)
+t_figure	infinite_plane_init(void)
 {
 	t_figure	figure;
 
 	figure.type = InfinitePlane;
-	figure.vector1 = normale;
-	figure.vector2 = point;
-	figure.color = color;
-	figure.reflection = reflection;
+	figure.vector1 = (cl_float3){{0.0f, 1.0f, 0.0f}};
+	figure.vector2 = (cl_float3){{0.0f, 0.0f, 0.0f}};
+	figure.color = 0xffffff;
+	figure.reflection = 0;
 	return (figure);
 }

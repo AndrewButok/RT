@@ -14,7 +14,7 @@
 
 void	get_sphere(t_figure *figure, JSON_Object *obj)
 {
-	*figure = sphere_init((cl_float3){{0, 0, 0}}, 1, 0xffffff, 0);
+	*figure = sphere_init();
 	if (json_object_has_value_of_type(obj, "center", JSONArray))
 		figure->vector1 = get_vector(json_object_get_array(obj, "center"),
 				figure->vector1);

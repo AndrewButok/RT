@@ -12,16 +12,15 @@
 
 #include "rt.h"
 
-t_figure	infinite_cylinder_init(t_ray axis, cl_float radius, cl_int color,
-								   cl_float reflection)
+t_figure	infinite_cylinder_init(void)
 {
 	t_figure	figure;
 
 	figure.type = InfiniteCylinder;
-	figure.vector2 = vector_normalize(axis.v);
-	figure.vector1 = axis.o;
-	figure.param1 = radius;
-	figure.color = color;
-	figure.reflection = reflection;
+	figure.vector2 = (cl_float3){{0, -1, 0}};
+	figure.vector1 = (cl_float3){{0, 0, 0}};
+	figure.param1 = 1;
+	figure.color = 0xffffff;
+	figure.reflection = 0;
 	return (figure);
 }

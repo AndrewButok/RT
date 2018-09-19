@@ -12,15 +12,14 @@
 
 #include "rt.h"
 
-t_figure	sphere_init(cl_float3 center, cl_float radius, cl_int color,
-					cl_float reflection)
+t_figure	sphere_init(void)
 {
 	t_figure figure;
 
 	figure.type = Sphere;
-	figure.vector1 = center;
-	figure.param1 = radius;
-	figure.color = color;
-	figure.reflection = reflection;
+	figure.vector1 = (cl_float3){{0, 0, 0}};
+	figure.param1 = 1;
+	figure.color = 0xffffff;
+	figure.reflection = 0;
 	return (figure);
 }

@@ -16,7 +16,8 @@ enum			e_figure
 	Sphere = 1,
 	InfinitePlane = 2,
 	InfiniteCylinder = 3,
-	InfiniteCone = 4
+	InfiniteCone = 4,
+	Cylinder = 5
 };
 
 enum			e_light
@@ -131,6 +132,83 @@ float			check_infinite_cylinder_intersection(t_ray *ray, __global t_figure *figu
 		return (-1);
 }
 
+float			check_cap_intersection(t_ray *ray, __global t_figure *figure)
+{
+	float3	point, intersection;
+	float	d;
+
+	if (figure->vector2.x != 0 || figure->vector2.y != 0 || figure->vector2.z != 0)
+	{
+		if (dot(figure->vector1 - ray->o, ray->v - ray->o) < 0 &&
+			dot(figure->vector1 + figure->vector2 * figure->param2 - ray->o, ray->v - ray->o) < 0)
+			return (-1);
+		else if (dot(figure->vector1 - ray->o, ray->v - ray->o) < 0)
+			point = figure->vector1 + (figure->vector2 * figure->param2);
+		else if (dot((figure->vector1 + (figure->vector2 * figure->param2)) - ray->o, ray->v - ray->o) < 0)
+			point = figure->vector1;
+		else
+			point = length(figure->vector1 - ray->o) >
+					length ((figure->vector1 + (figure->vector2 * figure->param2)) - ray->o) ?
+					figure->vector1 + (figure->vector2 * figure->param2) : figure->vector1;
+		d = dot(figure->vector2, point - ray->o) / dot(figure->vector2, ray->v);
+		intersection = ray->v * d + ray->o;
+		if (length(intersection - point) <= figure->param1)
+			return (d);
+	}
+	return (-1);
+}
+
+float      check_cylinder_intersection(t_ray *ray, __global t_figure *figure)
+{
+	float  a;
+	float  b;
+	float  c;
+	float  d;
+	float  x1, x2;
+	float3  i1, i2;
+
+	a = dot(ray->v, ray->v) - pow(dot(ray->v, figure->vector2), 2);
+	b = dot(ray->v, ray->o - figure->vector1) - dot(ray->v, figure->vector2) *
+											dot(ray->o - figure->vector1, figure->vector2);
+	c = dot(ray->o - figure->vector1, ray->o - figure->vector1) -
+			pow(dot(ray->o - figure->vector1, figure->vector2), 2) -
+			pow(figure->param1, 2);
+	d = pow(b, 2.0f) - a * c;
+	if (d >= 0)
+	{
+		x1 = ((-b) + sqrt(d)) / a;
+		x2 = ((-b) - sqrt(d)) / a;
+		a = dot(ray->v, figure->vector2)
+				* x1 + dot(ray->o - figure->vector1, figure->vector2);
+		b = dot(ray->v, figure->vector2)
+			* x2 + dot(ray->o - figure->vector1, figure->vector2);
+		if ((x1 > 1e-3 && x2 > 1e-3 && !(a > 1e-3 && a < figure->param2) &&
+			!(b > 1e-3 && b < figure->param2)) ||
+			(x1 > 1e-3 && x2 > 1e-3 && !(a > 1e-3 && a < figure->param2) &&
+			(b > 1e-3 && b < figure->param2) && x1 < x2) ||
+			(x1 > 1e-3 && x2 > 1e-3 && (a > 1e-3 && a < figure->param2) &&
+			!(b > 1e-3 && b < figure->param2) && x1 >= x2) ||
+			(x1 > 1e-3 && x2 <= 1e-3 && !(a > 1e-3 && a < figure->param2) &&
+			x1 >= x2) ||
+			(x1 <= 1e-3 && x2 > 1e-3 && !(b > 1e-3 && b < figure->param2) &&
+			x1 < x2))
+			return (check_cap_intersection(ray, figure));
+		if ((x1 > 1e-3 && x2 > 1e-3 && (b > 1e-3 && b < figure->param2)
+			&& x1 >= x2) ||
+			(x1 <= 1e-3 && x2 > 1e-3 && (b > 1e-3 && b < figure->param2)
+			&& x1 < x2))
+			return (x2);
+		if ((x1 > 1e-3 && x2 > 1e-3 && (a > 1e-3 && a < figure->param2) &&
+			x1 < x2)
+			|| (x1 > 1e-3 && x2 <= 1e-3) && (a > 1e-3 && a < figure->param2) &&
+			x1 >= x2)
+			return (x1);
+		return (-1);
+	}
+	else
+		return (-1);
+}
+
 float 			check_infinite_cone_intersection(t_ray *ray, __global t_figure *figure)
 {
 	float a, b, c, d, x1, x2;
@@ -170,6 +248,8 @@ float			check_intersection(t_ray *ray, __global t_figure *figure)
 		return (check_infinite_cylinder_intersection(ray, figure));
 	if (figure->type == InfiniteCone)
 		return (check_infinite_cone_intersection(ray, figure));
+	if (figure->type == Cylinder)
+		return (check_cylinder_intersection(ray, figure));
 	return (-1);
 }
 
@@ -200,6 +280,18 @@ float3		get_infinite_cylinder_normale(float3 *intersection, __global t_figure *f
 	return (normalize(*intersection - (figure->vector1 + (figure->vector2 * m))));
 }
 
+float3		get_cylinder_normale(float3 *intersection, __global t_figure *figure)
+{
+	float m;
+
+	m = dot(*intersection - figure->vector1,
+			figure->vector2);
+	if (m > 1e-3 && m < figure->param2)
+		return (normalize(*intersection - (figure->vector1 + (figure->vector2 * m))));
+	else
+		return (figure->vector2);
+}
+
 float3 		get_normale(float3 *intersection, __global t_figure *figure)
 {
 	if (figure->type == Sphere)
@@ -210,11 +302,13 @@ float3 		get_normale(float3 *intersection, __global t_figure *figure)
 		return (get_infinite_cylinder_normale(intersection, figure));
 	if (figure->type == InfiniteCone)
 		return (get_infinite_cone_normale(intersection, figure));
+	if (figure->type == Cylinder)
+		return (get_cylinder_normale(intersection, figure));
 	return (-1);
 }
 
 int			check_intersections(float3 intersection, float3 light,
-		__global t_figure *figures, __global int *params)
+		__global t_figure *figures, __global int *params, __global t_figure *cf)
 {
 	int		i = 0;
 	float	k;
@@ -224,6 +318,7 @@ int			check_intersections(float3 intersection, float3 light,
 	ray.v = light;
 	while (i < params[2])
 	{
+		k = -1.0f;
 		k = check_intersection(&ray, &(figures[i]));
 		if (k < 1 && k >= 1e-3)
 			return (1);
@@ -295,7 +390,7 @@ int			count_light(__global t_figure *figures, __global t_light *lights,
 		if (lights[i].type == Point)
 		{
 			light = lights[i].position - intersection;
-			if (!check_intersections(intersection, light, figures, params))
+			if (!check_intersections(intersection, light, figures, params, figure))
 			{
 				if (dot(normale, light) > 0)
 					bright += lights[i].intensity * dot(normale, light) /

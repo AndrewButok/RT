@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_infinite_cone.c                                :+:      :+:    :+:   */
+/*   get_cylinder.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,33 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
+#include <rt.h>
 
-void	get_infinite_cone(t_figure *figure, JSON_Object *obj)
+void	get_cylinder(t_figure *figure, JSON_Object *obj)
 {
-	*figure = infinite_cone_init();
-	if (json_object_has_value_of_type(obj, "vertex", JSONArray))
-		figure->vector1 = get_vector(json_object_get_array(obj,"vertex"),
-				figure->vector1);
+	*figure = cylinder_init();
+	if (json_object_has_value_of_type(obj, "point", JSONArray))
+		figure->vector1 = get_vector(json_object_get_array(obj,"point"),
+									 figure->vector1);
 	else
-		ft_putendl_fd("Cone vertex not found. Default applied",STDERR_FILENO);
+		ft_putendl_fd("Cylinder axis point not found. Default applied",
+					  STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "vector", JSONArray))
 		figure->vector2 = vector_normalize(get_vector(json_object_get_array(obj,
 				"vector"), figure->vector2));
 	else
-		ft_putendl_fd("Cone vector not found. Default applied",STDERR_FILENO);
+		ft_putendl_fd("Cylinder axis vector not found. Default applied",
+					  STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "radius", JSONNumber))
 		figure->param1 = (cl_float)json_object_get_number(obj, "radius");
 	else
-		ft_putendl_fd("Cone radius not found. Default applied", STDERR_FILENO);
+		ft_putendl_fd("Cylinder radius not found. Default applied",
+					  STDERR_FILENO);
+	if (json_object_has_value_of_type(obj, "height", JSONNumber))
+		figure->param2 = (cl_float)json_object_get_number(obj, "height");
+	else
+		ft_putendl_fd("Cylinder radius not found. Default applied",
+					  STDERR_FILENO);
 	get_color_reflection(figure, obj);
-	ft_putendl("\x1b[32mInfinite cone parsed.");
-
+	ft_putendl("\x1b[32mCylinder parsed.");
 }
