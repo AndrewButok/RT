@@ -6,7 +6,7 @@
 #    By: abutok <abutok@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2018/03/22 20:16:18 by abutok           ###   ########.fr        #
+#*   Updated: 2018/10/11 12:13:12 by                  ###   ########.fr       *#
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ GCC = gcc -Wall -Wextra -Werror
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
 #	Libs linking
-LINKLIB = -framework OpenGL -framework AppKit -framework SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL
+LINKLIB = -framework OpenGL -framework AppKit /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/

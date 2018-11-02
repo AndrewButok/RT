@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cl2.c                                              :+:      :+:    :+:   */
+/*   struct.cl                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,55 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
-
-void	params_init(t_view *view)
+enum			e_figure
 {
-	view->params = (cl_int*)malloc(sizeof(cl_int) * 5);
-	view->params[0] = view->width;
-	view->params[1] = view->height;
-	view->params[2] = (int)view->figures_count;
-	view->params[3] = (int)view->lights_count;
-	view->params[4] = view->rays_count;
-}
+	BadFigure = 0,
+	Sphere = 1,
+	InfinitePlane = 2,
+	InfiniteCylinder = 3,
+	InfiniteCone = 4,
+	Cylinder = 5
+};
 
-void	cl_run_kernel(t_view *view)
+enum			e_light
 {
-	clEnqueueNDRangeKernel(view->cl->queue, view->cl->kernel, 1, NULL,
-			&view->cl->works, NULL, 0, NULL, NULL);
-	clFlush(view->cl->queue);
-	clEnqueueReadBuffer(view->cl->queue, view->cl->buf_img, CL_TRUE, 0,
-						sizeof(cl_int) * view->width * view->height,
-						view->scene, 0, NULL, NULL);
-	clFinish(view->cl->queue);
-}
+	BadLight = -1,
+	Ambient = 0,
+	Point = 1
+};
 
+typedef union			u_color
+{
+	int				color;
+	struct
+	{
+		unsigned char	blue;
+		unsigned char	green;
+		unsigned char	red;
+		unsigned char	alpha;
+	}				spectrum;
+}						t_color;
+
+typedef struct			s_light
+{
+	enum e_light	type;
+	float3		position;
+	float		intensity;
+}						t_light;
+
+typedef struct 			s_figure
+{
+	float		reflection;
+	int			color;
+	enum e_figure 	type;
+	float3		vector1;
+	float3		vector2;
+	float		param1;
+	float		param2;
+}						t_figure;
+
+typedef struct			s_ray
+{
+	float3		o;
+	float3		v;
+}						t_ray;

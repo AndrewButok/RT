@@ -12,9 +12,10 @@
 
 #include "rt.h"
 
-void view_init(t_view **view_ptr, char *filename)
+void		view_init(t_view **view_ptr, char *filename)
 {
 	t_view		*view;
+	SDL_Event	*event;
 
 	errno = 0;
 	view = (t_view*)malloc(sizeof(t_view));
@@ -30,12 +31,13 @@ void view_init(t_view **view_ptr, char *filename)
 	view->lights = NULL;
 	get_space(view, filename);
 	view->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
-			SDL_WINDOWPOS_CENTERED, view->width, view->height, 0);
+									SDL_WINDOWPOS_CENTERED, view->width, view->height, 0);
 	view->surface = SDL_GetWindowSurface(view->window);
 	view->scene = view->surface->pixels;
-
 	cl_init(view);
-	SDL_UpdateWindowSurface(view->window);
+	event = (SDL_Event*)malloc(sizeof(SDL_Event));
+	event->type = SDL_WINDOWEVENT_EXPOSED;
+	SDL_PushEvent(event);
 }
 
 int		main(int argc, char** argv)
@@ -50,15 +52,15 @@ int		main(int argc, char** argv)
 	{
 		view_init(&view, argv[1]);
 		flag = 0;
-		while (flag == 0)
-		{
+		while (flag == 0) {
 			while (SDL_PollEvent(&event_iterator))
-				if (event_iterator.type == SDL_KEYDOWN &&
-					event_iterator.key.keysym.sym == SDLK_ESCAPE)
+				if ((event_iterator.type == SDL_KEYDOWN &&
+					 event_iterator.key.keysym.sym == SDLK_ESCAPE)
+					|| (event_iterator.type == SDL_WINDOWEVENT &&
+						event_iterator.window.event == SDL_WINDOWEVENT_CLOSE))
 					flag = 1;
-				else if (event_iterator.type == SDL_WINDOWEVENT &&
-						 event_iterator.window.event == SDL_WINDOWEVENT_CLOSE)
-					flag = 1;
+				else if (event_iterator.type == SDL_WINDOWEVENT_EXPOSED)
+					SDL_UpdateWindowSurface(view->window);
 		}
 	}
 }

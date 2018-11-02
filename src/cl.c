@@ -14,31 +14,11 @@
 
 static char	*get_kernel(void)
 {
-	char	*rslt;
-	char	*a;
-	char	*b;
-	int		fd;
-	int		e;
-
-	errno = 0;
-	fd = open("./src/do_rt.cl", O_RDONLY);
-	rslt = NULL;
-	b = NULL;
-	while ((e = get_next_line(fd, &b)) > 0)
-	{
-		a = rslt;
-		rslt = ft_strjoin(a, b);
-		ft_strdel(&a);
-		ft_strdel(&b);
-	}
-	ft_strdel(&b);
-	if (e == -1)
-	{
-		perror("Kernel file error");
-		exit(0);
-	}
-	close(fd);
-	return (rslt);
+	return ft_strdup("#include \"./src/render/struct.cl\"\n"
+					"#include \"./src/render/intersections.cl\"\n"
+					"#include \"./src/render/normales.cl\"\n"
+					"#include \"./src/render/cam.cl\"\n"
+					"#include \"./src/render/main.cl\"");
 }
 
 static void	cl_buf_init(t_view *view)
@@ -86,6 +66,7 @@ static void	cl_kernel_init(t_view *view)
 	if (err != 0)
 	{
 		ft_putendl_fd("Ok, you have change it. It not works. What's next?", 2);
+		printf("%d\n", err);
 		exit(0);
 	}
 	cl_buf_init(view);
@@ -96,7 +77,7 @@ static void	cl_kernel_init(t_view *view)
 void	cl_init(t_view *view)
 {
 	view->cl = (t_cl*)malloc(sizeof(t_cl));
-	clGetDeviceIDs(NULL, CL_DEVICE_TYPE_CPU, 1, &(view->cl->device), NULL);
+	clGetDeviceIDs(NULL, CL_DEVICE_TYPE_GPU, 1, &(view->cl->device), NULL);
 	view->cl->context = clCreateContext(NULL, 1, &(view->cl->device),
 	 		NULL, NULL, NULL);
 	view->cl->queue = clCreateCommandQueue(view->cl->context, view->cl->device,

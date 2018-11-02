@@ -38,10 +38,10 @@
     },
     {
       "type": "cylinder",
-      "point": [0, 1, 1],
-      "vector": [0, 1, 1],
+      "point": [0, -2, 0],
+      "vector": [0, -1, 0],
       "radius": 0.5,
-      "height": 18,
+      "height": 2,
       "color": "0x00ffff",
       "reflection": 20
     },
@@ -79,6 +79,6 @@
   {
     "width": 800,
     "height": 600,
-    "antialias": 5
+    "antialias": 1
   }
 }

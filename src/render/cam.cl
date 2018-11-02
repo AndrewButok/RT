@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cl2.c                                              :+:      :+:    :+:   */
+/*   cam.cl                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,30 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "rt.h"
-
-void	params_init(t_view *view)
+void	cam_rotate(t_ray *ray, float3 rotate_v)
 {
-	view->params = (cl_int*)malloc(sizeof(cl_int) * 5);
-	view->params[0] = view->width;
-	view->params[1] = view->height;
-	view->params[2] = (int)view->figures_count;
-	view->params[3] = (int)view->lights_count;
-	view->params[4] = view->rays_count;
-}
+	float n1, n2;
 
-void	cl_run_kernel(t_view *view)
-{
-	clEnqueueNDRangeKernel(view->cl->queue, view->cl->kernel, 1, NULL,
-			&view->cl->works, NULL, 0, NULL, NULL);
-	clFlush(view->cl->queue);
-	clEnqueueReadBuffer(view->cl->queue, view->cl->buf_img, CL_TRUE, 0,
-						sizeof(cl_int) * view->width * view->height,
-						view->scene, 0, NULL, NULL);
-	clFinish(view->cl->queue);
+	rotate_v *= (M_PI_F / 180.0f);
+	if (rotate_v.x != 0)
+	{
+		n1 = ray->v.y * cos(rotate_v.x) + ray->v.z * sin(rotate_v.x);
+		n2 = ray->v.z * cos(rotate_v.x) - ray->v.y * sin(rotate_v.x);
+		ray->v.y = n1;
+		ray->v.z = n2;
+	}
+	if (rotate_v.y != 0)
+	{
+		n1 = ray->v.x * cos(rotate_v.y) + ray->v.z * sin(rotate_v.y);
+		n2 = ray->v.z * cos(rotate_v.y) - ray->v.x * sin(rotate_v.y);
+		ray->v.x = n1;
+		ray->v.z = n2;
+	}
+	if (rotate_v.z != 0)
+	{
+		n1 = ray->v.x * cos(rotate_v.z) + ray->v.y * sin(rotate_v.z);
+		n2 = ray->v.y * cos(rotate_v.z) - ray->v.x * sin(rotate_v.z);
+		ray->v.x = n1;
+		ray->v.y = n2;
+	}
 }
-

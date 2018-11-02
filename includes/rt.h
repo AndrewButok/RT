@@ -12,6 +12,7 @@
 
 #ifndef RT_H
 # define RT_H
+# define CL_SILENCE_DEPRECATION
 # include "libft.h"
 # include "get_next_line.h"
 # include "parson.h"

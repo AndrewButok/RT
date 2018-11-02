@@ -35,7 +35,7 @@ void	get_cylinder(t_figure *figure, JSON_Object *obj)
 	if (json_object_has_value_of_type(obj, "height", JSONNumber))
 		figure->param2 = (cl_float)json_object_get_number(obj, "height");
 	else
-		ft_putendl_fd("Cylinder radius not found. Default applied",
+		ft_putendl_fd("Cylinder height not found. Default applied",
 					  STDERR_FILENO);
 	get_color_reflection(figure, obj);
 	ft_putendl("\x1b[32mCylinder parsed.");
