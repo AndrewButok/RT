@@ -30,7 +30,8 @@ enum					e_figure
 	InfinitePlane = 2,
 	InfiniteCylinder = 3,
 	InfiniteCone = 4,
-	Cylinder = 5
+	Cylinder = 5,
+	Cone = 6
 };
 
 enum					e_light
@@ -56,6 +57,7 @@ typedef struct	s_figure
 	cl_float3		vector2;
 	cl_float		param1;
 	cl_float		param2;
+	cl_float		param3;
 }						t_figure;
 
 typedef struct	s_ray
@@ -100,13 +102,15 @@ typedef struct			s_view
 int						check_hex(const char *str);
 int						ft_hexatoi(const char *str);
 cl_float3				get_vector(JSON_Array *arr, cl_float3 def);
-void					get_color_reflection(t_figure *figure, JSON_Object *obj);
+void					get_color_reflection(t_figure *figure,
+		JSON_Object *obj);
 void					get_space(t_view *view, char *filename);
 void					get_sphere(t_figure *figure, JSON_Object *obj);
 void					get_infinite_plane(t_figure *figure, JSON_Object *obj);
 void					get_infinite_cone(t_figure *figure, JSON_Object *obj);
 void					get_infinite_cylinder(t_figure *figure,
 		JSON_Object *obj);
+void					get_cone(t_figure *figure, JSON_Object *obj);
 void					get_cylinder(t_figure *figure, JSON_Object *obj);
 void					get_lights(t_view *view, JSON_Object *root);
 void					get_cam(t_view *view, JSON_Object *root);
@@ -116,6 +120,7 @@ t_figure				cylinder_init();
 t_figure				infinite_plane_init();
 t_figure				infinite_cylinder_init();
 t_figure				infinite_cone_init();
+t_figure				cone_init();
 t_light					light_init(enum e_light type, cl_float3 position,
 		cl_float intens);
 cl_float3				vector_normalize(cl_float3 unnormalized);

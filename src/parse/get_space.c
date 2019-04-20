@@ -27,12 +27,14 @@ void	get_figure(t_view *view, JSON_Object *figure, size_t i)
 			get_sphere(&(view->figures[i]), figure);
 		else if (ft_strequ(type, "plane"))
 			get_infinite_plane(&(view->figures[i]), figure);
-		else if (ft_strequ(type, "cone"))
+		else if (ft_strequ(type, "infinite_cone"))
 			get_infinite_cone(&(view->figures[i]),figure);
 		else if (ft_strequ(type, "infinite_cylinder"))
 			get_infinite_cylinder(&(view->figures[i]),figure);
 		else if (ft_strequ(type, "cylinder"))
 			get_cylinder(&(view->figures[i]),figure);
+		else if (ft_strequ(type, "cone"))
+			get_cone(&(view->figures[i]), figure);
 		else
 		{
 			ft_putendl_fd("Unknown figure found. Skipped.", STDERR_FILENO);
@@ -41,7 +43,6 @@ void	get_figure(t_view *view, JSON_Object *figure, size_t i)
 	}
 	else
 		ft_putendl_fd("Unknown figure type. Skipped.",STDERR_FILENO);
-
 }
 
 void	choose_figure_parse(t_view *view, JSON_Value *root)
@@ -103,4 +104,5 @@ void	get_space(t_view *view, char *filename)
 	get_lights(view, robj);
 	get_cam(view, robj);
 	get_params(view, robj);
+	json_value_free(root);
 }

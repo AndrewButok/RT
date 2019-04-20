@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cam.cl                                             :+:      :+:    :+:   */
+/*   cone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,30 +10,19 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-void	cam_rotate(t_ray *ray, float3 rotate_v)
-{
-	float n1, n2;
+#include <rt.h>
 
-	rotate_v *= (M_PI_F / 180.0f);
-	if (rotate_v.x != 0)
-	{
-		n1 = ray->v.y * cos(rotate_v.x) + ray->v.z * sin(rotate_v.x);
-		n2 = ray->v.z * cos(rotate_v.x) - ray->v.y * sin(rotate_v.x);
-		ray->v.y = n1;
-		ray->v.z = n2;
-	}
-	if (rotate_v.y != 0)
-	{
-		n1 = ray->v.x * cos(rotate_v.y) + ray->v.z * sin(rotate_v.y);
-		n2 = ray->v.z * cos(rotate_v.y) - ray->v.x * sin(rotate_v.y);
-		ray->v.x = n1;
-		ray->v.z = n2;
-	}
-	if (rotate_v.z != 0)
-	{
-		n1 = ray->v.x * cos(rotate_v.z) + ray->v.y * sin(rotate_v.z);
-		n2 = ray->v.y * cos(rotate_v.z) - ray->v.x * sin(rotate_v.z);
-		ray->v.x = n1;
-		ray->v.y = n2;
-	}
+t_figure cone_init(void)
+{
+	t_figure figure;
+
+	figure.type = Cone;
+	figure.vector1 = (cl_float3){{0, 0, 0}};
+	figure.vector2 = (cl_float3){{0, -1, 0}};
+	figure.param1 = 0;
+	figure.param2 = 0;
+	figure.param3 = 0;
+	figure.color = 0xffffff;
+	figure.reflection = 0;
+	return (figure);
 }

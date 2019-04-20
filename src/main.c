@@ -38,12 +38,13 @@ void		view_init(t_view **view_ptr, char *filename)
 	event = (SDL_Event*)malloc(sizeof(SDL_Event));
 	event->type = SDL_WINDOWEVENT_EXPOSED;
 	SDL_PushEvent(event);
+	free(event);
 }
 
 int		main(int argc, char** argv)
 {
 	t_view		*view;
-	int			flag;
+	int			exit_flag;
 	SDL_Event	event_iterator;
 
 	if (argc != 2)
@@ -51,14 +52,14 @@ int		main(int argc, char** argv)
 	else
 	{
 		view_init(&view, argv[1]);
-		flag = 0;
-		while (flag == 0) {
+		exit_flag = 0;
+		while (exit_flag == 0) {
 			while (SDL_PollEvent(&event_iterator))
 				if ((event_iterator.type == SDL_KEYDOWN &&
 					 event_iterator.key.keysym.sym == SDLK_ESCAPE)
 					|| (event_iterator.type == SDL_WINDOWEVENT &&
 						event_iterator.window.event == SDL_WINDOWEVENT_CLOSE))
-					flag = 1;
+					exit_flag = 1;
 				else if (event_iterator.type == SDL_WINDOWEVENT_EXPOSED)
 					SDL_UpdateWindowSurface(view->window);
 		}

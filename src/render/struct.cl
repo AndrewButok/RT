@@ -17,7 +17,8 @@ enum			e_figure
 	InfinitePlane = 2,
 	InfiniteCylinder = 3,
 	InfiniteCone = 4,
-	Cylinder = 5
+	Cylinder = 5,
+	Cone = 6
 };
 
 enum			e_light
@@ -42,8 +43,8 @@ typedef union			u_color
 typedef struct			s_light
 {
 	enum e_light	type;
-	float3		position;
-	float		intensity;
+	float3			position;
+	float			intensity;
 }						t_light;
 
 typedef struct 			s_figure
@@ -55,6 +56,7 @@ typedef struct 			s_figure
 	float3		vector2;
 	float		param1;
 	float		param2;
+	float		param3;
 }						t_figure;
 
 typedef struct			s_ray
