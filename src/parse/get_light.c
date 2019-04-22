@@ -14,7 +14,7 @@
 
 void	get_ambient_light(t_light *light, JSON_Object *obj)
 {
-	*light = light_init(Ambient, (cl_float3){{0,0,0}}, 0);
+	*light = light_init(Ambient, (cl_float3){{0, 0, 0}}, 0);
 	if (json_object_has_value_of_type(obj, "intensity", JSONNumber))
 		light->intensity = (cl_float)json_object_get_number(obj, "intensity");
 	else
@@ -25,12 +25,12 @@ void	get_ambient_light(t_light *light, JSON_Object *obj)
 
 void	get_point_light(t_light *light, JSON_Object *obj)
 {
-	*light = light_init(Point, (cl_float3){{0,0,0}}, 0);
+	*light = light_init(Point, (cl_float3){{0, 0, 0}}, 0);
 	if (json_object_has_value_of_type(obj, "intensity", JSONNumber))
 		light->intensity = (cl_float)json_object_get_number(obj, "intensity");
 	else
 		ft_putendl_fd("Intensity parameter not found. Default applied.",
-					  STDERR_FILENO);
+				STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "position", JSONArray))
 		light->position = get_vector(json_object_get_array(obj, "position"),
 				light->position);
@@ -62,7 +62,7 @@ void	get_light(t_view *view, JSON_Object *obj, size_t i)
 		}
 	}
 	else
-		ft_putendl_fd("Unknown figure type.Skipped.",STDERR_FILENO);
+		ft_putendl_fd("Unknown figure type.Skipped.", STDERR_FILENO);
 }
 
 void	choose_light_parse(t_view *view, JSON_Value *value)
@@ -76,7 +76,7 @@ void	choose_light_parse(t_view *view, JSON_Value *value)
 		arr = json_value_get_array(value);
 		view->lights_count = json_array_get_count(arr);
 		view->lights = (t_light*)malloc(sizeof(t_light) *
-										  view->lights_count);
+				view->lights_count);
 		i = view->lights_count;
 		while (i > 0)
 		{
@@ -91,7 +91,7 @@ void	choose_light_parse(t_view *view, JSON_Value *value)
 		return ;
 	}
 	ft_putendl_fd("Wrong light obj type. It must be obj or array.",
-				  STDERR_FILENO);
+			STDERR_FILENO);
 }
 
 void	get_lights(t_view *view, JSON_Object *root)

@@ -32,6 +32,7 @@ void	get_params(t_view *view, JSON_Object *root)
 
 	view->width = 800;
 	view->height = 600;
+	view->rays_count = 1;
 	val = json_object_get_object(root, "params");
 	if (val != NULL)
 	{
@@ -39,19 +40,14 @@ void	get_params(t_view *view, JSON_Object *root)
 			view->width = (cl_int)json_object_get_number(val, "width");
 		else
 			ft_putendl_fd("Height parameter isn't present or illegal."
-				 "Default applied", STDERR_FILENO);
+				"Default applied", STDERR_FILENO);
 		if (json_object_has_value_of_type(val, "height", JSONNumber))
 			view->height = (cl_int)json_object_get_number(val, "height");
 		else
 			ft_putendl_fd("Height parameter isn't present or illegal."
-			  "Default applied", STDERR_FILENO);
+				"Default applied", STDERR_FILENO);
 		get_rays(view, val);
 	}
 	else
-	{
 		ft_putendl_fd("Default screen params applied.", STDERR_FILENO);
-		view->width = 800;
-		view->height = 600;
-		view->rays_count = 1;
-	}
 }

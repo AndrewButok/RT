@@ -12,9 +12,30 @@
 
 #include "rt.h"
 
-void	get_figure(t_view *view, JSON_Object *figure, size_t i)
+typedef	void(*t_parse_function)(t_figure*, JSON_Object*);
+
+t_parse_function	get_parse_function(const char *type)
 {
-	const char		*type;
+	if (ft_strequ(type, "sphere"))
+		return (&get_sphere);
+	else if (ft_strequ(type, "plane"))
+		return (&get_infinite_plane);
+	else if (ft_strequ(type, "infinite_cone"))
+		return (&get_infinite_cone);
+	else if (ft_strequ(type, "infinite_cylinder"))
+		return (&get_infinite_cylinder);
+	else if (ft_strequ(type, "cylinder"))
+		return (&get_cylinder);
+	else if (ft_strequ(type, "cone"))
+		return (&get_cone);
+	else
+		return (NULL);
+}
+
+void				get_figure(t_view *view, JSON_Object *figure, size_t i)
+{
+	const char			*type;
+	t_parse_function	pf;
 
 	if (view->figures == NULL && i == 0)
 	{
@@ -23,29 +44,20 @@ void	get_figure(t_view *view, JSON_Object *figure, size_t i)
 	}
 	if ((type = json_object_get_string(figure, "type")) != NULL)
 	{
-		if (ft_strequ(type, "sphere"))
-			get_sphere(&(view->figures[i]), figure);
-		else if (ft_strequ(type, "plane"))
-			get_infinite_plane(&(view->figures[i]), figure);
-		else if (ft_strequ(type, "infinite_cone"))
-			get_infinite_cone(&(view->figures[i]),figure);
-		else if (ft_strequ(type, "infinite_cylinder"))
-			get_infinite_cylinder(&(view->figures[i]),figure);
-		else if (ft_strequ(type, "cylinder"))
-			get_cylinder(&(view->figures[i]),figure);
-		else if (ft_strequ(type, "cone"))
-			get_cone(&(view->figures[i]), figure);
-		else
+		pf = get_parse_function(type);
+		if (pf == NULL)
 		{
 			ft_putendl_fd("Unknown figure found. Skipped.", STDERR_FILENO);
 			view->figures[i].type = BadFigure;
 		}
+		else
+			pf(&(view->figures[i]), figure);
 	}
 	else
-		ft_putendl_fd("Unknown figure type. Skipped.",STDERR_FILENO);
+		ft_putendl_fd("Unknown figure type. Skipped.", STDERR_FILENO);
 }
 
-void	choose_figure_parse(t_view *view, JSON_Value *root)
+void				choose_figure_parse(t_view *view, JSON_Value *root)
 {
 	JSON_Array	*arr;
 	JSON_Object	*fig;
@@ -71,11 +83,10 @@ void	choose_figure_parse(t_view *view, JSON_Value *root)
 		return ;
 	}
 	ft_putendl_fd("Wrong figure obj type. It must be obj or array.",
-				  STDERR_FILENO);
+			STDERR_FILENO);
 }
 
-
-void	get_figures(t_view *view, JSON_Object *root)
+void				get_figures(t_view *view, JSON_Object *root)
 {
 	JSON_Value	*val;
 
@@ -88,9 +99,9 @@ void	get_figures(t_view *view, JSON_Object *root)
 	choose_figure_parse(view, val);
 }
 
-void	get_space(t_view *view, char *filename)
+void				get_space(t_view *view, char *filename)
 {
-	JSON_Value 	*root;
+	JSON_Value	*root;
 	JSON_Object	*robj;
 
 	root = json_parse_file(filename);

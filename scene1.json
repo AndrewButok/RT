@@ -37,13 +37,14 @@
       "reflection": 0
     },
     {
-      "type": "cylinder",
-      "point": [0, -2, 0],
+      "type": "cone",
+      "vertex": [0, 0, 0],
       "vector": [0, -1, 0],
-      "radius": 0.5,
-      "height": 2,
-      "color": "0x00ffff",
-      "reflection": 20
+      "radius": 1,
+      "dist1": 0,
+      "dist2": 1,
+      "color": "0x0000ff00",
+      "reflection": 0
     },
     {
       "type": "triangle",

@@ -29,7 +29,7 @@ cl_float3	get_vector(JSON_Array *arr, cl_float3 def)
 		if (json_value_get_type(json_array_get_value(arr, i)) != JSONNumber)
 		{
 			ft_putendl_fd("Wrong vector format. Default applied",
-						  STDERR_FILENO);
+					STDERR_FILENO);
 			return (def);
 		}
 		i++;

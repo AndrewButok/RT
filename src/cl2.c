@@ -32,4 +32,3 @@ void	cl_run_kernel(t_view *view)
 						view->scene, 0, NULL, NULL);
 	clFinish(view->cl->queue);
 }
-

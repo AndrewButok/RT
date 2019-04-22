@@ -40,7 +40,7 @@ void		get_cone(t_figure *figure, JSON_Object *obj)
 		figure->vector2 = vector_normalize(get_vector(json_object_get_array(obj,
 				"vector"), figure->vector2));
 	else
-		ft_putendl_fd("Cone vector not found. Default applied",STDERR_FILENO);
+		ft_putendl_fd("Cone vector not found. Default applied", STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "radius", JSONNumber))
 		figure->param1 = (cl_float)json_object_get_number(obj, "radius");
 	else

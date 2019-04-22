@@ -22,7 +22,7 @@ void		view_init(t_view **view_ptr, char *filename)
 	if (errno != 0)
 	{
 		perror("View malloc error.");
-		return;
+		return ;
 	}
 	*view_ptr = view;
 	view->figures_count = 0;
@@ -31,7 +31,7 @@ void		view_init(t_view **view_ptr, char *filename)
 	view->lights = NULL;
 	get_space(view, filename);
 	view->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
-									SDL_WINDOWPOS_CENTERED, view->width, view->height, 0);
+		SDL_WINDOWPOS_CENTERED, view->width, view->height, 0);
 	view->surface = SDL_GetWindowSurface(view->window);
 	view->scene = view->surface->pixels;
 	cl_init(view);
@@ -41,7 +41,7 @@ void		view_init(t_view **view_ptr, char *filename)
 	free(event);
 }
 
-int		main(int argc, char** argv)
+int			main(int argc, char **argv)
 {
 	t_view		*view;
 	int			exit_flag;
@@ -53,16 +53,16 @@ int		main(int argc, char** argv)
 	{
 		view_init(&view, argv[1]);
 		exit_flag = 0;
-		while (exit_flag == 0) {
+		while (exit_flag == 0)
+		{
 			while (SDL_PollEvent(&event_iterator))
 				if ((event_iterator.type == SDL_KEYDOWN &&
-					 event_iterator.key.keysym.sym == SDLK_ESCAPE)
-					|| (event_iterator.type == SDL_WINDOWEVENT &&
-						event_iterator.window.event == SDL_WINDOWEVENT_CLOSE))
+				event_iterator.key.keysym.sym == SDLK_ESCAPE) ||
+				(event_iterator.type == SDL_WINDOWEVENT &&
+				event_iterator.window.event == SDL_WINDOWEVENT_CLOSE))
 					exit_flag = 1;
 				else if (event_iterator.type == SDL_WINDOWEVENT_EXPOSED)
 					SDL_UpdateWindowSurface(view->window);
 		}
 	}
 }
-

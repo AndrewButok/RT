@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/11/11 20:07:02 by                  ###   ########.fr       */
+/*   Updated: 2018/11/11 20:07:02 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 static char	*get_kernel(void)
 {
-	return ft_strdup("#include \"./src/render/struct.cl\"\n"
-					"#include \"./src/render/intersections.cl\"\n"
-					"#include \"./src/render/normales.cl\"\n"
-					"#include \"./src/render/cam.cl\"\n"
-					"#include \"./src/render/main.cl\"");
+	return (ft_strdup("#include \"./src/render/struct.cl\"\n"
+	"#include \"./src/render/intersections.cl\"\n"
+	"#include \"./src/render/normales.cl\"\n"
+	"#include \"./src/render/cam.cl\"\n"
+	"#include \"./src/render/main.cl\""));
 }
 
 static void	cl_buf_init(t_view *view)
@@ -38,7 +38,7 @@ static void	cl_buf_init(t_view *view)
 			CL_MEM_COPY_HOST_PTR,
 			sizeof(t_ray), view->cam, &err);
 	params_init(view);
-	view->cl->buf_param	= clCreateBuffer(view->cl->context,
+	view->cl->buf_param = clCreateBuffer(view->cl->context,
 			CL_MEM_COPY_HOST_PTR, sizeof(cl_int) * 6, view->params, &err);
 }
 
@@ -49,7 +49,6 @@ static void	cl_kernel_buf_assign(t_view *view)
 	clSetKernelArg(view->cl->kernel, 2, sizeof(cl_mem), &view->cl->buf_cam);
 	clSetKernelArg(view->cl->kernel, 3, sizeof(cl_mem), &view->cl->buf_img);
 	clSetKernelArg(view->cl->kernel, 4, sizeof(cl_mem), &view->cl->buf_param);
-
 }
 
 static void	cl_kernel_init(t_view *view)
@@ -74,14 +73,14 @@ static void	cl_kernel_init(t_view *view)
 	view->cl->works = (size_t)view->width * view->height;
 }
 
-void	cl_init(t_view *view)
+void		cl_init(t_view *view)
 {
 	view->cl = (t_cl*)malloc(sizeof(t_cl));
 	clGetDeviceIDs(NULL, CL_DEVICE_TYPE_GPU, 1, &(view->cl->device), NULL);
 	view->cl->context = clCreateContext(NULL, 1, &(view->cl->device),
-	 		NULL, NULL, NULL);
+			NULL, NULL, NULL);
 	view->cl->queue = clCreateCommandQueue(view->cl->context, view->cl->device,
-	 		0, NULL);
+			0, NULL);
 	cl_kernel_init(view);
 	cl_run_kernel(view);
 }

@@ -12,7 +12,7 @@
 
 #include <rt.h>
 
-t_figure cone_init(void)
+t_figure	cone_init(void)
 {
 	t_figure figure;
 

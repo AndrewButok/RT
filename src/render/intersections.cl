@@ -172,9 +172,7 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure)
 		((1 + pow(figure->param1, 2)) *
 		pow(dot(ray->o - figure->vector1, figure->vector2), 2));
 	d = pow(b, 2.0f) - a * c;
-	if (d == 0)
-		return ((-b)/a);
-	else if (d > 0)
+	if (d >= 0)
 	{
 		x1 = dot(figure->vector2, figure->vector1 +
 				(figure->vector2 * figure->param2) - ray->o) / dot(figure->vector2, ray->v);

@@ -22,13 +22,12 @@ void	get_cam(t_view *view, JSON_Object *root)
 	view->cam = (t_ray*)malloc(sizeof(t_ray));
 	if (json_object_has_value_of_type(cam, "position", JSONArray))
 		view->cam->o = get_vector(json_object_get_array(cam,
-																 "position"), view->cam->o);
+				"position"), view->cam->o);
 	else
 		ft_putendl_fd("Unknown cam position. Default applied", STDERR_FILENO);
 	if (json_object_has_value_of_type(cam, "rotation", JSONArray))
 		view->cam->v = get_vector(json_object_get_array(cam,
-																 "rotation"), view->cam->v);
+				"rotation"), view->cam->v);
 	else
 		ft_putendl_fd("Unknown cam rotation. Default applied", STDERR_FILENO);
 }
-

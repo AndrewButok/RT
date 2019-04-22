@@ -41,18 +41,18 @@ enum					e_light
 	Point = 1
 };
 
-typedef struct	s_light
+typedef struct			s_light
 {
 	enum e_light	type;
 	cl_float3		position;
 	cl_float		intensity;
 }						t_light;
 
-typedef struct	s_figure
+typedef struct			s_figure
 {
 	cl_float		reflection;
 	cl_int			color;
-	enum e_figure 	type;
+	enum e_figure	type;
 	cl_float3		vector1;
 	cl_float3		vector2;
 	cl_float		param1;
@@ -60,7 +60,7 @@ typedef struct	s_figure
 	cl_float		param3;
 }						t_figure;
 
-typedef struct	s_ray
+typedef struct			s_ray
 {
 	cl_float3		o;
 	cl_float3		v;
@@ -88,13 +88,13 @@ typedef struct			s_view
 	SDL_Surface		*surface;
 	cl_int			*scene;
 	t_figure		*figures;
-	size_t 			figures_count;
+	size_t			figures_count;
 	t_light			*lights;
-	size_t 			lights_count;
+	size_t			lights_count;
 	cl_int			*params;
-	cl_int 			width;
-	cl_int 			height;
-	cl_int 			rays_count;
+	cl_int			width;
+	cl_int			height;
+	cl_int			rays_count;
 	t_ray			*cam;
 	t_cl			*cl;
 }						t_view;

@@ -16,17 +16,17 @@ void	get_infinite_plane(t_figure *figure, JSON_Object *obj)
 {
 	*figure = infinite_plane_init();
 	if (json_object_has_value_of_type(obj, "normale", JSONArray))
-		figure->vector1 = vector_normalize(get_vector(json_object_get_array(obj, "normale"),
-				figure->vector1));
+		figure->vector1 = vector_normalize(get_vector(json_object_get_array(obj,
+				"normale"), figure->vector1));
 	else
 		ft_putendl_fd("Plane normale not found. Default applied.",
-					  STDERR_FILENO);
+				STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "point", JSONArray))
 		figure->vector2 = get_vector(json_object_get_array(obj, "point"),
-									 figure->vector2);
+				figure->vector2);
 	else
 		ft_putendl_fd("Plane point not found. Default applied.",
-					  STDERR_FILENO);
+				STDERR_FILENO);
 	get_color_reflection(figure, obj);
 	ft_putendl("\x1b[32mInfinite plane parsed.");
 }
