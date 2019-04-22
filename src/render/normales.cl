@@ -26,7 +26,7 @@ float3		get_infinite_cone_normale(float3 *intersection, __global t_figure *figur
 
 	m = pow(length(*intersection - figure->vector1), 2) /
 		dot(*intersection - figure->vector1, figure->vector2);
-	return (normalize(*intersection - figure->vector1 - (figure->vector2 * m)));
+	return (normalize(*intersection - figure->vector1 - figure->vector2 * m));
 }
 
 float3		get_infinite_cylinder_normale(float3 *intersection, __global t_figure *figure)
@@ -34,17 +34,16 @@ float3		get_infinite_cylinder_normale(float3 *intersection, __global t_figure *f
 	float m;
 
 	m = dot(*intersection - figure->vector1, figure->vector2);
-		return (normalize(*intersection - (figure->vector1 + (figure->vector2 * m))));
+		return (normalize(*intersection - figure->vector1 - figure->vector2 * m));
 }
 
 float3		get_cylinder_normale(float3 *intersection, __global t_figure *figure)
 {
 	float m;
 
-	m = dot(*intersection - figure->vector1,
-		figure->vector2);
-	if (m > 1e-3 && m < figure->param2)
-		return (normalize(*intersection - (figure->vector1 + (figure->vector2 * m))));
+	m = dot(*intersection - figure->vector1, figure->vector2);
+	if (m > 1e-3 && m < figure->param2 - 1e-3)
+		return (normalize(*intersection - figure->vector1 - figure->vector2 * m));
 	return (figure->vector2);
 }
 
@@ -53,9 +52,9 @@ float3		get_cone_normale(float3 *intersection, __global t_figure *figure)
 	float	m;
 
 	m = pow(length(*intersection - figure->vector1), 2) /
-		dot(*intersection - figure->vector1, figure->vector2);
-	if (m > figure->param2 && m < figure->param3)
-		return (normalize(*intersection - figure->vector1 - (figure->vector2 * m)));
+			dot(*intersection - figure->vector1, figure->vector2);
+	if (m > figure->param2 + 1e-3 && m < figure->param3 - 1e-3)
+		return (normalize(*intersection - figure->vector1 - figure->vector2 * m));
 	return (figure->vector2);
 }
 
