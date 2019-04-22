@@ -160,7 +160,7 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure)
 	float	b;
 	float	c;
 	float	d;
-	float	x1, x2;
+	float	x1, x2, cap_distance;
 	float3	cap_center, intersection;
 
 	a = dot(ray->v, ray->v) - ((1 + pow(figure->param1, 2)) *
@@ -179,9 +179,10 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure)
 		x2 = dot(figure->vector2, figure->vector1 +
 				(figure->vector2 * figure->param3) - ray->o) / dot(figure->vector2, ray->v);
 		x1 = x1 < x2 ? x1 : x2;
-		cap_center = x1 < x2 ? (figure->vector1 + (figure->vector2 * figure->param2)) : (figure->vector1 + (figure->vector2 * figure->param3));
+		cap_distance = x1 < x2 ? figure->param2 : figure->param3;
+		cap_center =  figure->vector1 + (figure->vector2 * cap_distance);
 		intersection = ray->v * (x1) + ray->o;
-		if (length(cap_center - intersection) < figure->param1)
+		if (length(cap_center - intersection) < figure->param1 * cap_distance)
 			return (x1);
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
@@ -190,14 +191,14 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure)
 		b = dot(ray->v, figure->vector2)
 			* x2 + dot(ray->o - figure->vector1, figure->vector2);
 		if ((x1 > 1e-3 && x2 > 1e-3 && (b > figure->param2 && b < figure->param3)
-			&& x1 >= x2) ||
-			(x1 <= 1e-3 && x2 > 1e-3 && (b > figure->param2 && b < figure->param3)
+			&& x1 > x2) ||
+			(x1 < 1e-3 && x2 > 1e-3 && (b > figure->param2 && b < figure->param3)
 			&& x1 < x2))
 			return (x2);
 		if ((x1 > 1e-3 && x2 > 1e-3 && (a > figure->param2 && a < figure->param3) &&
 			x1 < x2)
-			|| (x1 > 1e-3 && x2 <= 1e-3) && (a > figure->param2 && a < figure->param3) &&
-			x1 >= x2)
+			|| ((x1 > 1e-3 && x2 < 1e-3) && (a > figure->param2 && a < figure->param3) &&
+			x1 > x2))
 			return (x1);
 		return (-1);
 	}
