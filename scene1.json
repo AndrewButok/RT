@@ -37,18 +37,9 @@
       "reflection": 0
     },
     {
-      "type": "cylinder",
-      "point": [-3, 0, 0],
-      "vector": [0, 1, 1],
-      "radius": 1,
-      "height": 2,
-      "color": "0x00ffff00",
-      "reflection": 20
-    },
-    {
       "type": "cone",
       "vertex": [0, 0, 0],
-      "vector": [0, -1, 0],
+      "vector": [1, -1, -1],
       "radius": 0.5,
       "dist1": -1,
       "dist2": 1,
@@ -75,19 +66,19 @@
     },
     {
       "type": "point",
-      "position": [3.0, -1.0, -2.0],
+      "position": [3.0, 0.0, -2.0],
       "intensity": 0.5
     }
   ],
   "cam":
   {
     "position": [0, 0, -10.0],
-    "rotation": [0.0, -10.0, 0.0]
+    "rotation": [0.0, 0.0, 0.0]
   },
   "params":
   {
-    "width": 800,
-    "height": 600,
-    "antialias": 5
+    "width": 1000,
+    "height": 500,
+    "antialias": 2
   }
 }

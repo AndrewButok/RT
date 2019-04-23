@@ -40,7 +40,9 @@ float			check_sphere_intersection(t_ray *ray, __global t_figure *figure)
 
 float			check_infinite_plane_intersection(t_ray *ray, __global t_figure *figure)
 {
-	if (figure->vector1.x != 0 || figure->vector1.y != 0 || figure->vector1.z != 0)
+	if (figure->vector1.x >= 1e-3 || figure->vector1.x <= -1e-3 ||
+		figure->vector1.y >= 1e-3 || figure->vector1.y <= -1e-3 ||
+		figure->vector1.z >= 1e-3 || figure->vector1.z <= -1e-3)
 		return (dot(figure->vector1, figure->vector2 - ray->o) /
 			dot(figure->vector1, ray->v));
 	return (-1);
@@ -101,7 +103,7 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure)
 		x1 = x1 < x2 ? x1 : x2;
 		cap_center = x1 < x2 ? figure->vector1 : (figure->vector1 + (figure->vector2 * figure->param2));
 		intersection = ray->v * (x1) + ray->o;
-		if (length(cap_center - intersection) <= figure->param1)
+		if (length(cap_center - intersection) < figure->param1)
 			return (x1);
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
@@ -156,6 +158,7 @@ float			check_infinite_cone_intersection(t_ray *ray, __global t_figure *figure)
 
 float			check_cone_intersection(t_ray *ray, __global t_figure *figure)
 {
+	//TODO review
 	float	a;
 	float	b;
 	float	c;
@@ -186,7 +189,7 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure)
 		}
 		cap_center =  figure->vector1 + (figure->vector2 * cap_distance);
 		intersection = ray->v * (x1) + ray->o;
-		if (length(cap_center - intersection) <= figure->param1 * cap_distance)
+		if (length(cap_center - intersection) < fabs(figure->param1 * cap_distance))
 			return (x1);
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;

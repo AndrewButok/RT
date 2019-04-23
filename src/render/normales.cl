@@ -24,7 +24,7 @@ float3		get_infinite_cone_normale(float3 *intersection, __global t_figure *figur
 {
 	float	m;
 
-	m = pow(length(*intersection - figure->vector1), 2) /
+	m = dot(*intersection - figure->vector1, *intersection - figure->vector1) /
 		dot(*intersection - figure->vector1, figure->vector2);
 	return (normalize(*intersection - figure->vector1 - figure->vector2 * m));
 }
@@ -51,9 +51,9 @@ float3		get_cone_normale(float3 *intersection, __global t_figure *figure)
 {
 	float	m;
 
-	m = pow(length(*intersection - figure->vector1), 2) /
+	m = dot(*intersection - figure->vector1, *intersection - figure->vector1) /
 			dot(*intersection - figure->vector1, figure->vector2);
-	if (m > figure->param2 + 1e-3 && m < figure->param3 - 1e-3)
+	if (m > figure->param2 && m < figure->param3)
 		return (normalize(*intersection - figure->vector1 - figure->vector2 * m));
 	return (figure->vector2);
 }
