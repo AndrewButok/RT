@@ -28,6 +28,8 @@ t_parse_function	get_parse_function(const char *type)
 		return (&get_cylinder);
 	else if (ft_strequ(type, "cone"))
 		return (&get_cone);
+	else if (ft_strequ(type, "triangle"))
+		return (&get_triangle);
 	else
 		return (NULL);
 }

@@ -37,23 +37,20 @@
       "reflection": 0
     },
     {
-      "type": "cone",
-      "vertex": [0, 0, 0],
-      "vector": [1, -1, -1],
-      "radius": 0.5,
-      "dist1": -1,
-      "dist2": 1,
-      "color": "0x00f0fff0",
-      "reflection": 20
-    },
-    {
       "type": "triangle",
       "points":
       [
-        [0, 0, 0],
-        [0, 1, 1],
-        [0, 0, 1]
+        [0,     0,    0],
+        [0,     1,    0],
+        [1,     1,    0]
       ],
+      "color": "0xff00ff",
+      "reflection": 0
+    },
+    {
+      "type": "sphere",
+      "center": [0, 0, 0],
+      "radius": 0.0125,
       "color": "0xff0000",
       "reflection": 10
     }
@@ -77,8 +74,8 @@
   },
   "params":
   {
-    "width": 1000,
-    "height": 500,
+    "width": 1920,
+    "height": 1080,
     "antialias": 2
   }
 }

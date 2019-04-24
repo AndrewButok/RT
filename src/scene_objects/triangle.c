@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_vector.c                                       :+:      :+:    :+:   */
+/*   triangle.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,30 +12,15 @@
 
 #include "rt.h"
 
-cl_float3	get_vector(JSON_Array *arr, cl_float3 def)
+t_figure	triangle_init(void)
 {
-	size_t i;
-	size_t c;
+	t_figure figure;
 
-	c = json_array_get_count(arr);
-	if (c != 3)
-	{
-		ft_putendl_fd("Wrong vector size. Default applied", STDERR_FILENO);
-		return (def);
-	}
-	i = 0;
-	while (i < c)
-	{
-		if (json_value_get_type(json_array_get_value(arr, i)) != JSONNumber)
-		{
-			errno = 107;
-			ft_putendl_fd("Wrong vector format. Default applied",
-					STDERR_FILENO);
-			return (def);
-		}
-		i++;
-	}
-	return ((cl_float3){{(cl_float)json_array_get_number(arr, 0),
-						(cl_float)json_array_get_number(arr, 1),
-						(cl_float)json_array_get_number(arr, 2)}});
+	figure.type = Triangle;
+	figure.vector1 = (cl_float3){{0, 0, 0}};
+	figure.vector2 = (cl_float3){{0, 0, 0}};
+	figure.vector3 = (cl_float3){{0, 0, 0}};
+	figure.color = 0xffffff;
+	figure.reflection = 0;
+	return (figure);
 }

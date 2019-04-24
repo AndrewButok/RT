@@ -18,7 +18,8 @@ enum			e_figure
 	InfiniteCylinder = 3,
 	InfiniteCone = 4,
 	Cylinder = 5,
-	Cone = 6
+	Cone = 6,
+	Triangle = 7
 };
 
 enum			e_light
@@ -54,6 +55,7 @@ typedef struct 			s_figure
 	enum e_figure 	type;
 	float3		vector1;
 	float3		vector2;
+	float3		vector3;
 	float		param1;
 	float		param2;
 	float		param3;

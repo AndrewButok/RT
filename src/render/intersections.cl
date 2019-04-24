@@ -29,19 +29,9 @@ float			check_sphere_intersection(t_ray *ray, __global t_figure *figure, float3 
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		if (x1 <= 1e-3)
-		{
-			if (normale != 0)
-				*normale = normalize(ray->o + ray->v * x2 - figure->vector1);
-			return (x2);
-		}
-		if (x2 <= 1e-3)
-		{
-			if (normale != 0)
-				*normale = normalize(ray->o + ray->v * x1 - figure->vector1);
-			return (x1);
-		}
-		x1 = x1 <= x2 ? x1 : x2;
+		x1 = x1 <= 1e-3 ? x2 :
+				(x2 <= 1e-3 ? x1 :
+				(x1 <= x2 ? x1 : x2));
 		if (normale != 0)
 			*normale = normalize(ray->o + ray->v * x2 - figure->vector1);
 		return (x1);
@@ -84,28 +74,14 @@ float			check_infinite_cylinder_intersection(t_ray *ray, __global t_figure *figu
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		if (x1 <= 1e-3)
-		{
-			if (normale != 0)
-				*normale = normalize(ray->o + ray->v * x2 - figure->vector1 -
-					figure->vector2 * dot(ray->o + ray->v * x2 - figure->vector1,
-						figure->vector2));
-			return (x2);
-		}
-		if (x2 <= 1e-3)
-		{
-			if (normale != 0)
-				*normale = normalize(ray->o + ray->v * x1 - figure->vector1 -
-					figure->vector2 * dot(ray->o + ray->v * x1 - figure->vector1,
-						figure->vector2));
-			return (x1);
-		}
-		x1 = (x1 <= x2 ? x1 : x2);
+		x1 = x1 <= 1e-3 ? x2 :
+				(x2 <= 1e-3 ? x1 :
+				(x1 <= x2 ? x1 : x2));
 		if (normale != 0)
 			*normale = normalize(ray->o + ray->v * x1 - figure->vector1 -
 				figure->vector2 * dot(ray->o + ray->v * x1 - figure->vector1,
 					figure->vector2));
-		return x1;
+		return (x1);
 	}
 	return (-1);
 }
@@ -158,7 +134,7 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 						figure->vector2));
 			return (x2);
 		}
-		if ((x1 > 1e-3 && x2 > 1e-3 && (a > 1e-3 && a < figure->param2) &&
+		else if ((x1 > 1e-3 && x2 > 1e-3 && (a > 1e-3 && a < figure->param2) &&
 			x1 < x2)
 			|| (x1 > 1e-3 && x2 <= 1e-3) && (a > 1e-3 && a < figure->param2) &&
 			x1 >= x2)
@@ -194,23 +170,9 @@ float			check_infinite_cone_intersection(t_ray *ray, __global t_figure *figure, 
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		if (x1 <= 1e-3)
-		{
-			if (normale != 0)
-				*normale = normalize(ray->o + ray->v * x2 - figure->vector1 - figure->vector2 *
-					(dot(ray->o + ray->v * x2 - figure->vector1, ray->o + ray->v * x2 - figure->vector1) /
-						dot(ray->o + ray->v * x2 - figure->vector1, figure->vector2)));
-			return (x2);
-		}
-		if (x2 <= 1e-3)
-		{
-			if (normale != 0)
-				*normale = normalize(ray->o + ray->v * x1 - figure->vector1 - figure->vector2 *
-					(dot(ray->o + ray->v * x1 - figure->vector1, ray->o + ray->v * x1 - figure->vector1) /
-						dot(ray->o + ray->v * x1 - figure->vector1, figure->vector2)));
-			return (x1);
-		}
-		x1 = (x1 <= x2 ? x1 : x2);
+		x1 = x1 <= 1e-3 ? x2 :
+				(x2 <= 1e-3 ? x1 :
+				(x1 <= x2 ? x1 : x2));
 		if (normale != 0)
 			*normale = normalize(ray->o + ray->v * x1 - figure->vector1 - figure->vector2 *
 				(dot(ray->o + ray->v * x1 - figure->vector1, ray->o + ray->v * x1 - figure->vector1) /
@@ -223,7 +185,6 @@ float			check_infinite_cone_intersection(t_ray *ray, __global t_figure *figure, 
 
 float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *normale)
 {
-	//TODO review
 	float	a;
 	float	b;
 	float	c;
@@ -294,6 +255,30 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 		return (-1);
 }
 
+float			check_triangle_intersection(t_ray *ray, __global t_figure *figure, float3 *normale)
+{
+	float3	n;
+	float3	p;
+	float	distance;
+
+	n = normalize(cross(figure->vector1 - figure-> vector2, figure->vector3 - figure->vector2));
+	if (n.x >= 1e-3 || n.x <= -1e-3 ||
+		n.y >= 1e-3 || n.y <= -1e-3 ||
+		n.z >= 1e-3 || n.z <= -1e-3)
+	{
+		if (normale != 0)
+			*normale = n;
+		distance = dot(n, figure->vector2 - ray->o) / dot(n, ray->v);
+		p = ray->o + ray->v * distance;
+		if (dot(n, cross(figure->vector2 - figure->vector1, p - figure->vector1)) < 0 &&
+			dot(n, cross(figure->vector3 - figure->vector2, p - figure->vector2)) < 0 &&
+			dot(n, cross(figure->vector1 - figure->vector3, p - figure->vector3)) < 0)
+			return (distance);
+		return (-1);
+	}
+	return (-1);
+}
+
 float			check_intersection(t_ray *ray, __global t_figure *figure, float3 *normale)
 {
 	if (figure->type == Sphere)
@@ -308,5 +293,7 @@ float			check_intersection(t_ray *ray, __global t_figure *figure, float3 *normal
 		return (check_cylinder_intersection(ray, figure, normale));
 	else if (figure->type == Cone)
 		return (check_cone_intersection(ray, figure, normale));
+	else if (figure->type == Triangle)
+		return (check_triangle_intersection(ray, figure, normale));
 	return (-1);
 }

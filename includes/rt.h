@@ -31,7 +31,8 @@ enum					e_figure
 	InfiniteCylinder = 3,
 	InfiniteCone = 4,
 	Cylinder = 5,
-	Cone = 6
+	Cone = 6,
+	Triangle = 7
 };
 
 enum					e_light
@@ -55,6 +56,7 @@ typedef struct			s_figure
 	enum e_figure	type;
 	cl_float3		vector1;
 	cl_float3		vector2;
+	cl_float3		vector3;
 	cl_float		param1;
 	cl_float		param2;
 	cl_float		param3;
@@ -112,6 +114,7 @@ void					get_infinite_cylinder(t_figure *figure,
 		JSON_Object *obj);
 void					get_cone(t_figure *figure, JSON_Object *obj);
 void					get_cylinder(t_figure *figure, JSON_Object *obj);
+void					get_triangle(t_figure *figure, JSON_Object *obj);
 void					get_lights(t_view *view, JSON_Object *root);
 void					get_cam(t_view *view, JSON_Object *root);
 void					get_params(t_view *view, JSON_Object *root);
@@ -121,6 +124,7 @@ t_figure				infinite_plane_init();
 t_figure				infinite_cylinder_init();
 t_figure				infinite_cone_init();
 t_figure				cone_init();
+t_figure				triangle_init();
 t_light					light_init(enum e_light type, cl_float3 position,
 		cl_float intens);
 cl_float3				vector_normalize(cl_float3 unnormalized);
