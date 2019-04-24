@@ -16,7 +16,6 @@ static char	*get_kernel(void)
 {
 	return (ft_strdup("#include \"./src/render/struct.cl\"\n"
 	"#include \"./src/render/intersections.cl\"\n"
-	"#include \"./src/render/normales.cl\"\n"
 	"#include \"./src/render/cam.cl\"\n"
 	"#include \"./src/render/main.cl\""));
 }

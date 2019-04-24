@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 int				check_intersections(float3 intersection, float3 light,
-								   __global t_figure *figures, __global int *params, __global t_figure *cf)
+	  __global t_figure *figures, __global int *params, __global t_figure *cf)
 {
 	int		i = 0;
 	float	k;
@@ -22,7 +22,7 @@ int				check_intersections(float3 intersection, float3 light,
 	while (i < params[2])
 	{
 		k = -1.0f;
-		k = check_intersection(&ray, &(figures[i]));
+		k = check_intersection(&ray, &(figures[i]), 0);
 		if (k < 1 && k >= 1e-3)
 			return (1);
 		i++;
@@ -77,10 +77,9 @@ float			trace_reflection(float3 l, float3 normale, float3 view, float3 buf)
 }
 
 int				count_light(__global t_figure *figures, __global t_light *lights,
-__global int *params, t_ray *ray, __global t_figure *figure, float len)
+__global int *params, t_ray *ray, __global t_figure *figure, float3 normale, float len)
 {
 	float3		intersection = (ray->v * len) + ray->o,
-				normale = get_normale(&intersection, figure),
 				light;
 	float	bright = 0, reflected = 0;
 	int		i;
@@ -115,15 +114,18 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 {
 	__private int	index = 0;
 	__private int	closest_index;
+	float3			normale;
+	float3			nbuf;
 	float			lbuf;
 	float			len = INFINITY;
 
 	while (index < params[2])
 	{
-		lbuf = check_intersection(ray, &(figures[index]));
+		lbuf = check_intersection(ray, &(figures[index]), &nbuf);
 		if (lbuf >= 1.0f && lbuf < len)
 		{
 			len = lbuf;
+			normale = nbuf;
 			closest_index = index;
 		}
 		index++;
@@ -131,7 +133,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 	if (len == INFINITY)
 		return (0);
 	else
-		return (count_light(figures, lights, params, ray, &(figures[closest_index]), len));
+		return (count_light(figures, lights, params, ray, &(figures[closest_index]), normale, len));
 }
 
 __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
