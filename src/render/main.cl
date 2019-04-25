@@ -63,13 +63,13 @@ int				set_brightness(int color, float bright, float reflected)
 	return (coloru.color);
 }
 
-float			trace_reflection(float3 l, float3 normale, float3 view, float3 buf)
+float			trace_reflection(float3 l, float3 normal, float3 view, float3 buf)
 {
 	float3	h;
 	float	d;
 
 	h = view + l;
-	d = dot(h, normale);
+	d = dot(h, normal);
 	if (d > 0)
 		return (buf.x * pow(d / length(h), buf.y));
 	else
@@ -77,15 +77,15 @@ float			trace_reflection(float3 l, float3 normale, float3 view, float3 buf)
 }
 
 int				count_light(__global t_figure *figures, __global t_light *lights,
-__global int *params, t_ray *ray, __global t_figure *figure, float3 normale, float len)
+__global int *params, t_ray *ray, __global t_figure *figure, float3 normal, float len)
 {
 	float3		intersection = (ray->v * len) + ray->o,
 				light;
 	float	bright = 0, reflected = 0;
 	int		i;
 
-	if (dot(normale, ray->v) >= 0)
-		normale = normale * (-1);
+	if (dot(normal, ray->v) >= 0)
+		normal = normal * (-1);
 	i = 0;
 	while (i < params[3])
 	{
@@ -96,11 +96,11 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normale, flo
 			light = lights[i].position - intersection;
 			if (!check_intersections(intersection, light, figures, params, figure))
 			{
-				if (dot(normale, light) > 0)
-					bright += lights[i].intensity * dot(normale, light) /
+				if (dot(normal, light) > 0)
+					bright += lights[i].intensity * dot(normal, light) /
 						length(light);
-				if (dot(normale, light) > 0 && figure->reflection > 0)
-					reflected += trace_reflection(light, normale, ray->v * (-1),
+				if (dot(normal, light) > 0 && figure->reflection > 0)
+					reflected += trace_reflection(light, normal, ray->v * (-1),
 						(float3)(lights[i].intensity, figure->reflection, 0.0f));
 			}
 		}
@@ -114,7 +114,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 {
 	__private int	index = 0;
 	__private int	closest_index;
-	float3			normale;
+	float3			normal;
 	float3			nbuf;
 	float			lbuf;
 	float			len = INFINITY;
@@ -125,7 +125,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 		if (lbuf >= 1.0f && lbuf < len)
 		{
 			len = lbuf;
-			normale = nbuf;
+			normal = nbuf;
 			closest_index = index;
 		}
 		index++;
@@ -133,7 +133,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 	if (len == INFINITY)
 		return (0);
 	else
-		return (count_light(figures, lights, params, ray, &(figures[closest_index]), normale, len));
+		return (count_light(figures, lights, params, ray, &(figures[closest_index]), normal, len));
 }
 
 __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,

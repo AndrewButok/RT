@@ -19,7 +19,8 @@ enum			e_figure
 	InfiniteCone = 4,
 	Cylinder = 5,
 	Cone = 6,
-	Triangle = 7
+	Triangle = 7,
+	Ellipsoid = 8
 };
 
 enum			e_light

@@ -33,3 +33,10 @@ cl_float3	vector_normalize(cl_float3 unnormalized)
 						unnormalized.y / len,
 						unnormalized.z / len}});
 }
+
+cl_float3	vector_sub(cl_float3 a, cl_float3 b)
+{
+	return (cl_float3){{a.x - b.x,
+						a.y - b.y,
+						a.z - b.z}};
+}

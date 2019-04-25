@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_infinite_plane.c                               :+:      :+:    :+:   */
+/*   elipsoid.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,16 @@
 
 #include "rt.h"
 
-void	get_infinite_plane(t_figure *figure, JSON_Object *obj)
+t_figure	ellipsoid_init(void)
 {
-	*figure = infinite_plane_init();
-	if (json_object_has_value_of_type(obj, "normal", JSONArray))
-		figure->vector1 = vector_normalize(get_vector(json_object_get_array(obj,
-				"normal"), figure->vector1));
-	else
-		ft_putendl_fd("Plane normal not found. Default applied.",
-				STDERR_FILENO);
-	if (json_object_has_value_of_type(obj, "point", JSONArray))
-		figure->vector2 = get_vector(json_object_get_array(obj, "point"),
-				figure->vector2);
-	else
-		ft_putendl_fd("Plane point not found. Default applied.",
-				STDERR_FILENO);
-	get_color_reflection(figure, obj);
-	ft_putendl("\x1b[32mInfinite plane parsed.");
+	t_figure figure;
+
+	figure.type = Ellipsoid;
+	figure.vector1 = (cl_float3){{0, 0, 0}};
+	figure.vector2 = (cl_float3){{0, 0, 0}};
+	figure.param1 = 0;
+	figure.param2 = 0;
+	figure.color = 0xffffff;
+	figure.reflection = 0;
+	return (figure);
 }

@@ -32,7 +32,8 @@ enum					e_figure
 	InfiniteCone = 4,
 	Cylinder = 5,
 	Cone = 6,
-	Triangle = 7
+	Triangle = 7,
+	Ellipsoid = 8
 };
 
 enum					e_light
@@ -115,6 +116,7 @@ void					get_infinite_cylinder(t_figure *figure,
 void					get_cone(t_figure *figure, JSON_Object *obj);
 void					get_cylinder(t_figure *figure, JSON_Object *obj);
 void					get_triangle(t_figure *figure, JSON_Object *obj);
+void					get_ellipsoid(t_figure *figure, JSON_Object *obj);
 void					get_lights(t_view *view, JSON_Object *root);
 void					get_cam(t_view *view, JSON_Object *root);
 void					get_params(t_view *view, JSON_Object *root);
@@ -125,12 +127,14 @@ t_figure				infinite_cylinder_init();
 t_figure				infinite_cone_init();
 t_figure				cone_init();
 t_figure				triangle_init();
+t_figure				ellipsoid_init();
 t_light					light_init(enum e_light type, cl_float3 position,
 		cl_float intens);
 cl_float3				vector_normalize(cl_float3 unnormalized);
 cl_float				vector_length(cl_float3 vector);
 cl_float				vector_scalar_multiple(cl_float3 vector1,
 		cl_float3 vector2);
+cl_float3				vector_sub(cl_float3 a, cl_float3 b);
 void					cl_init(t_view *view);
 void					cl_run_kernel(t_view *view);
 void					params_init(t_view *view);
