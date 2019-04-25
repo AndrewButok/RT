@@ -23,9 +23,7 @@ float			check_sphere_intersection(t_ray *ray, __global t_figure *figure, float3 
 	c = dot(ray->o - figure->vector1, ray->o - figure->vector1) -
 		pow(figure->param1, 2.0f);
 	d = pow(b, 2.0f) - a * c;
-	if (d == 0)
-		return ((-b)/a);
-	else if (d > 0)
+	if (d > 0)
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
