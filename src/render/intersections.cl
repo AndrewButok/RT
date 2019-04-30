@@ -66,9 +66,7 @@ float			check_infinite_cylinder_intersection(t_ray *ray, __global t_figure *figu
 		pow(dot(ray->o - figure->vector1, figure->vector2), 2) -
 		pow(figure->param1, 2);
 	d = pow(b, 2.0f) - a * c;
-	if (d == 0)
-		return ((-b)/a);
-	else if (d > 0)
+	if (d > 0)
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
@@ -101,7 +99,7 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 		pow(dot(ray->o - figure->vector1, figure->vector2), 2) -
 		pow(figure->param1, 2);
 	d = pow(b, 2.0f) - a * c;
-	if (d >= 0)
+	if (d > 0)
 	{
 		x1 = dot(figure->vector2, figure->vector1 - ray->o) / dot(figure->vector2, ray->v);
 		x2 = dot(figure->vector2, figure->vector1 +
@@ -162,9 +160,7 @@ float			check_infinite_cone_intersection(t_ray *ray, __global t_figure *figure, 
 		((1 + pow(figure->param1, 2)) *
 		pow(dot(ray->o - figure->vector1, figure->vector2), 2));
 	d = pow(b, 2.0f) - a * c;
-	if (d == 0)
-		return ((-b)/a);
-	else if (d > 0)
+	if (d > 0)
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
@@ -199,7 +195,7 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 		((1 + pow(figure->param1, 2)) *
 		pow(dot(ray->o - figure->vector1, figure->vector2), 2));
 	d = pow(b, 2.0f) - a * c;
-	if (d >= 0)
+	if (d > 0)
 	{
 		x1 = dot(figure->vector2, figure->vector1 +
 				(figure->vector2 * figure->param2) - ray->o) / dot(figure->vector2, ray->v);
