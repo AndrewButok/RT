@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_elipsoid.c                                     :+:      :+:    :+:   */
+/*   get_ellipsoid.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
+/*   Updated: 2019/04/27 19:19:03 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,10 @@
 
 static void	get_ellipsoid_radii(t_figure *figure, JSON_Object *obj)
 {
-	if (json_object_has_value_of_type(obj, "radius1", JSONNumber))
-		figure->param1 += json_object_get_number(obj, "radius1");
+	if (json_object_has_value_of_type(obj, "radius", JSONNumber))
+		figure->param1 += json_object_get_number(obj, "radius");
 	else
-		ft_putendl_fd("Ellipsoid first radius not found. Default applied",
-					STDERR_FILENO);
-	if (json_object_has_value_of_type(obj, "radius2", JSONNumber))
-		figure->param1 += json_object_get_number(obj, "radius2");
-	else
-		ft_putendl_fd("Ellipsoid second radius not found. Default applied",
+		ft_putendl_fd("Ellipsoid radius not found. Default applied",
 					STDERR_FILENO);
 }
 

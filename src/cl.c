@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cl.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/11/11 20:07:02 by abutok           ###   ########.fr       */
+/*   Updated: 2019/04/27 19:15:14 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ static void	cl_kernel_init(t_view *view)
 void		cl_init(t_view *view)
 {
 	view->cl = (t_cl*)malloc(sizeof(t_cl));
-	clGetDeviceIDs(NULL, CL_DEVICE_TYPE_GPU, 1, &(view->cl->device), NULL);
+	clGetDeviceIDs(NULL, CL_DEVICE_TYPE_CPU, 1, &(view->cl->device), NULL);
 	view->cl->context = clCreateContext(NULL, 1, &(view->cl->device),
 			NULL, NULL, NULL);
 	view->cl->queue = clCreateCommandQueue(view->cl->context, view->cl->device,

@@ -282,30 +282,30 @@ float			check_ellipsoid_intersection(t_ray *ray, __global t_figure *figure, floa
 	float	a1, a2, a, b, c, d;
 	float	x1, x2;
 
-	a1 = 2 * figure->param2 * dot(ray->v, figure->vector2);
-	a2 = figure->param1 * figure->param1 + 2 * figure->param2 * dot(ray->o - figure->vector1, figure->vector2) - figure->param2;
-	a = pow(2 * figure->param1, 2) * dot(ray->v, ray->v) - a1 * a1;
-	b = pow(2 * figure->param1, 2) * dot(ray->v, ray->o - figure->vector1) - a1 * a2;
-	c = pow(2 * figure->param1, 2) * dot(ray->o - figure->vector1, ray->o - figure->vector1) - a2 * a2;
+	a1 = 2.0f * figure->param2 * dot(ray->v, figure->vector2);
+	a2 = figure->param1 * figure->param1 + 2.0f * figure->param2 * dot(ray->o - figure->vector1, figure->vector2) - figure->param2;
+	a = pow(2.0f * figure->param1, 2.0f) * dot(ray->v, ray->v) - a1 * a1;
+	b = pow(2.0f * figure->param1, 2.0f) * dot(ray->v, ray->o - figure->vector1) - a1 * a2;
+	c = pow(2.0f * figure->param1, 2.0f) * dot(ray->o - figure->vector1, ray->o - figure->vector1) - a2 * a2;
 	d = pow(b, 2.0f) - a * c;
 	if (d > 0)
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		x1 = x1 <= 1e-3 ? x2 :
-	 		(x2 <= 1e-3 ? x1 :
-	 		(x1 <= x2 ? x1 : x2));
+		x1 = x1 < 1e-3 ? x2 :
+	 		(x2 < 1e-3 ? x1 :
+	 		(x1 < x2 ? x1 : x2));
 		if (normal != 0)
 		{
 			float3 r, cmid;
 
 			cmid = figure->vector1 + figure->vector2 * (figure->param2 / 2.0f);
 			r = (ray->o + ray->v * x1) - cmid;
-			*normal = normalize(r - (figure->vector2 * (1 - (b * b) / (c * a)) * dot(r, figure->vector2)));
+			*normal = normalize(r - (figure->vector2 * (1.0f - (b * b) / (c * a)) * dot(r, figure->vector2)));
 		}
 		return (x1);
 	}
-
+	return (-1);
 }
 
 float			check_intersection(t_ray *ray, __global t_figure *figure, float3 *normal)
