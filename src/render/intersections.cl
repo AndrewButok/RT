@@ -304,6 +304,28 @@ float			check_ellipsoid_intersection(t_ray *ray, __global t_figure *figure, floa
 	return (-1);
 }
 
+float			check_torus_intersection(t_ray *ray, __global t_figure *figure, float3 *normale)
+{
+	float	m, n, o, p, q;
+	float	a, b, c, d, e;
+
+	m = dot(ray->v, ray->v);
+	n = dot(ray->v, ray->o - figure->vector1);
+	o = dot(ray->o - figure->vector1, ray->o - figure->vector1);
+	p = dot(ray->v, figure->vector2);
+	q = dot(ray->o - figure->vector1, figure->vector2);
+	a = pow(m, 2);
+	b = 4 * m * n;
+	c = 4 * pow(m, 2) + 2 * m * o -
+		2 * (pow(figure->param1, 2) + pow(figure->param2, 2)) * m +
+		4 * pow(figure->param1, 2) * pow(p, 2);
+	d = 4 * n * o - 4 * (pow(figure->param1, 2) + pow(figure->param2, 2)) * n +
+		8 * pow(figure->param1, 2) * p * q;
+	e = pow(o, 2) - 2 * (pow(figure->param1, 2) + pow(figure->param2, 2)) * o +
+		4 * pow(figure->param1, 2) * pow(q, 2) + pow((pow(figure->param1, 2) - pow(figure->param2, 2)), 2);
+	return (-1);
+}
+
 float			check_intersection(t_ray *ray, __global t_figure *figure, float3 *normal)
 {
 	if (figure->type == Sphere)
