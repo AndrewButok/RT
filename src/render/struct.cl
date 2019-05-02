@@ -20,7 +20,8 @@ enum			e_figure
 	Cylinder = 5,
 	Cone = 6,
 	Triangle = 7,
-	Ellipsoid = 8
+	Ellipsoid = 8,
+	Torus = 9
 };
 
 enum			e_light

@@ -304,10 +304,55 @@ float			check_ellipsoid_intersection(t_ray *ray, __global t_figure *figure, floa
 	return (-1);
 }
 
-float			check_torus_intersection(t_ray *ray, __global t_figure *figure, float3 *normale)
+float			select_solution(t_ray *ray, __global t_figure *figure, float3 *normal, float *x1, float *x2, float *x3, float *x4)
 {
-	float	m, n, o, p, q;
+	float k, m, rv = -1;
+	float3 a;
+	if (*x1 > 0 && ((*x2 > 0 && *x3 > 0 && *x4 > 0 && *x1 < *x2 && *x1 < *x3 && *x1 < *x4) ||
+				   (*x2 > 0 && *x3 > 0 && *x1 < *x2 && *x1 < *x3) ||
+				   (*x2 > 0 && *x4 > 0 && *x1 < *x2 && *x1 < *x4) ||
+				   (*x3 > 0 && *x4 > 0 && *x1 < *x3 && *x1 < *x4) ||
+				   (*x4 > 0 && *x1 < *x4) ||
+				   (*x3 > 0 && *x1 < *x3) ||
+				   (*x2 > 0 && *x1 < *x2)))
+		rv = *x1;
+	if (*x2 > 0 && ((*x1 > 0 && *x3 > 0 && *x4 > 0 && *x2 < *x1 && *x2 < *x3 && *x2 < *x4) ||
+				   (*x1 > 0 && *x3 > 0 && *x2 < *x1 && *x2 < *x3) ||
+				   (*x1 > 0 && *x4 > 0 && *x2 < *x1 && *x2 < *x4) ||
+				   (*x3 > 0 && *x4 > 0 && *x2 < *x3 && *x2 < *x4) ||
+				   (*x4 > 0 && *x2 < *x4) ||
+				   (*x3 > 0 && *x2 < *x3) ||
+				   (*x1 > 0 && *x2 < *x1)))
+		rv = *x2;
+	if (*x3 > 0 && ((*x2 > 0 && *x1 > 0 && *x4 > 0 && *x3 < *x2 && *x3 < *x1 && *x3 < *x4) ||
+				   (*x2 > 0 && *x1 > 0 && *x3 < *x2 && *x3 < *x1) ||
+				   (*x2 > 0 && *x4 > 0 && *x3 < *x2 && *x3 < *x4) ||
+				   (*x1 > 0 && *x4 > 0 && *x3 < *x1 && *x3 < *x4) ||
+				   (*x4 > 0 && *x3 < *x4) ||
+				   (*x1 > 0 && *x3 < *x1) ||
+				   (*x2 > 0 && *x3 < *x2)))
+		rv = *x3;
+	if (*x4 > 0 && ((*x2 > 0 && *x3 > 0 && *x1 > 0 && *x4 < *x2 && *x4 < *x3 && *x4 < *x1) ||
+				   (*x2 > 0 && *x3 > 0 && *x4 < *x2 && *x4 < *x3) ||
+				   (*x2 > 0 && *x1 > 0 && *x4 < *x2 && *x4 < *x1) ||
+				   (*x3 > 0 && *x1 > 0 && *x4 < *x3 && *x4 < *x1) ||
+				   (*x1 > 0 && *x4 < *x1) ||
+				   (*x3 > 0 && *x4 < *x3) ||
+				   (*x2 > 0 && *x4 < *x2)))
+		rv = *x4;
+	//TODO: normal of torus;
+	if (normal != 0)
+	{
+		normal = normalize(ray->o + rv * ray->v - a  - (C - a) * m / (R + m))
+	}
+	return (rv);
+}
+
+float			check_torus_intersection(t_ray *ray, __global t_figure *figure, float3 *normal)
+{
+	float	m, n, o, p, q, r, u, y, w;
 	float	a, b, c, d, e;
+	float	x1, x2, x3, x4;
 
 	m = dot(ray->v, ray->v);
 	n = dot(ray->v, ray->o - figure->vector1);
@@ -323,7 +368,65 @@ float			check_torus_intersection(t_ray *ray, __global t_figure *figure, float3 *
 		8 * pow(figure->param1, 2) * p * q;
 	e = pow(o, 2) - 2 * (pow(figure->param1, 2) + pow(figure->param2, 2)) * o +
 		4 * pow(figure->param1, 2) * pow(q, 2) + pow((pow(figure->param1, 2) - pow(figure->param2, 2)), 2);
-	return (-1);
+	m = c / a - (3 * b * b / (8 * a * a));
+	n = (b * b * b) / (8 * a * a * a) - (b * c) / (2 * a * a) + d / a;
+	o = (-3 * b * b * b * b) / (256 * a * a * a * a) + (c * b * b) / (16 * a * a * a) - (b * d) / (4 * a * a) + e / a;
+	// if biquadratic equation
+	if (n == 0 && (m * m - 4 * o) > 0)
+	{
+		if ((-m + sqrt(m * m - 4 * o)) > 0)
+		{
+			x1 = (-b) / (4 * a) + sqrt((-m + sqrt(m * m - 4 * o)) / 2);
+			x2 = (-b) / (4 * a) - sqrt((-m + sqrt(m * m - 4 * o)) / 2);
+		}
+		else
+		{
+			x1 = -1;
+			x2 = -1;
+		}
+		if ((-m + sqrt(m * m - 4 * o)) > 0)
+		{
+			x3 = (-b) / (4 * a) + sqrt((-m - sqrt(m * m - 4 * o)) / 2);
+			x4 = (-b) / (4 * a) - sqrt((-m - sqrt(m * m - 4 * o)) / 2);
+		}
+		else
+		{
+			x3 = -1;
+			x4 = -1;
+		}
+		return select_solution(ray, figure, normal, &x1, &x2, &x3, &x4);
+	}
+	p = -(m * m) / 12 - o;
+	if (p < 0)
+		return (-1);
+	q = -(m * m * m) / 108 + (m * o) / 3 - (n * n * n) / 8;
+	r = - q / 2 + sqrt((q * q) / 4 + (p * p * p) / 27);
+	u = pow(r, 1.0f/3.0f);
+	y = - (5 * m) / 6 + u + (u == 0 ? -pow(q, 1.0f/3.0f) : (-p)/ (3 * u));
+	if ( m - 2 * y <= 0)
+		return (-1);
+	w = sqrt(m - 2 * y);
+	if ((3 * m + 2 * y + 2 * n / w) < 0)
+	{
+		x1 = (-b) / (4 * a) + (w + sqrt(-(3 * m + 2 * y + 2 * n / w)) / 2);
+		x2 = (-b) / (4 * a) + (w - sqrt(-(3 * m + 2 * y + 2 * n / w)) / 2);
+	}
+	else
+	{
+		x1 = -1;
+		x2 = -1;
+	}
+	if ((3 * m + 2 * y + 2 * n / (-w)) < 0)
+	{
+		x3 = (-b) / (4 * a) + (-w + sqrt(-(3 * m + 2 * y - 2 * n / w)) / 2);
+		x4 = (-b) / (4 * a) + (-w - sqrt(-(3 * m + 2 * y - 2 * n / w)) / 2);
+	}
+	else
+	{
+		x3 = -1;
+		x4 = -1;
+	}
+	return select_solution(ray, figure, normal, &x1, &x2, &x3, &x4);
 }
 
 float			check_intersection(t_ray *ray, __global t_figure *figure, float3 *normal)
@@ -344,5 +447,7 @@ float			check_intersection(t_ray *ray, __global t_figure *figure, float3 *normal
 		return (check_triangle_intersection(ray, figure, normal));
 	else if (figure->type == Ellipsoid)
 		return (check_ellipsoid_intersection(ray, figure, normal));
+	else if (figure->type == Torus)
+		return (check_torus_intersection(ray, figure, normal));
 	return (-1);
 }
