@@ -22,8 +22,8 @@ void	get_cylinder(t_figure *figure, JSON_Object *obj)
 		ft_putendl_fd("Cylinder axis point not found. Default applied",
 				STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "vector", JSONArray))
-		figure->vector2 = vector_normalize(get_vector(json_object_get_array(obj,
-				"vector"), figure->vector2));
+		figure->vector2 = normalize(get_vector(json_object_get_array(obj,
+			"vector"), figure->vector2));
 	else
 		ft_putendl_fd("Cylinder axis vector not found. Default applied",
 				STDERR_FILENO);

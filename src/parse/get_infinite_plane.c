@@ -16,8 +16,8 @@ void	get_infinite_plane(t_figure *figure, JSON_Object *obj)
 {
 	*figure = infinite_plane_init();
 	if (json_object_has_value_of_type(obj, "normal", JSONArray))
-		figure->vector1 = vector_normalize(get_vector(json_object_get_array(obj,
-				"normal"), figure->vector1));
+		figure->vector1 = normalize(get_vector(json_object_get_array(obj,
+			"normal"), figure->vector1));
 	else
 		ft_putendl_fd("Plane normal not found. Default applied.",
 				STDERR_FILENO);

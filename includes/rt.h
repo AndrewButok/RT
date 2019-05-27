@@ -130,11 +130,11 @@ t_figure				triangle_init();
 t_figure				ellipsoid_init();
 t_light					light_init(enum e_light type, cl_float3 position,
 		cl_float intens);
-cl_float3				vector_normalize(cl_float3 unnormalized);
-cl_float				vector_length(cl_float3 vector);
-cl_float				vector_scalar_multiple(cl_float3 vector1,
-		cl_float3 vector2);
-cl_float3				vector_sub(cl_float3 a, cl_float3 b);
+cl_float3				normalize(cl_float3 unnormalized);
+cl_float				length(cl_float3 vector);
+cl_float				dot(cl_float3 vector1,
+							cl_float3 vector2);
+cl_float3				sub(cl_float3 a, cl_float3 b);
 void					cl_init(t_view *view);
 void					cl_run_kernel(t_view *view);
 void					params_init(t_view *view);

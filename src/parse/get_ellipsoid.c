@@ -34,10 +34,10 @@ void		get_ellipsoid(t_figure *figure, JSON_Object *obj)
 	{
 		figure->vector2 = get_vector(json_object_get_array(obj, "center2"),
 				figure->vector2);
-		figure->param2 = vector_length(vector_sub(figure->vector2,
-				figure->vector1));
-		figure->vector2 = vector_normalize(vector_sub(figure->vector2,
-				figure->vector1));
+		figure->param2 = length(sub(figure->vector2,
+									figure->vector1));
+		figure->vector2 = normalize(sub(figure->vector2,
+										figure->vector1));
 	}
 	else
 		ft_putendl_fd("Ellipsoid second center not found. Default applied",

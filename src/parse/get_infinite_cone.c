@@ -21,8 +21,8 @@ void	get_infinite_cone(t_figure *figure, JSON_Object *obj)
 	else
 		ft_putendl_fd("Cone vertex not found. Default applied", STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "vector", JSONArray))
-		figure->vector2 = vector_normalize(get_vector(json_object_get_array(obj,
-				"vector"), figure->vector2));
+		figure->vector2 = normalize(get_vector(json_object_get_array(obj,
+			"vector"), figure->vector2));
 	else
 		ft_putendl_fd("Cone vector not found. Default applied", STDERR_FILENO);
 	if (json_object_has_value_of_type(obj, "radius", JSONNumber))

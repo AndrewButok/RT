@@ -12,29 +12,29 @@
 
 #include "rt.h"
 
-cl_float	vector_scalar_multiple(cl_float3 vector1, cl_float3 vector2)
+cl_float	dot(cl_float3 vector1, cl_float3 vector2)
 {
 	return (vector1.x * vector2.x +
 			vector1.y * vector2.y +
 			vector1.z * vector2.z);
 }
 
-cl_float	vector_length(cl_float3 vector)
+cl_float	length(cl_float3 vector)
 {
-	return (sqrtf(vector_scalar_multiple(vector, vector)));
+	return (sqrtf(dot(vector, vector)));
 }
 
-cl_float3	vector_normalize(cl_float3 unnormalized)
+cl_float3	normalize(cl_float3 unnormalized)
 {
 	cl_float len;
 
-	len = vector_length(unnormalized);
+	len = length(unnormalized);
 	return ((cl_float3){{unnormalized.x / len,
 						unnormalized.y / len,
 						unnormalized.z / len}});
 }
 
-cl_float3	vector_sub(cl_float3 a, cl_float3 b)
+cl_float3	sub(cl_float3 a, cl_float3 b)
 {
 	return (cl_float3){{a.x - b.x,
 						a.y - b.y,
