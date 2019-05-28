@@ -14,12 +14,13 @@
 
 void	params_init(t_view *view)
 {
-	view->params = (cl_int*)malloc(sizeof(cl_int) * 5);
+	view->params = (cl_int*)malloc(sizeof(cl_int) * 6);
 	view->params[0] = view->width;
 	view->params[1] = view->height;
 	view->params[2] = (int)view->figures_count;
 	view->params[3] = (int)view->lights_count;
 	view->params[4] = view->rays_count;
+	view->params[5] = view->depth;
 }
 
 void	cl_run_kernel(t_view *view)

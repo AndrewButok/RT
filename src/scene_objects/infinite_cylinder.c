@@ -21,6 +21,6 @@ t_figure	infinite_cylinder_init(void)
 	figure.vector1 = (cl_float3){{0, 0, 0}};
 	figure.param1 = 1;
 	figure.color = 0xffffff;
-	figure.reflection = 0;
+	figure.spectacular = 0;
 	return (figure);
 }

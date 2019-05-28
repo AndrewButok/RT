@@ -29,6 +29,6 @@ void	get_infinite_cone(t_figure *figure, JSON_Object *obj)
 		figure->param1 = (cl_float)json_object_get_number(obj, "radius");
 	else
 		ft_putendl_fd("Cone radius not found. Default applied", STDERR_FILENO);
-	get_color_reflection(figure, obj);
+	get_figure_params(figure, obj);
 	ft_putendl("\x1b[32mInfinite cone parsed.");
 }

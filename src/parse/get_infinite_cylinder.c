@@ -32,6 +32,6 @@ void	get_infinite_cylinder(t_figure *figure, JSON_Object *obj)
 	else
 		ft_putendl_fd("Cylinder radius not found. Default applied",
 				STDERR_FILENO);
-	get_color_reflection(figure, obj);
+	get_figure_params(figure, obj);
 	ft_putendl("\x1b[32mInfinite cylinder parsed.");
 }

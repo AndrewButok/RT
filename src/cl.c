@@ -75,7 +75,7 @@ static void	cl_kernel_init(t_view *view)
 void		cl_init(t_view *view)
 {
 	view->cl = (t_cl*)malloc(sizeof(t_cl));
-	clGetDeviceIDs(NULL, CL_DEVICE_TYPE_GPU, 1, &(view->cl->device), NULL);
+	clGetDeviceIDs(NULL, CL_DEVICE_TYPE_CPU, 1, &(view->cl->device), NULL);
 	view->cl->context = clCreateContext(NULL, 1, &(view->cl->device),
 			NULL, NULL, NULL);
 	view->cl->queue = clCreateCommandQueue(view->cl->context, view->cl->device,

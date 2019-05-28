@@ -21,6 +21,6 @@ t_figure	triangle_init(void)
 	figure.vector2 = (cl_float3){{0, 0, 0}};
 	figure.vector3 = (cl_float3){{0, 0, 0}};
 	figure.color = 0xffffff;
-	figure.reflection = 0;
+	figure.spectacular = 0;
 	return (figure);
 }

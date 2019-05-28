@@ -32,10 +32,10 @@ SCENEFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c \
 				light_init.c cylinder.c cone.c triangle.c ellipsoid.c
 VECTORFILES = vector.c
 PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
-				get_color_reflection.c get_infinite_plane.c \
+				get_infinite_plane.c \
 				get_infinite_cone.c get_infinite_cylinder.c \
 				get_light.c get_cam.c get_params.c get_cylinder.c get_cone.c \
-				get_triangle.c get_ellipsoid.c
+				get_triangle.c get_ellipsoid.c get_figure_params.c
 #	Header folder
 INCLUDE = ./includes
 #	Binaries folder

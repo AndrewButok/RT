@@ -22,6 +22,6 @@ t_figure	cylinder_init(void)
 	figure.param1 = 1;
 	figure.param2 = 1;
 	figure.color = 0xffffff;
-	figure.reflection = 0;
+	figure.spectacular = 0;
 	return (figure);
 }

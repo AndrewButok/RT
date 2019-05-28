@@ -52,6 +52,7 @@ typedef struct			s_light
 
 typedef struct 			s_figure
 {
+	float		spectacular;
 	float		reflection;
 	int			color;
 	enum e_figure 	type;

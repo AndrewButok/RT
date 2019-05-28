@@ -20,6 +20,6 @@ t_figure	infinite_plane_init(void)
 	figure.vector1 = (cl_float3){{0.0f, 1.0f, 0.0f}};
 	figure.vector2 = (cl_float3){{0.0f, 0.0f, 0.0f}};
 	figure.color = 0xffffff;
-	figure.reflection = 0;
+	figure.spectacular = 0;
 	return (figure);
 }

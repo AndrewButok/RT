@@ -15,7 +15,7 @@ set(SOURCE_FILES
         src/parse/get_space.c
         src/parse/get_sphere.c
         src/parse/get_vector.c
-        src/parse/get_color_reflection.c
+        src/parse/get_figure_params.c
         src/parse/get_infinite_plane.c
         src/parse/get_infinite_cone.c
         src/vector/vector.c

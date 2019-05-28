@@ -52,6 +52,7 @@ typedef struct			s_light
 
 typedef struct			s_figure
 {
+	cl_float		spectacular;
 	cl_float		reflection;
 	cl_int			color;
 	enum e_figure	type;
@@ -98,6 +99,7 @@ typedef struct			s_view
 	cl_int			width;
 	cl_int			height;
 	cl_int			rays_count;
+	cl_int			depth;
 	t_ray			*cam;
 	t_cl			*cl;
 }						t_view;
@@ -105,7 +107,7 @@ typedef struct			s_view
 int						check_hex(const char *str);
 int						ft_hexatoi(const char *str);
 cl_float3				get_vector(JSON_Array *arr, cl_float3 def);
-void					get_color_reflection(t_figure *figure,
+void					get_figure_params(t_figure *figure,
 		JSON_Object *obj);
 void					get_space(t_view *view, char *filename);
 void					get_sphere(t_figure *figure, JSON_Object *obj);

@@ -14,15 +14,35 @@
 
 void	get_rays(t_view *view, JSON_Object *params)
 {
-	view->rays_count = 1;
 	if (json_object_has_value_of_type(params, "antialias", JSONNumber))
 		view->rays_count = (int)json_object_get_number(params, "antialias");
 	else
+	{
 		ft_putendl("Antialias parameter is absent. Default applied");
+		view->rays_count = 1;
+		return ;
+	}
 	if (view->rays_count > 90 || view->rays_count < 1)
 	{
 		ft_putendl("Invalid antialias parameter. Default applied");
 		view->rays_count = 1;
+	}
+}
+
+void	get_depth(t_view *view, JSON_Object *params)
+{
+	if (json_object_has_value_of_type(params, "depth", JSONNumber))
+		view->depth = (int)json_object_get_number(params, "depth");
+	else
+	{
+		ft_putendl("Depth parameter is absent. Default applied");
+		view->depth = 0;
+		return ;
+	}
+	if (view->rays_count > 5 || view->rays_count < 0)
+	{
+		ft_putendl("Invalid depth parameter. Default applied");
+		view->rays_count = 0;
 	}
 }
 
@@ -47,6 +67,7 @@ void	get_params(t_view *view, JSON_Object *root)
 			ft_putendl_fd("Height parameter isn't present or illegal."
 				"Default applied", STDERR_FILENO);
 		get_rays(view, val);
+		get_depth(view, val);
 	}
 	else
 		ft_putendl_fd("Default screen params applied.", STDERR_FILENO);

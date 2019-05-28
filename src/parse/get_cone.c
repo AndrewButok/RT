@@ -46,6 +46,6 @@ void		get_cone(t_figure *figure, JSON_Object *obj)
 	else
 		ft_putendl_fd("Cone radius not found. Default applied", STDERR_FILENO);
 	get_cone_distances(figure, obj);
-	get_color_reflection(figure, obj);
+	get_figure_params(figure, obj);
 	ft_putendl("\x1b[32mCone parsed.");
 }

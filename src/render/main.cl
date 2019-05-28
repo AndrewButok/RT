@@ -63,7 +63,7 @@ int				set_brightness(int color, float bright, float reflected)
 	return (coloru.color);
 }
 
-float			trace_reflection(float3 l, float3 normal, float3 view, float3 buf)
+float			trace_spectacular(float3 l, float3 normal, float3 view, float3 buf)
 {
 	float3	h;
 	float	d;
@@ -99,9 +99,9 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 				if (dot(normal, light) > 0)
 					bright += lights[i].intensity * dot(normal, light) /
 						length(light);
-				if (dot(normal, light) > 0 && figure->reflection > 0)
-					reflected += trace_reflection(light, normal, ray->v * (-1),
-						(float3)(lights[i].intensity, figure->reflection, 0.0f));
+				if (dot(normal, light) > 0 && figure->spectacular > 0)
+					reflected += trace_spectacular(light, normal, ray->v * (-1),
+						(float3)(lights[i].intensity, figure->spectacular, 0.0f));
 			}
 		}
 		i++;

@@ -6,35 +6,35 @@
       "normal": [0.0, -1.0, 0.0],
       "point": [0, -3, 0],
       "color": "0xaaaaaa",
-      "reflection": 100
+      "spectacular": 100
     },
     {
       "type": "plane",
       "normal": [0.0, -1.0, 0.0],
       "point": [0, 3, 0],
       "color": "0xffffff",
-      "reflection": 100
+      "spectacular": 100
     },
     {
       "type": "plane",
       "normal": [0.0, 0.0, 1.0],
       "point": [0, 0, 20],
       "color": "0x00000aa",
-      "reflection": 0
+      "spectacular": 0
     },
     {
       "type": "plane",
       "normal":[1, 0, 0],
       "point": [5, 0, 0],
       "color": "0x00000aa",
-      "reflection": 0
+      "spectacular": 0
     },
     {
       "type": "plane",
       "normal": [1, 0, 0],
       "point": [-5, 0, 0],
       "color": "0x00000aa",
-      "reflection": 0
+      "spectacular": 0
     },
     {
       "type": "infinite_cylinder",
@@ -42,7 +42,7 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "reflection": 200
+      "spectacular": 200
     },
     {
       "type": "infinite_cylinder",
@@ -50,7 +50,7 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "reflection": 200
+      "spectacular": 200
     },
     {
       "type": "infinite_cylinder",
@@ -58,7 +58,7 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "reflection": 200
+      "spectacular": 200
     },
     {
       "type": "infinite_cylinder",
@@ -66,70 +66,70 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "reflection": 200
+      "spectacular": 200
     },
     {
       "type": "sphere",
       "center": [-3, -3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [-3, 3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [3, -3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [3, 3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [-3, -3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [-3, 3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [3, -3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [3, 3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "sphere",
       "center": [-3, -3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "ellipsoid",
@@ -137,7 +137,7 @@
       "center2": [0, 0, 6],
       "radius": 3,
       "color": "0xff0000",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "cylinder",
@@ -146,7 +146,7 @@
       "vector": [0, -1, 1],
       "height": 2,
       "color": "0xaa0000",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "cylinder",
@@ -155,7 +155,8 @@
       "vector": [0, -1, 1],
       "height": 2.25,
       "color": "0xff0000",
-      "reflection": 10
+      "spectacular": 10,
+      "reflection": 0
     },
     {
       "type": "cylinder",
@@ -164,7 +165,7 @@
       "vector": [0, -1, 1],
       "height": 2.5,
       "color": "0xff7700",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "cylinder",
@@ -173,7 +174,7 @@
       "vector": [0, -1, 1],
       "height": 3,
       "color": "0xffff00",
-      "reflection": 10
+      "spectacular": 10
     },
     {
       "type": "cylinder",
@@ -182,7 +183,7 @@
       "vector": [0, -1, 1],
       "height": 4,
       "color": "0xff00",
-      "reflection": 10
+      "spectacular": 10
     }
   ],
   "lights":
@@ -217,6 +218,7 @@
   {
     "width": 1920,
     "height": 1080,
-    "antialias": 6
+    "antialias": 1,
+    "depth": 0
   }
 }

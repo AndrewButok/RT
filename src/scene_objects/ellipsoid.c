@@ -22,6 +22,6 @@ t_figure	ellipsoid_init(void)
 	figure.param1 = 0;
 	figure.param2 = 0;
 	figure.color = 0xffffff;
-	figure.reflection = 0;
+	figure.spectacular = 0;
 	return (figure);
 }
