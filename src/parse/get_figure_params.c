@@ -12,7 +12,23 @@
 
 #include "rt.h"
 
-void	get_figure_params(t_figure *figure, JSON_Object *obj)
+static void	check_reflection(t_figure *figure)
+{
+	if (figure->reflection < 0.0f)
+	{
+		ft_putendl_fd("Reflection less than 0. 0 applied",
+				STDERR_FILENO);
+		figure->reflection = 0;
+	}
+	if (figure->reflection > 1.0f)
+	{
+		ft_putendl_fd("Reflection greater than 1. 1 applied",
+					  STDERR_FILENO);
+		figure->reflection = 1;
+	}
+}
+
+void		get_figure_params(t_figure *figure, JSON_Object *obj)
 {
 	if (json_object_has_value_of_type(obj, "color", JSONString) &&
 		check_hex(json_object_get_string(obj, "color")))
@@ -32,4 +48,5 @@ void	get_figure_params(t_figure *figure, JSON_Object *obj)
 	else
 		ft_putendl_fd("Unknown or invalid reflection. Default applied",
 				STDERR_FILENO);
+	check_reflection(figure);
 }

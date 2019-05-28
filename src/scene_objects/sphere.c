@@ -21,5 +21,6 @@ t_figure	sphere_init(void)
 	figure.param1 = 1;
 	figure.color = 0xffffff;
 	figure.spectacular = 0;
+	figure.reflection = 0;
 	return (figure);
 }

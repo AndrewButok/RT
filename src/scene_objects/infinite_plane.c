@@ -21,5 +21,6 @@ t_figure	infinite_plane_init(void)
 	figure.vector2 = (cl_float3){{0.0f, 0.0f, 0.0f}};
 	figure.color = 0xffffff;
 	figure.spectacular = 0;
+	figure.reflection = 0;
 	return (figure);
 }

@@ -12,7 +12,7 @@
 
 #include <rt.h>
 
-void	get_rays(t_view *view, JSON_Object *params)
+static void	get_rays(t_view *view, JSON_Object *params)
 {
 	if (json_object_has_value_of_type(params, "antialias", JSONNumber))
 		view->rays_count = (int)json_object_get_number(params, "antialias");
@@ -29,7 +29,7 @@ void	get_rays(t_view *view, JSON_Object *params)
 	}
 }
 
-void	get_depth(t_view *view, JSON_Object *params)
+static void	get_depth(t_view *view, JSON_Object *params)
 {
 	if (json_object_has_value_of_type(params, "depth", JSONNumber))
 		view->depth = (int)json_object_get_number(params, "depth");
@@ -46,7 +46,7 @@ void	get_depth(t_view *view, JSON_Object *params)
 	}
 }
 
-void	get_params(t_view *view, JSON_Object *root)
+void		get_params(t_view *view, JSON_Object *root)
 {
 	JSON_Object	*val;
 

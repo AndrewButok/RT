@@ -22,5 +22,6 @@ t_figure	infinite_cone_init(void)
 	figure.color = 0xffffff;
 	figure.spectacular = 0;
 	figure.type = InfiniteCone;
+	figure.reflection = 0;
 	return (figure);
 }
