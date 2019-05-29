@@ -152,10 +152,10 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 		while (j < params[4])
 		{
 			ray.o = cam->o;
-			ray.v.x = (((i % params[0] + (j * step)) / params[0]) * 2.0f - 1.0f) *
-		  		(((float)params[0]) / params[1]) * tan(M_PI_F / 360 * 30);
-			ray.v.y = (1.0f - 2.0f * ((i / params[0] + (k * step)) / params[1])) *
-		  		tan(M_PI_F / 360.0f * 30);
+			ray.v.x = (2 * tan (M_PI_F / 360.0f * 60) *
+					(i % params[0] - params[0] / 2 + k * step)) / params[0];
+			ray.v.y = (2 * tan (-M_PI_F / 360.0f * 60) *
+		   			(i / params[0] - params[1] / 2 + j * step)) / params[0];
 			ray.v.z = 1;
 			cam_rotate(&ray, cam->v);
 			buf.color = rt(figures, lights, &ray, params);

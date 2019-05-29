@@ -16,20 +16,20 @@ static void	get_transparency(t_figure *figure, JSON_Object *obj)
 {
 	if (json_object_has_value_of_type(obj, "transparency", JSONNumber))
 		figure->transparency = (cl_float)json_object_get_number(obj,
-														   "transparency");
+				"transparency");
 	else
 		ft_putendl_fd("Unknown or invalid transparency. Default applied",
-					  STDERR_FILENO);
+				STDERR_FILENO);
 	if (figure->transparency < 0.0f)
 	{
 		ft_putendl_fd("Transparency less than 0. 0 applied",
-					  STDERR_FILENO);
+				STDERR_FILENO);
 		figure->transparency = 0;
 	}
 	if (figure->transparency > 1.0f)
 	{
 		ft_putendl_fd("Transparency greater than 1. 1 applied",
-					  STDERR_FILENO);
+				STDERR_FILENO);
 		figure->transparency = 1;
 	}
 }
@@ -38,10 +38,10 @@ static void	get_density(t_figure *figure, JSON_Object *obj)
 {
 	if (json_object_has_value_of_type(obj, "density", JSONNumber))
 		figure->density = (cl_float)json_object_get_number(obj,
-															  "density");
+				"density");
 	else
 		ft_putendl_fd("Unknown or invalid density. Default applied",
-					  STDERR_FILENO);
+				STDERR_FILENO);
 }
 
 static void	get_reflection(t_figure *figure, JSON_Object *obj)
