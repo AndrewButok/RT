@@ -211,14 +211,14 @@
   ],
   "cam":
   {
-    "position": [0.0, 0, -10.0],
+    "position": [0.0, 0, -5.0],
     "rotation": [0.0, 0.0, 0.0]
   },
   "params":
   {
     "width": 1920,
     "height": 1080,
-    "antialias": 4,
+    "antialias": 10,
     "depth": 0
   }
 }

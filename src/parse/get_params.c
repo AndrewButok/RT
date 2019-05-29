@@ -22,7 +22,7 @@ static void	get_rays(t_view *view, JSON_Object *params)
 		view->rays_count = 1;
 		return ;
 	}
-	if (view->rays_count > 90 || view->rays_count < 1)
+	if (view->rays_count > 100 || view->rays_count < 1)
 	{
 		ft_putendl("Invalid antialias parameter. Default applied");
 		view->rays_count = 1;
@@ -39,10 +39,10 @@ static void	get_depth(t_view *view, JSON_Object *params)
 		view->depth = 0;
 		return ;
 	}
-	if (view->rays_count > 5 || view->rays_count < 0)
+	if (view->depth > 5 || view->depth < 0)
 	{
 		ft_putendl("Invalid depth parameter. Default applied");
-		view->rays_count = 0;
+		view->depth = 0;
 	}
 }
 
