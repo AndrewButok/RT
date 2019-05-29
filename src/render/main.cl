@@ -148,23 +148,28 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 	k = 0;
 	while (k < params[4])
 	{
-		ray.o = cam->o;
-		ray.v.x = (2 * tan (M_PI_F / 360.0f * 60) *
-				(i % params[0] - params[0] / 2 + k * step)) / params[0];
-		ray.v.y = (2 * tan (-M_PI_F / 360.0f * 60) *
-				(i / params[0] - params[1] / 2 + k * step)) / params[0];
-		ray.v.z = 1;
-		cam_rotate(&ray, cam->v);
-		buf.color = rt(figures, lights, &ray, params);
-		r += buf.spectrum.red;
-		g += buf.spectrum.green;
-		b += buf.spectrum.blue;
+		j = 0;
+		while (j < params[4])
+		{
+			ray.o = cam->o;
+			ray.v.x = (2 * tan (M_PI_F / 360.0f * 60) *
+					(i % params[0] - params[0] / 2 + j * step)) / params[0];
+			ray.v.y = (2 * tan (-M_PI_F / 360.0f * 60) *
+					(i / params[0] - params[1] / 2 + k * step)) / params[0];
+			ray.v.z = 1;
+			cam_rotate(&ray, cam->v);
+			buf.color = rt(figures, lights, &ray, params);
+			r += buf.spectrum.red;
+			g += buf.spectrum.green;
+			b += buf.spectrum.blue;
+			j++;
+		}
 		k++;
 	}
 	buf.color = 0;
-	r /= params[4];
-	g /= params[4];
-	b /= params[4];
+	r /= params[4] * params[4];
+	g /= params[4] * params[4];
+	b /= params[4] * params[4];
 	buf.spectrum.red = r > 255 ? 255 : r;
 	buf.spectrum.green = g > 255 ? 255 : g;
 	buf.spectrum.blue = b > 255 ? 255 : b;
