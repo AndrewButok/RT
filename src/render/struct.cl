@@ -54,6 +54,8 @@ typedef struct 			s_figure
 {
 	float		spectacular;
 	float		reflection;
+	float		transparency;
+	float		density;
 	int			color;
 	enum e_figure 	type;
 	float3		vector1;

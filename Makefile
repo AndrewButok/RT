@@ -14,7 +14,7 @@ NAME = RT
 PARSON = ./parson/libparson.a
 #	C compiler and his default flags
 GCC = gcc -Wall -Wextra -Werror
-#	Libft linking
+#	Libft and parson linking
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
 #	Libs linking
@@ -38,6 +38,8 @@ PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
 				get_triangle.c get_ellipsoid.c get_figure_params.c
 #	Header folder
 INCLUDE = ./includes
+#   Header file
+HEADER = $(INCLUDE)/rt.h
 #	Binaries folder
 BINDIR = ./obj/
 #	Binaries list
@@ -67,22 +69,22 @@ $(BINDIR):
 	@if [ ! -d "$(BINDIR)" ]; then mkdir $(BINDIR); fi
 
 
-$(BINDIR)%.o: $(SRCDIR)%.c
+$(BINDIR)%.o: $(SRCDIR)%.c $(HEADER)
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-$(BINDIR)%.o: $(PARSEDIR)%.c
+$(BINDIR)%.o: $(PARSEDIR)%.c $(HEADER)
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-$(BINDIR)%.o: $(SCENEDIR)%.c
+$(BINDIR)%.o: $(SCENEDIR)%.c $(HEADER)
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-$(BINDIR)%.o: $(VECTORDIR)%.c
+$(BINDIR)%.o: $(VECTORDIR)%.c $(HEADER)
 	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-#$(BINDIR)%.o: $(COLORDIR)%.c
+#$(BINDIR)%.o: $(COLORDIR)%.c $(HEADER)
 #	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
-#$(BINDIR)%.o: $(LIGHTDIR)%.c
+#$(BINDIR)%.o: $(LIGHTDIR)%.c $(HEADER)
 #	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
 
 #

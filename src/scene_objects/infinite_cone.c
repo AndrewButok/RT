@@ -23,5 +23,7 @@ t_figure	infinite_cone_init(void)
 	figure.spectacular = 0;
 	figure.type = InfiniteCone;
 	figure.reflection = 0;
+	figure.density = 0;
+	figure.transparency = 0;
 	return (figure);
 }

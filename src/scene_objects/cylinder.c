@@ -24,5 +24,7 @@ t_figure	cylinder_init(void)
 	figure.color = 0xffffff;
 	figure.spectacular = 0;
 	figure.reflection = 0;
+	figure.density = 0;
+	figure.transparency = 0;
 	return (figure);
 }
