@@ -156,7 +156,7 @@
       "radius": 3,
       "color": "0xff0000",
       "spectacular": 10,
-      "reflection": 0.6
+      "reflection": 0
     },
     {
       "type": "cylinder",
@@ -239,9 +239,9 @@
   },
   "params":
   {
-    "width": 800,
-    "height": 600,
-    "antialias": 3,
-    "depth": 1
+    "width": 1024,
+    "height": 720,
+    "antialias": 2,
+    "depth": 5
   }
 }

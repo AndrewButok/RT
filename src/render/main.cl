@@ -18,20 +18,20 @@ int				check_intersections(float3 intersection, float3 light,
 		return (0);
 }
 
-int				set_spectrum_brightness(int val, float bright,
+inline __attribute__((always_inline)) int set_spectrum_brightness(int val, float bright,
 										   float reflected)
 {
 	return ((int)(val * bright + (255 - val) * reflected));
 }
 
-unsigned char	limit_spectrum(int d, int min, int max)
+inline __attribute__((always_inline)) unsigned char	limit_spectrum(int d, int min, int max)
 {
 	d = d > max ? max : d;
 	d = d < min ? min : d;
 	return ((unsigned char)d);
 }
 
-int				set_brightness(int color, float bright, float reflected)
+inline __attribute__((always_inline)) int				set_brightness(int color, float bright, float reflected)
 {
 	t_color coloru;
 
@@ -51,7 +51,7 @@ int				set_brightness(int color, float bright, float reflected)
 	return (coloru.color);
 }
 
-float			trace_spectacular(float3 l, float3 normal, float3 view, float3 buf)
+inline __attribute__((always_inline)) float			trace_spectacular(float3 l, float3 normal, float3 view, float3 buf)
 {
 	float3	h;
 	float	d;
@@ -97,12 +97,12 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 	return (set_brightness(figure->color, bright, reflected));
 }
 
-float3	ft_reflect_ray(float3 r, float3 normal)
+inline __attribute__((always_inline)) float3	ft_reflect_ray(float3 r, float3 normal)
 {
 	return (2 * normal * dot(normal, r) - r);
 }
 
-int ft_change_color(t_color color, float scale)
+inline __attribute__((always_inline)) int ft_change_color(t_color color, float scale)
 {
 	color.spectrum.red = ((color.spectrum.red * scale) > 255) ? 255 : color.spectrum.red * scale;
 	color.spectrum.green = ((color.spectrum.green * scale) > 255) ? 255 : color.spectrum.green * scale;
@@ -110,7 +110,7 @@ int ft_change_color(t_color color, float scale)
 	return (color.color);
 }
 
-int ft_add_color(t_color color1, t_color color2)
+inline __attribute__((always_inline)) int ft_add_color(t_color color1, t_color color2)
 {
 	t_color new;
 
@@ -150,7 +150,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 		return (local_color.color);
 	reflect_ray.v = ft_reflect_ray(-ray->v, normal);
 	reflect_ray.o = (ray->o + (ray->v * t_max));
-	reflected_color.color = rt(figures, lights, &reflect_ray, params, 0.0001, DBL_MAX, depth - 1);
+	reflected_color.color = rt(figures, lights, &reflect_ray, params, 0.001, DBL_MAX, depth - 1);
 	
 	local_color.color = ft_change_color(local_color, (1.0 - figures[closest_index].reflection));
 
@@ -170,7 +170,7 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 	t_color			buf;
 	unsigned int	r = 0,g = 0,b = 0;
 	int				depth = params[5];
-	float			t_min = 0.0, t_max = DBL_MAX;
+	float			t_max = DBL_MAX;
 
 	k = 0;
 	while (k < params[4])
@@ -185,9 +185,8 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 					(i / params[0] - params[1] / 2 + k * step)) / params[0];
 			ray.v.z = 1;
 			cam_rotate(&ray, cam->v);
-			t_min = 0.0;
 			t_max = DBL_MAX;
-			buf.color = rt(figures, lights, &ray, params, t_min, t_max, depth);
+			buf.color = rt(figures, lights, &ray, params, 0.001, t_max, depth - 1);
 			r += buf.spectrum.red;
 			g += buf.spectrum.green;
 			b += buf.spectrum.blue;
