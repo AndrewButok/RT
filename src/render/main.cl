@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.cl                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 int				check_intersections(float3 intersection, float3 light,
 	  __global t_figure *figures, __global int *params, __global t_figure *cf)
 {
@@ -109,31 +97,68 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 	return (set_brightness(figure->color, bright, reflected));
 }
 
-int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
-		__global int *params)
+float3	ft_reflect_ray(float3 r, float3 normal)
 {
-	__private int	index = 0;
-	__private int	closest_index;
+	return (2 * normal * dot(normal, r) - r);
+}
+
+int ft_change_color(t_color color, float scale)
+{
+	color.spectrum.red = ((color.spectrum.red * scale) > 255) ? 255 : color.spectrum.red * scale;
+	color.spectrum.green = ((color.spectrum.green * scale) > 255) ? 255 : color.spectrum.green * scale;
+	color.spectrum.blue = ((color.spectrum.blue * scale) > 255) ? 255 : color.spectrum.blue * scale;
+	return (color.color);
+}
+
+int ft_add_color(t_color color1, t_color color2)
+{
+	t_color new;
+
+	new.spectrum.red = ((color1.spectrum.red + color2.spectrum.red) > 255) ? 255 : color1.spectrum.red + color2.spectrum.red;
+	new.spectrum.green = ((color1.spectrum.green + color2.spectrum.green) > 255) ? 255 : color1.spectrum.green + color2.spectrum.green;
+	new.spectrum.blue = ((color1.spectrum.blue + color2.spectrum.blue) > 255) ? 255 : color1.spectrum.blue + color2.spectrum.blue;
+	return (new.color);
+}
+
+int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
+		__global int *params, float t_min, float t_max, int depth)
+{
+	int				index = -1;
+	int				closest_index;
 	float3			normal;
 	float3			nbuf;
-	float			lbuf;
-	float			len = INFINITY;
+	float			t = DBL_MAX;
+	t_color			local_color;
+	t_color			reflected_color;
+	t_ray			reflect_ray;
 
-	while (index < params[2])
+	while (++index < params[2])
 	{
-		lbuf = check_intersection(ray, &(figures[index]), &nbuf);
-		if (lbuf >= 1.0f && lbuf < len)
+		t = check_intersection(ray, &(figures[index]), &nbuf);
+		if (t >= t_min && t < t_max)
 		{
-			len = lbuf;
+			t_max = t;//////////////////// should change
 			normal = nbuf;
 			closest_index = index;
 		}
-		index++;
 	}
-	if (len == INFINITY)
+	if (t == DBL_MAX)
 		return (0);
-	else
-		return (count_light(figures, lights, params, ray, &(figures[closest_index]), normal, len));
+	local_color.color = count_light(figures, lights, params, ray, &(figures[closest_index]), normal, t_max);
+
+	if (depth < 0 || figures[closest_index].reflection < 0.0)
+		return (local_color.color);
+	reflect_ray.v = ft_reflect_ray(-ray->v, normal);
+	reflect_ray.o = (ray->o + (ray->v * t_max));
+	reflected_color.color = rt(figures, lights, &reflect_ray, params, 0.0001, DBL_MAX, depth - 1);
+	
+	local_color.color = ft_change_color(local_color, (1.0 - figures[closest_index].reflection));
+
+	reflected_color.color = ft_change_color(reflected_color, (figures[closest_index].reflection));
+
+	local_color.color = ft_add_color(local_color, reflected_color);
+
+	return (local_color.color);
 }
 
 __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
@@ -144,6 +169,8 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 	float 			step = 1.0f / params[4];
 	t_color			buf;
 	unsigned int	r = 0,g = 0,b = 0;
+	int				depth = params[5];
+	float			t_min = 0.0, t_max = DBL_MAX;
 
 	k = 0;
 	while (k < params[4])
@@ -158,7 +185,9 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 					(i / params[0] - params[1] / 2 + k * step)) / params[0];
 			ray.v.z = 1;
 			cam_rotate(&ray, cam->v);
-			buf.color = rt(figures, lights, &ray, params);
+			t_min = 0.0;
+			t_max = DBL_MAX;
+			buf.color = rt(figures, lights, &ray, params, t_min, t_max, depth);
 			r += buf.spectrum.red;
 			g += buf.spectrum.green;
 			b += buf.spectrum.blue;

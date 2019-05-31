@@ -6,35 +6,40 @@
       "normal": [0.0, -1.0, 0.0],
       "point": [0, -3, 0],
       "color": "0xaaaaaa",
-      "spectacular": 100
+      "spectacular": 100,
+      "reflection": 0.4
     },
     {
       "type": "plane",
       "normal": [0.0, -1.0, 0.0],
       "point": [0, 3, 0],
       "color": "0xffffff",
-      "spectacular": 100
+      "spectacular": 100,
+      "reflection": 0.4
     },
     {
       "type": "plane",
       "normal": [0.0, 0.0, 1.0],
       "point": [0, 0, 20],
       "color": "0x00000aa",
-      "spectacular": 0
+      "spectacular": 0,
+      "reflection": 0.1
     },
     {
       "type": "plane",
       "normal":[1, 0, 0],
       "point": [5, 0, 0],
       "color": "0x00000aa",
-      "spectacular": 0
+      "spectacular": 0,
+      "reflection": 0.1
     },
     {
       "type": "plane",
       "normal": [1, 0, 0],
       "point": [-5, 0, 0],
       "color": "0x00000aa",
-      "spectacular": 0
+      "spectacular": 0,
+      "reflection": 0.1
     },
     {
       "type": "infinite_cylinder",
@@ -42,7 +47,8 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "spectacular": 200
+      "spectacular": 200,
+      "reflection": 0.8
     },
     {
       "type": "infinite_cylinder",
@@ -50,7 +56,8 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "spectacular": 200
+      "spectacular": 200,
+      "reflection": 0.8
     },
     {
       "type": "infinite_cylinder",
@@ -58,7 +65,8 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "spectacular": 200
+      "spectacular": 200,
+      "reflection": 0.8
     },
     {
       "type": "infinite_cylinder",
@@ -66,70 +74,80 @@
       "vector": [0.0, 1.0, 0.0],
       "radius": 0.625,
       "color": "0xffffff",
-      "spectacular": 200
+      "spectacular": 200,
+      "reflection": 0.8
     },
     {
       "type": "sphere",
       "center": [-3, -3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [-3, 3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [3, -3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [3, 3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [-3, -3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [-3, 3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [3, -3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [3, 3, 12],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "sphere",
       "center": [-3, -3, 4],
       "radius": 1,
       "color": "0xffffff",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.1
     },
     {
       "type": "ellipsoid",
@@ -137,7 +155,8 @@
       "center2": [0, 0, 6],
       "radius": 3,
       "color": "0xff0000",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.6
     },
     {
       "type": "cylinder",
@@ -146,7 +165,8 @@
       "vector": [0, -1, 1],
       "height": 2,
       "color": "0xaa0000",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.2
     },
     {
       "type": "cylinder",
@@ -156,7 +176,7 @@
       "height": 2.25,
       "color": "0xff0000",
       "spectacular": 10,
-      "reflection": -1
+      "reflection": 0.4
     },
     {
       "type": "cylinder",
@@ -165,7 +185,8 @@
       "vector": [0, -1, 1],
       "height": 2.5,
       "color": "0xff7700",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.6
     },
     {
       "type": "cylinder",
@@ -174,7 +195,8 @@
       "vector": [0, -1, 1],
       "height": 3,
       "color": "0xffff00",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 0.8
     },
     {
       "type": "cylinder",
@@ -183,7 +205,8 @@
       "vector": [0, -1, 1],
       "height": 4,
       "color": "0xff00",
-      "spectacular": 10
+      "spectacular": 10,
+      "reflection": 1
     }
   ],
   "lights":
@@ -216,9 +239,9 @@
   },
   "params":
   {
-    "width": 1920,
-    "height": 1080,
-    "antialias": 4,
-    "depth": 0
+    "width": 800,
+    "height": 600,
+    "antialias": 3,
+    "depth": 1
   }
 }
