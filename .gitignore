@@ -3,5 +3,7 @@ cmake-build-debug/
 obj/
 objs/
 RT
-*.a
-*.o
+**.a
+**.o
+.VScode/
+.vscode/

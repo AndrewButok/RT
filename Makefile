@@ -6,14 +6,14 @@
 #    By: abutok <abutok@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/04/25 16:42:08 by abutok           ###   ########.fr        #
+#    Updated: 2019/05/31 16:16:24 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RT
 PARSON = ./parson/libparson.a
 #	C compiler and his default flags
-GCC = gcc -Wall -Wextra -Werror
+GCC = gcc -Wall -Wextra -Werror -Ofast -flto -pipe -march=native -mtune=native
 #	Libft and parson linking
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
