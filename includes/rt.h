@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/03 15:38:38 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/03 19:24:42 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,37 @@
 # include <fcntl.h>
 # include <OpenCL/cl.h>
 # include <SDL.h>
-# include <SDL_image.h>
+
+/*
+**	Ya _ipal etot C: structs
+*/
+
+enum	e_bool {false, true} __attribute__((packed));
+
+# ifdef BOOL
+#  undef BOOL
+# endif
+
+# define BOOL typedef enum e_bool bool
+
+# ifdef DOT
+#  undef DOT
+# endif
+
+struct	s_dot
+{
+	int32_t	x;
+	int32_t	y;
+};
+
+# define DOT typedef struct	s_dot Dot
+
+BOOL;
+DOT;
+
+/*
+**	Ya raz_ipal etot C.
+*/
 
 enum			e_figure
 {
@@ -66,6 +96,8 @@ typedef struct	s_figure
 	cl_float		param2;
 	cl_float		param3;
 	char			*texture;
+	Dot				spos;
+	Dot				epos;
 }				t_figure;
 
 typedef struct	s_ray
@@ -106,6 +138,7 @@ typedef struct	s_view
 	cl_int			depth;
 	t_ray			*cam;
 	t_cl			*cl;
+	Uint32			*tex_pxls;
 }				t_view;
 
 int				check_hex(const char *str);
@@ -144,20 +177,17 @@ void			cl_run_kernel(t_view *view);
 void			params_init(t_view *view);
 
 /*
-**	Ya _ipal etot C.
+**	Ya _ipal etot C: funcs
 */
-
-# ifndef BOOL
-
-enum	e_bool {false, true} __attribute__((packed));
-#  define BOOL typedef enum e_bool bool
-# else
-#  define BOOL typedef _Bool bool
-# endif
-
-BOOL;
-
+SDL_Surface		*sdl_load_image(const char *const path,
+								const SDL_PixelFormat *format,
+								SDL_Surface *dst);
 bool			rt_sdl_load_textures(t_figure *restrict const objs,
-									const size_t max_objs);
+								const size_t max_objs,
+								const SDL_PixelFormat *format);
+
+/*
+**	Ya raz_ipal etot C.
+*/
 
 #endif

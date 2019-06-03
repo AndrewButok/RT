@@ -6,19 +6,20 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/06/03 15:40:56 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/03 16:58:00 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RT
 PARSON = ./parson/libparson.a
 #	C compiler and his default flags
-GCC = gcc -Wall -Wextra -Werror -Ofast -flto -pipe -march=native -mtune=native
+GCC = gcc -g3
+# GCC = gcc -Wall -Wextra -Werror -Ofast -flto -pipe -march=native -mtune=native
 #	Libft and parson linking
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
 #	Libs linking
-LINKLIB = -framework OpenGL -framework AppKit /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL ./SDL2_image.framework/SDL2_image
+LINKLIB = -framework OpenGL -framework AppKit /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL -F ./ -rpath ./ -framework SDL2_image
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/

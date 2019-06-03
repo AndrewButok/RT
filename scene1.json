@@ -17,11 +17,30 @@
     },
     {
       "type": "sphere",
-      "normal": [0.0, -1.0, 0.0],
-      "point": [0, 0, 0],
-      "color": "0xfacf0f",
-      "spectacular": 100,
-      "texutre": "test.jpg"
+      "center": [1, -1, 5],
+      "radius": 1,
+      "color": "0xffffff",
+      "spectacular": 10,
+      "reflection": 0.1,
+      "texture": "resources/world.jpg"
+    },
+    {
+      "type": "sphere",
+      "center": [-2, 1, 4],
+      "radius": 1,
+      "color": "0xffaafb",
+      "spectacular": 10,
+      "reflection": 0.1,
+      "texture": "resources/world.jpg"
+    },
+    {
+      "type": "sphere",
+      "center": [2, -2, 4],
+      "radius": 1,
+      "color": "0xf5ffbf",
+      "spectacular": 10,
+      "reflection": 0.1,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "plane",
