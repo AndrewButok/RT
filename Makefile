@@ -18,7 +18,7 @@ GCC = gcc -Wall -Wextra -Werror -Ofast -flto -pipe -march=native -mtune=native
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
 #	Libs linking
-LINKLIB = -framework OpenGL -framework AppKit /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL
+LINKLIB = -framework OpenGL -framework AppKit /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL ./SDL2_image.framework/SDL2_image
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/
@@ -56,6 +56,8 @@ LIBFTINCLUDE = ./libft/includes
 PARSONINCLUDE = ./parson
 #	SDL2 include
 SDLINCLUDE = /Library/Frameworks/SDL2.framework/Headers
+#   SDL2_image include
+SDLIINCLUDE = ./SDL2_image.framework/Headers
 
 .NOTPARALLEL = all fclean clean re $(NAME)
 
@@ -70,22 +72,22 @@ $(BINDIR):
 
 
 $(BINDIR)%.o: $(SRCDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(PARSEDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(SCENEDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(VECTORDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 #$(BINDIR)%.o: $(COLORDIR)%.c $(HEADER)
-#	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+#	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 #$(BINDIR)%.o: $(LIGHTDIR)%.c $(HEADER)
-#	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) $< -o $@
+#	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 #
 
