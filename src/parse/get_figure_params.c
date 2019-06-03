@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_figure_params.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/03 14:47:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,4 +83,5 @@ void		get_figure_params(t_figure *figure, JSON_Object *obj)
 	get_reflection(figure, obj);
 	get_density(figure, obj);
 	get_transparency(figure, obj);
+	get_figure_texture(figure, obj);
 }

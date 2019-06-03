@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/03 15:38:38 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,9 @@
 # include <fcntl.h>
 # include <OpenCL/cl.h>
 # include <SDL.h>
+# include <SDL_image.h>
 
-enum					e_figure
+enum			e_figure
 {
 	BadFigure = 0,
 	Sphere = 1,
@@ -36,21 +37,21 @@ enum					e_figure
 	Ellipsoid = 8
 };
 
-enum					e_light
+enum			e_light
 {
 	BadLight = -1,
 	Ambient = 0,
 	Point = 1
 };
 
-typedef struct			s_light
+typedef struct	s_light
 {
 	enum e_light	type;
 	cl_float3		position;
 	cl_float		intensity;
-}						t_light;
+}				t_light;
 
-typedef struct			s_figure
+typedef struct	s_figure
 {
 	cl_float		spectacular;
 	cl_float		reflection;
@@ -65,15 +66,15 @@ typedef struct			s_figure
 	cl_float		param2;
 	cl_float		param3;
 	char			*texture;
-}						t_figure;
+}				t_figure;
 
-typedef struct			s_ray
+typedef struct	s_ray
 {
 	cl_float3		o;
 	cl_float3		v;
-}						t_ray;
+}				t_ray;
 
-typedef struct			s_cl
+typedef struct	s_cl
 {
 	cl_device_id		device;
 	cl_context			context;
@@ -87,9 +88,9 @@ typedef struct			s_cl
 	cl_mem				buf_param;
 	size_t				works;
 
-}						t_cl;
+}				t_cl;
 
-typedef struct			s_view
+typedef struct	s_view
 {
 	SDL_Window		*window;
 	SDL_Surface		*surface;
@@ -105,44 +106,58 @@ typedef struct			s_view
 	cl_int			depth;
 	t_ray			*cam;
 	t_cl			*cl;
-}						t_view;
+}				t_view;
 
-int						check_hex(const char *str);
-int						ft_hexatoi(const char *str);
-cl_float3				get_vector(JSON_Array *arr, cl_float3 def);
-void					get_figure_params(t_figure *figure,
-		JSON_Object *obj);
-void					get_figure_texture(t_figure *figure, JSON_Object *obj);
-void					get_space(t_view *view, char *filename);
-void					get_sphere(t_figure *figure, JSON_Object *obj);
-void					get_infinite_plane(t_figure *figure, JSON_Object *obj);
-void					get_infinite_cone(t_figure *figure, JSON_Object *obj);
-void					get_infinite_cylinder(t_figure *figure,
-		JSON_Object *obj);
-void					get_cone(t_figure *figure, JSON_Object *obj);
-void					get_cylinder(t_figure *figure, JSON_Object *obj);
-void					get_triangle(t_figure *figure, JSON_Object *obj);
-void					get_ellipsoid(t_figure *figure, JSON_Object *obj);
-void					get_lights(t_view *view, JSON_Object *root);
-void					get_cam(t_view *view, JSON_Object *root);
-void					get_params(t_view *view, JSON_Object *root);
-t_figure				sphere_init();
-t_figure				cylinder_init();
-t_figure				infinite_plane_init();
-t_figure				infinite_cylinder_init();
-t_figure				infinite_cone_init();
-t_figure				cone_init();
-t_figure				triangle_init();
-t_figure				ellipsoid_init();
-t_light					light_init(enum e_light type, cl_float3 position,
+int				check_hex(const char *str);
+int				ft_hexatoi(const char *str);
+cl_float3		get_vector(JSON_Array *arr, cl_float3 def);
+void			get_figure_params(t_figure *figure, JSON_Object *obj);
+void			get_figure_texture(t_figure *figure, JSON_Object *obj);
+void			get_space(t_view *view, char *filename);
+void			get_sphere(t_figure *figure, JSON_Object *obj);
+void			get_infinite_plane(t_figure *figure, JSON_Object *obj);
+void			get_infinite_cone(t_figure *figure, JSON_Object *obj);
+void			get_infinite_cylinder(t_figure *figure, JSON_Object *obj);
+void			get_cone(t_figure *figure, JSON_Object *obj);
+void			get_cylinder(t_figure *figure, JSON_Object *obj);
+void			get_triangle(t_figure *figure, JSON_Object *obj);
+void			get_ellipsoid(t_figure *figure, JSON_Object *obj);
+void			get_lights(t_view *view, JSON_Object *root);
+void			get_cam(t_view *view, JSON_Object *root);
+void			get_params(t_view *view, JSON_Object *root);
+t_figure		sphere_init();
+t_figure		cylinder_init();
+t_figure		infinite_plane_init();
+t_figure		infinite_cylinder_init();
+t_figure		infinite_cone_init();
+t_figure		cone_init();
+t_figure		triangle_init();
+t_figure		ellipsoid_init();
+t_light			light_init(enum e_light type, cl_float3 position,
 		cl_float intens);
-cl_float3				normalize(cl_float3 unnormalized);
-cl_float				length(cl_float3 vector);
-cl_float				dot(cl_float3 vector1,
-							cl_float3 vector2);
-cl_float3				sub(cl_float3 a, cl_float3 b);
-void					cl_init(t_view *view);
-void					cl_run_kernel(t_view *view);
-void					params_init(t_view *view);
+cl_float3		normalize(cl_float3 unnormalized);
+cl_float		length(cl_float3 vector);
+cl_float		dot(cl_float3 vector1, cl_float3 vector2);
+cl_float3		sub(cl_float3 a, cl_float3 b);
+void			cl_init(t_view *view);
+void			cl_run_kernel(t_view *view);
+void			params_init(t_view *view);
+
+/*
+**	Ya _ipal etot C.
+*/
+
+# ifndef BOOL
+
+enum	e_bool {false, true} __attribute__((packed));
+#  define BOOL typedef enum e_bool bool
+# else
+#  define BOOL typedef _Bool bool
+# endif
+
+BOOL;
+
+bool			rt_sdl_load_textures(t_figure *restrict const objs,
+									const size_t max_objs);
 
 #endif

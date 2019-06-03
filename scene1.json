@@ -16,6 +16,14 @@
       "spectacular": 100
     },
     {
+      "type": "sphere",
+      "normal": [0.0, -1.0, 0.0],
+      "point": [0, 0, 0],
+      "color": "0xfacf0f",
+      "spectacular": 100,
+      "texutre": "test.jpg"
+    },
+    {
       "type": "plane",
       "normal": [
         0.0,

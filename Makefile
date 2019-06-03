@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abutok <abutok@student.42.fr>              +#+  +:+       +#+         #
+#    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/05/31 16:16:24 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/03 15:40:56 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ LIGHTDIR = ./src/light/
 VECTORDIR = ./src/vector/
 PARSEDIR = ./src/parse/
 #	Source files
-SRCFILES = main.c cl.c cl2.c
+SRCFILES = main.c cl.c cl2.c rt_sdl_load_textures.c sdl_load_image.c
 SCENEFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c \
 				light_init.c cylinder.c cone.c triangle.c ellipsoid.c
 VECTORFILES = vector.c
@@ -35,7 +35,7 @@ PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
 				get_infinite_plane.c \
 				get_infinite_cone.c get_infinite_cylinder.c \
 				get_light.c get_cam.c get_params.c get_cylinder.c get_cone.c \
-				get_triangle.c get_ellipsoid.c get_figure_params.c
+				get_triangle.c get_ellipsoid.c get_figure_params.c get_figure_texture.c
 #	Header folder
 INCLUDE = ./includes
 #   Header file
