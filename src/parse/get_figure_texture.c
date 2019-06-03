@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cl2.c                                              :+:      :+:    :+:   */
+/*   get_figure_texture.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,24 +12,9 @@
 
 #include "rt.h"
 
-void	params_init(t_view *view)
+void	get_figure_texture(t_figure *figure, JSON_Object *obj)
 {
-	view->params = (cl_int*)malloc(sizeof(cl_int) * 6);
-	view->params[0] = view->width;
-	view->params[1] = view->height;
-	view->params[2] = (int)view->figures_count;
-	view->params[3] = (int)view->lights_count;
-	view->params[4] = view->antialiasing;
-	view->params[5] = view->depth;
-}
-
-void	cl_run_kernel(t_view *view)
-{
-	clEnqueueNDRangeKernel(view->cl->queue, view->cl->kernel, 1, NULL,
-			&view->cl->works, NULL, 0, NULL, NULL);
-	clFlush(view->cl->queue);
-	clEnqueueReadBuffer(view->cl->queue, view->cl->buf_img, CL_TRUE, 0,
-						sizeof(cl_int) * view->width * view->height,
-						view->scene, 0, NULL, NULL);
-	clFinish(view->cl->queue);
+	figure->texture = NULL;
+	if (json_object_has_value_of_type(obj, "texture", JSONString))
+		figure->texture = json_object_get_string(obj, "texture");
 }

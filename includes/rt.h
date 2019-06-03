@@ -64,6 +64,7 @@ typedef struct			s_figure
 	cl_float		param1;
 	cl_float		param2;
 	cl_float		param3;
+	char			*texture;
 }						t_figure;
 
 typedef struct			s_ray
@@ -100,7 +101,7 @@ typedef struct			s_view
 	cl_int			*params;
 	cl_int			width;
 	cl_int			height;
-	cl_int			rays_count;
+	cl_int			antialiasing;
 	cl_int			depth;
 	t_ray			*cam;
 	t_cl			*cl;
@@ -111,6 +112,7 @@ int						ft_hexatoi(const char *str);
 cl_float3				get_vector(JSON_Array *arr, cl_float3 def);
 void					get_figure_params(t_figure *figure,
 		JSON_Object *obj);
+void					get_figure_texture(t_figure *figure, JSON_Object *obj);
 void					get_space(t_view *view, char *filename);
 void					get_sphere(t_figure *figure, JSON_Object *obj);
 void					get_infinite_plane(t_figure *figure, JSON_Object *obj);

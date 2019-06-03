@@ -32,7 +32,7 @@ set(SOURCE_FILES
         src/parse/get_cam.c
         src/parse/get_params.c
         src/scene_objects/cylinder.c
-        src/parse/get_cylinder.c src/parse/get_cone.c src/scene_objects/cone.c src/parse/get_triangle.c src/scene_objects/triangle.c src/parse/get_ellipsoid.c src/scene_objects/ellipsoid.c)
+        src/parse/get_cylinder.c src/parse/get_cone.c src/scene_objects/cone.c src/parse/get_triangle.c src/scene_objects/triangle.c src/parse/get_ellipsoid.c src/scene_objects/ellipsoid.c src/parse/get_figure_texture.c)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})

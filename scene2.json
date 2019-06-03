@@ -206,7 +206,7 @@
       "height": 4,
       "color": "0xff00",
       "spectacular": 10,
-      "reflection": 1
+      "reflection": 0.7
     }
   ],
   "lights":
@@ -239,8 +239,8 @@
   },
   "params":
   {
-    "width": 1024,
-    "height": 720,
+    "width": 1920,
+    "height": 1080,
     "antialias": 2,
     "depth": 5
   }
