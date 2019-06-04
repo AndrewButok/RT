@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/03 19:24:42 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/04 18:26:40 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,11 @@
 # include <OpenCL/cl.h>
 # include <SDL.h>
 
-/*
-**	Ya _ipal etot C: structs
-*/
-
-enum	e_bool {false, true} __attribute__((packed));
-
-# ifdef BOOL
-#  undef BOOL
-# endif
-
-# define BOOL typedef enum e_bool bool
-
 # ifdef DOT
 #  undef DOT
 # endif
 
-struct	s_dot
+struct			s_dot
 {
 	int32_t	x;
 	int32_t	y;
@@ -47,12 +35,7 @@ struct	s_dot
 
 # define DOT typedef struct	s_dot Dot
 
-BOOL;
 DOT;
-
-/*
-**	Ya raz_ipal etot C.
-*/
 
 enum			e_figure
 {
@@ -177,6 +160,37 @@ void			cl_run_kernel(t_view *view);
 void			params_init(t_view *view);
 
 /*
+**	Ya _ipal etot C: structs
+*/
+
+enum	e_bool {false, true} __attribute__((packed));
+
+# ifdef FREE
+#  undef FREE
+# endif
+
+# define FREE(trash, fn_del) if ((trash)) {fn_del((trash)); (trash) = NULL;}
+
+# ifdef BOOL
+#  undef BOOL
+# endif
+
+# define BOOL typedef enum e_bool bool
+
+BOOL;
+
+typedef struct	s_helper
+{
+	SDL_Surface			**tex_surf;
+	size_t				summ_height;
+	size_t				max_width;
+	size_t				textured_objs;
+	Dot					*spos;
+	Dot					*epos;
+	Uint32 *restrict	pxls;
+}				t_helper;
+
+/*
 **	Ya _ipal etot C: funcs
 */
 SDL_Surface		*sdl_load_image(const char *const path,
@@ -184,7 +198,8 @@ SDL_Surface		*sdl_load_image(const char *const path,
 								SDL_Surface *dst);
 bool			rt_sdl_load_textures(t_figure *restrict const objs,
 								const size_t max_objs,
-								const SDL_PixelFormat *format);
+								const SDL_PixelFormat *format,
+								Uint32 *restrict tex_pxls);
 
 /*
 **	Ya raz_ipal etot C.
