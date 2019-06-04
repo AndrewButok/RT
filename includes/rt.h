@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/04 18:26:40 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/04 19:57:44 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -187,7 +187,6 @@ typedef struct	s_helper
 	size_t				textured_objs;
 	Dot					*spos;
 	Dot					*epos;
-	Uint32 *restrict	pxls;
 }				t_helper;
 
 /*
@@ -196,10 +195,9 @@ typedef struct	s_helper
 SDL_Surface		*sdl_load_image(const char *const path,
 								const SDL_PixelFormat *format,
 								SDL_Surface *dst);
-bool			rt_sdl_load_textures(t_figure *restrict const objs,
+Uint32			*rt_sdl_load_textures(t_figure *restrict const objs,
 								const size_t max_objs,
-								const SDL_PixelFormat *format,
-								Uint32 *restrict tex_pxls);
+								const SDL_PixelFormat *format);
 
 /*
 **	Ya raz_ipal etot C.

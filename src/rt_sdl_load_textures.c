@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:58:23 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/04 18:26:34 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/04 19:59:51 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,20 +28,41 @@ static bool		add_free_helper(t_helper *restrict const h, const bool ret)
 	return (ret);
 }
 
-static bool		add_copy_to_poses_objects(t_figure *restrict const objs,
+static bool		add_copy_data_to_objects(t_figure *restrict const objs,
 							const size_t max_objs,
 							t_helper *restrict const h)
 {
-	size_t	i;
-	size_t	j;
+	Uint32					*out;
+	const Uint32 *restrict	curr_tex;
+	size_t					i;
+	size_t					j;
+	Dot						p;
+	Dot						o;
 
 	j = ~0L;
 	i = ~0L;
+	if (!(out = malloc(sizeof(Uint32) * (h->max_width * h->summ_height))))
+		return (add_free_helper(h, false));
 	while (max_objs > ++i)
 		if (objs[i].texture)
 		{
-			objs[i].spos = h->spos[++j];
+			curr_tex = (Uint32*)h->tex_surf[++j]->pixels;
+			objs[i].spos = h->spos[j];
 			objs[i].epos = h->epos[j];
+			p.y = objs[i].spos.y;
+			o.y = ~0L;
+			while (h->tex_surf[j]->h > o.y && objs[i].epos.y > p.y
+			&& (o.x = ~0L))
+			{
+				p.x = objs[i].spos.x;
+				while (objs[i].epos.x > p.x && h->tex_surf[j]->w > ++o.x)
+				{
+					out[p.y * h->max_width + p.x] =
+						curr_tex[o.y * h->tex_surf[j]->w + o.x];
+					++p.x;
+				}
+				++p.y;
+			}
 		}
 	return (add_free_helper(h, true));
 }
@@ -72,10 +93,10 @@ static bool		add_prepare_texture_map(t_figure *restrict const objs,
 			h->epos[j].y = h->spos[j].y + h->tex_surf[j]->h;
 		}
 	}
-	return (add_copy_to_poses_objects(objs, max_objs, h));
+	return (add_copy_data_to_objects(objs, max_objs, h));
 }
 
-static bool		add_load_texture_surfaces(t_figure *restrict const objs,
+static Uint32	*add_load_texture_surfaces(t_figure *restrict const objs,
 							const size_t max_objs,
 							t_helper *restrict const h,
 							const SDL_PixelFormat *format)
@@ -106,22 +127,19 @@ static bool		add_load_texture_surfaces(t_figure *restrict const objs,
 	return (add_prepare_texture_map(objs, max_objs, h));
 }
 
-bool			rt_sdl_load_textures(t_figure *restrict const objs,
+Uint32			*rt_sdl_load_textures(t_figure *restrict const objs,
 							const size_t max_objs,
-							const SDL_PixelFormat *format,
-							Uint32 *restrict tex_pxls)
+							const SDL_PixelFormat *format)
 {
 	size_t		i;
 	t_helper	h;
 
 	i = ~0L;
 	ft_bzero(&h, sizeof(t_helper));
-	h.pxls = tex_pxls
-		= NULL;
 	while (max_objs > ++i)
 		if (objs[i].texture)
 			++h.textured_objs;
 	if (h.textured_objs)
 		return (add_load_texture_surfaces(objs, max_objs, &h, format));
-	return (true);
+	return (NULL);
 }
