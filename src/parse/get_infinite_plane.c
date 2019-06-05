@@ -12,7 +12,8 @@
 
 #include "rt.h"
 
-void	get_infinite_plane(t_figure *figure, JSON_Object *obj)
+void	get_infinite_plane(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf)
 {
 	*figure = infinite_plane_init();
 	if (json_object_has_value_of_type(obj, "normal", JSONArray))
@@ -27,6 +28,6 @@ void	get_infinite_plane(t_figure *figure, JSON_Object *obj)
 	else
 		ft_putendl_fd("Plane point not found. Default applied.",
 				STDERR_FILENO);
-	get_figure_params(figure, obj);
+	get_figure_params(figure, obj, pf);
 	ft_putendl("\x1b[32mInfinite plane parsed.");
 }

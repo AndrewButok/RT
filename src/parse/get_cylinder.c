@@ -12,7 +12,7 @@
 
 #include <rt.h>
 
-void	get_cylinder(t_figure *figure, JSON_Object *obj)
+void	get_cylinder(t_figure *figure, JSON_Object *obj, SDL_PixelFormat *pf)
 {
 	*figure = cylinder_init();
 	if (json_object_has_value_of_type(obj, "point", JSONArray))
@@ -37,6 +37,6 @@ void	get_cylinder(t_figure *figure, JSON_Object *obj)
 	else
 		ft_putendl_fd("Cylinder height not found. Default applied",
 				STDERR_FILENO);
-	get_figure_params(figure, obj);
+	get_figure_params(figure, obj, pf);
 	ft_putendl("\x1b[32mCylinder parsed.");
 }

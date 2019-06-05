@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-typedef	void(*t_parse_function)(t_figure*, JSON_Object*);
+typedef	void(*t_parse_function)(t_figure*, JSON_Object*, SDL_PixelFormat*);
 
 t_parse_function	get_parse_function(const char *type)
 {
@@ -55,7 +55,7 @@ void				get_figure(t_view *view, JSON_Object *figure, size_t i)
 			view->figures[i].type = BadFigure;
 		}
 		else
-			pf(&(view->figures[i]), figure);
+			pf(&(view->figures[i]), figure, view->surface->format);
 	}
 	else
 		ft_putendl_fd("Unknown figure type. Skipped.", STDERR_FILENO);
@@ -115,9 +115,9 @@ void				get_space(t_view *view, char *filename)
 		exit(0);
 	}
 	robj = json_value_get_object(root);
+	get_params(view, robj);
 	get_figures(view, robj);
 	get_lights(view, robj);
 	get_cam(view, robj);
-	get_params(view, robj);
 	json_value_free(root);
 }

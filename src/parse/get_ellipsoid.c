@@ -21,7 +21,8 @@ static void	get_ellipsoid_radii(t_figure *figure, JSON_Object *obj)
 					STDERR_FILENO);
 }
 
-void		get_ellipsoid(t_figure *figure, JSON_Object *obj)
+void		get_ellipsoid(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf)
 {
 	*figure = ellipsoid_init();
 	if (json_object_has_value_of_type(obj, "center1", JSONArray))
@@ -43,6 +44,6 @@ void		get_ellipsoid(t_figure *figure, JSON_Object *obj)
 		ft_putendl_fd("Ellipsoid second center not found. Default applied",
 					STDERR_FILENO);
 	get_ellipsoid_radii(figure, obj);
-	get_figure_params(figure, obj);
+	get_figure_params(figure, obj, pf);
 	ft_putendl("\x1b[32mEllipsoid parsed.");
 }

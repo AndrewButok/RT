@@ -64,7 +64,8 @@ typedef struct 			s_figure
 	float		param1;
 	float		param2;
 	float		param3;
-	char        *texture;
+	int			*texture;
+	int2		t_size;
 }						t_figure;
 
 typedef struct			s_ray

@@ -66,7 +66,8 @@ static void	get_reflection(t_figure *figure, JSON_Object *obj)
 	}
 }
 
-void		get_figure_params(t_figure *figure, JSON_Object *obj)
+void		get_figure_params(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf)
 {
 	if (json_object_has_value_of_type(obj, "color", JSONString) &&
 		check_hex(json_object_get_string(obj, "color")))
@@ -83,5 +84,5 @@ void		get_figure_params(t_figure *figure, JSON_Object *obj)
 	get_reflection(figure, obj);
 	get_density(figure, obj);
 	get_transparency(figure, obj);
-	get_figure_texture(figure, obj);
+	get_figure_texture(figure, obj, pf);
 }

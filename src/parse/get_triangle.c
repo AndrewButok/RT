@@ -18,7 +18,8 @@ static void				figure_error(char *error_message, t_figure *figure)
 	figure->type = BadFigure;
 }
 
-void					get_triangle(t_figure *figure, JSON_Object *obj)
+void					get_triangle(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf)
 {
 	JSON_Array	*point_array;
 
@@ -43,6 +44,6 @@ json_array_get_count(point_array = json_object_get_array(obj, "points")) == 3)
 		figure_error("Triangle points not found.", figure);
 		return ;
 	}
-	get_figure_params(figure, obj);
+	get_figure_params(figure, obj, pf);
 	ft_putendl("\x1b[32mTriangle parsed.");
 }

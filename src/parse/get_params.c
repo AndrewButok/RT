@@ -88,6 +88,10 @@ void			get_params(t_view *view, JSON_Object *root)
 		get_wh(view, val);
 		get_rays(view, val);
 		get_depth(view, val);
+		view->window = SDL_CreateWindow("RT", SDL_WINDOWPOS_CENTERED,
+				SDL_WINDOWPOS_CENTERED, view->width, view->height, 0);
+		view->surface = SDL_GetWindowSurface(view->window);
+		view->scene = view->surface->pixels;
 	}
 	else
 		ft_putendl_fd("Default screen params applied.", STDERR_FILENO);

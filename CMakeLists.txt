@@ -32,10 +32,19 @@ set(SOURCE_FILES
         src/parse/get_cam.c
         src/parse/get_params.c
         src/scene_objects/cylinder.c
-        src/parse/get_cylinder.c src/parse/get_cone.c src/scene_objects/cone.c src/parse/get_triangle.c src/scene_objects/triangle.c src/parse/get_ellipsoid.c src/scene_objects/ellipsoid.c src/parse/get_figure_texture.c)
+        src/parse/get_cylinder.c
+        src/parse/get_cone.c
+        src/scene_objects/cone.c
+        src/parse/get_triangle.c
+        src/scene_objects/triangle.c
+        src/parse/get_ellipsoid.c
+        src/scene_objects/ellipsoid.c
+        src/parse/get_figure_texture.c
+        src/sdl_load_image.c
+        SDL2_image.framework/SDL2_image)
 
 add_library(ft ${LIBFT_SRC})
 add_library(parson ${PARSON_SRC})
 add_executable(RT ${SOURCE_FILES})
 target_link_libraries(RT ft parson ${SDL} ${OPENCL})
-include_directories(includes parson libft/includes /Library/Frameworks/SDL2.framework/Headers)
+include_directories(includes parson libft/includes /Library/Frameworks/SDL2.framework/Headers ./SDL2_image.framework/Headers)
