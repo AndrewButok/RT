@@ -24,20 +24,6 @@
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_image.h>
 
-# ifdef DOT
-#  undef DOT
-# endif
-
-struct			s_dot
-{
-	int32_t	x;
-	int32_t	y;
-};
-
-# define DOT typedef struct	s_dot Dot
-
-DOT;
-
 enum			e_figure
 {
 	BadFigure = 0,
@@ -79,9 +65,8 @@ typedef struct	s_figure
 	cl_float		param1;
 	cl_float		param2;
 	cl_float		param3;
-	char			*texture;
-	Dot				spos;
-	Dot				epos;
+	int				*texture;
+	cl_int2			t_size;
 }				t_figure;
 
 typedef struct	s_ray
@@ -122,23 +107,32 @@ typedef struct	s_view
 	cl_int			depth;
 	t_ray			*cam;
 	t_cl			*cl;
-	Uint32			*tex_pxls;
 }				t_view;
 
 int				check_hex(const char *str);
 int				ft_hexatoi(const char *str);
 cl_float3		get_vector(JSON_Array *arr, cl_float3 def);
-void			get_figure_params(t_figure *figure, JSON_Object *obj);
-void			get_figure_texture(t_figure *figure, JSON_Object *obj);
+void			get_figure_params(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_figure_texture(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
 void			get_space(t_view *view, char *filename);
-void			get_sphere(t_figure *figure, JSON_Object *obj);
-void			get_infinite_plane(t_figure *figure, JSON_Object *obj);
-void			get_infinite_cone(t_figure *figure, JSON_Object *obj);
-void			get_infinite_cylinder(t_figure *figure, JSON_Object *obj);
-void			get_cone(t_figure *figure, JSON_Object *obj);
-void			get_cylinder(t_figure *figure, JSON_Object *obj);
-void			get_triangle(t_figure *figure, JSON_Object *obj);
-void			get_ellipsoid(t_figure *figure, JSON_Object *obj);
+void			get_sphere(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_infinite_plane(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_infinite_cone(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_infinite_cylinder(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_cone(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_cylinder(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_triangle(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
+void			get_ellipsoid(t_figure *figure, JSON_Object *obj,
+		SDL_PixelFormat *pf);
 void			get_lights(t_view *view, JSON_Object *root);
 void			get_cam(t_view *view, JSON_Object *root);
 void			get_params(t_view *view, JSON_Object *root);
