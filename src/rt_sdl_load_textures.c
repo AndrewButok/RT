@@ -6,13 +6,13 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 14:58:23 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/04 19:59:51 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/05 14:24:11 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static bool		add_free_helper(t_helper *restrict const h, const bool ret)
+static Uint32	*add_free_helper(t_helper *restrict const h, const Uint32 *ret)
 {
 	size_t	i;
 
@@ -28,7 +28,7 @@ static bool		add_free_helper(t_helper *restrict const h, const bool ret)
 	return (ret);
 }
 
-static bool		add_copy_data_to_objects(t_figure *restrict const objs,
+static Uint32	*add_copy_data_to_objects(t_figure *restrict const objs,
 							const size_t max_objs,
 							t_helper *restrict const h)
 {
@@ -42,7 +42,7 @@ static bool		add_copy_data_to_objects(t_figure *restrict const objs,
 	j = ~0L;
 	i = ~0L;
 	if (!(out = malloc(sizeof(Uint32) * (h->max_width * h->summ_height))))
-		return (add_free_helper(h, false));
+		return (add_free_helper(h, NULL));
 	while (max_objs > ++i)
 		if (objs[i].texture)
 		{
@@ -64,10 +64,10 @@ static bool		add_copy_data_to_objects(t_figure *restrict const objs,
 				++p.y;
 			}
 		}
-	return (add_free_helper(h, true));
+	return (add_free_helper(h, out));
 }
 
-static bool		add_prepare_texture_map(t_figure *restrict const objs,
+static Uint32	*add_prepare_texture_map(t_figure *restrict const objs,
 							const size_t max_objs,
 							t_helper *restrict const h)
 {
@@ -77,9 +77,9 @@ static bool		add_prepare_texture_map(t_figure *restrict const objs,
 	i = ~0L;
 	j = ~0L;
 	if (!(h->spos = (Dot*)malloc(sizeof(Dot) * h->textured_objs)))
-		return (add_free_helper(h, false));
+		return (add_free_helper(h, NULL));
 	if (!(h->epos = (Dot*)malloc(sizeof(Dot) * h->textured_objs)))
-		return (add_free_helper(h, false));
+		return (add_free_helper(h, NULL));
 	while (max_objs > ++i)
 	{
 		objs[i].spos = (Dot){-1, -1};
@@ -111,7 +111,7 @@ static Uint32	*add_load_texture_surfaces(t_figure *restrict const objs,
 	max_width = 0;
 	summ_height = 0;
 	if (!(h->tex_surf = malloc(sizeof(SDL_Surface) * h->textured_objs)))
-		return (add_free_helper(h, false));
+		return (add_free_helper(h, NULL));
 	ft_bzero(h->tex_surf, sizeof(SDL_Surface) * h->textured_objs);
 	while (max_objs > ++i)
 		if (objs[i].texture)
@@ -119,7 +119,7 @@ static Uint32	*add_load_texture_surfaces(t_figure *restrict const objs,
 			++j;
 			if (!(h->tex_surf[j] =
 			sdl_load_image(objs[i].texture, format, h->tex_surf[j])))
-				return (add_free_helper(h, false));
+				return (add_free_helper(h, NULL));
 			if (h->tex_surf[j]->w > max_width)
 				max_width = h->tex_surf[j]->w;
 			summ_height += h->tex_surf[j]->h;

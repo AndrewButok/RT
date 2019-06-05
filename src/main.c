@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/04 19:55:43 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/05 14:26:56 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ void		view_init(t_view **view_ptr, char *filename)
 		SDL_WINDOWPOS_CENTERED, view->width, view->height, 0);
 	view->surface = SDL_GetWindowSurface(view->window);
 	view->scene = view->surface->pixels;
-	if (!(view->tex_pxls = rt_sdl_load_textures(view->figures,
-					view->figures_count, view->surface->format)))
-		return ;
+	// if (!(view->tex_pxls = rt_sdl_load_textures(view->figures,
+					// view->figures_count, view->surface->format)))
+		// return ;
 	cl_init(view);
 	event = (SDL_Event*)malloc(sizeof(SDL_Event));
 	event->type = SDL_WINDOWEVENT_EXPOSED;

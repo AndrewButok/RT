@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   libft.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 10:46:46 by abutok            #+#    #+#             */
-/*   Updated: 2018/03/22 19:25:08 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/05 14:21:30 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FT_LIBFT_H
 # define FT_LIBFT_H
+
 # include <string.h>
 # include <stdlib.h>
 # include <unistd.h>

@@ -6,7 +6,7 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/04 19:57:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/05 14:22:02 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@
 # include <math.h>
 # include <fcntl.h>
 # include <OpenCL/cl.h>
-# include <SDL.h>
+# include <SDL2/SDL.h>
+# include <SDL2/SDL_image.h>
 
 # ifdef DOT
 #  undef DOT

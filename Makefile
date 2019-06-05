@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/06/03 16:58:00 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/05 14:25:15 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ GCC = gcc -g3
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
 #	Libs linking
-LINKLIB = -framework OpenGL -framework AppKit /Library/Frameworks/SDL2.framework/Versions/Current/SDL2 $(LINKLIBFT) $(LINKPARSON) -framework OpenCL -F ./ -rpath ./ -framework SDL2_image
+LINKLIB = -framework OpenGL -framework AppKit $(LINKLIBFT) $(LINKPARSON) -framework OpenCL
 #	Sources directories
 SRCDIR = ./src/
 COLORDIR = ./src/color/
@@ -66,23 +66,23 @@ all: $(LIBFT) $(PARSON) $(NAME)
 
 $(NAME): $(BINDIR) $(BIN)
 	$(GCC) $(LINKLIB) -o $(NAME) $(BIN) -I $(LIBFTINCLUDE) -I $(INCLUDE) \
-		-I $(PARSONINCLUDE) -I $(SDLINCLUDE)
+		-I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I ~/.brew/include -L ~/.brew/lib -rpath ~/.brew/lib -lSDL2 -lSDL2_image
 
 $(BINDIR):
 	@if [ ! -d "$(BINDIR)" ]; then mkdir $(BINDIR); fi
 
 
 $(BINDIR)%.o: $(SRCDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(PARSEDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(SCENEDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(VECTORDIR)%.c $(HEADER)
-	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 #$(BINDIR)%.o: $(COLORDIR)%.c $(HEADER)
 #	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
