@@ -6,12 +6,11 @@
 /*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/03 15:20:18 by tmaluh            #+#    #+#             */
-/*   Updated: 2019/06/03 16:09:29 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/05 14:41:04 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
-#include "../SDL2_image.framework/Headers/SDL_image.h"
 
 SDL_Surface	*sdl_load_image(const char *const path,
 							const SDL_PixelFormat *format,

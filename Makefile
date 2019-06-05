@@ -6,7 +6,7 @@
 #    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/06/05 14:25:15 by tmaluh           ###   ########.fr        #
+#    Updated: 2019/06/05 14:40:57 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ LIGHTDIR = ./src/light/
 VECTORDIR = ./src/vector/
 PARSEDIR = ./src/parse/
 #	Source files
-SRCFILES = main.c cl.c cl2.c rt_sdl_load_textures.c sdl_load_image.c
+SRCFILES = main.c cl.c cl2.c sdl_load_image.c
 SCENEFILES = sphere.c infinite_plane.c infinite_cone.c infinite_cylinder.c \
 				light_init.c cylinder.c cone.c triangle.c ellipsoid.c
 VECTORFILES = vector.c
