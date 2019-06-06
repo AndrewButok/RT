@@ -13,8 +13,7 @@
 NAME = RT
 PARSON = ./parson/libparson.a
 #	C compiler and his default flags
-GCC = gcc -g3
-# GCC = gcc -Wall -Wextra -Werror -Ofast -flto -pipe -march=native -mtune=native
+GCC = gcc -Wall -Wextra -Werror -Ofast -flto -pipe -march=native -mtune=native
 #	Libft and parson linking
 LINKLIBFT = -L ./libft -lft
 LINKPARSON = -L ./parson -lparson
