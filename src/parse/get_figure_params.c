@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_figure_params.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/03 14:47:44 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/06 17:34:47 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,18 @@ static void	get_density(t_figure *figure, JSON_Object *obj)
 	else
 		ft_putendl_fd("Unknown or invalid density. Default applied",
 				STDERR_FILENO);
+	if (figure->density < 1.0f)
+	{
+		ft_putendl_fd("Density less than 1. 1 applied",
+				STDERR_FILENO);
+		figure->transparency = 1;
+	}
+	if (figure->density > 2.0f)
+	{
+		ft_putendl_fd("Density greater than 2. 2 applied",
+				STDERR_FILENO);
+		figure->transparency = 2;
+	}
 }
 
 static void	get_reflection(t_figure *figure, JSON_Object *obj)
