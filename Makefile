@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: arudyi <arudyi@student.42.fr>              +#+  +:+       +#+         #
+#    By: abutok <abutok@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/06/06 12:46:21 by arudyi           ###   ########.fr        #
+#    Updated: 2019/06/06 13:36:10 by abutok           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -54,10 +54,10 @@ LIBFT = ./libft/libft.a
 LIBFTINCLUDE = ./libft/includes
 #	Parson header
 PARSONINCLUDE = ./parson
-#	SDL2 include
-SDLINCLUDE = /Library/Frameworks/SDL2.framework/Headers
-#   SDL2_image include
-SDLIINCLUDE = ./SDL2_image.framework/Headers
+#	Brew include
+BRINCLUDE = -I ~/.brew/include
+#	Brew link
+BRLINK = -L ~/.brew/lib -rpath ~/.brew/lib -lSDL2 -lSDL2_image
 
 .NOTPARALLEL = all fclean clean re $(NAME)
 
@@ -65,23 +65,23 @@ all: $(LIBFT) $(PARSON) $(NAME)
 
 $(NAME): $(BINDIR) $(BIN)
 	$(GCC) $(LINKLIB) -o $(NAME) $(BIN) -I $(LIBFTINCLUDE) -I $(INCLUDE) \
-		-I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I ~/.brew/include -L ~/.brew/lib -rpath ~/.brew/lib -lSDL2 -lSDL2_image
+		-I $(PARSONINCLUDE) $(BRINCLUDE) $(BRLINK)
 
 $(BINDIR):
 	@if [ ! -d "$(BINDIR)" ]; then mkdir $(BINDIR); fi
 
 
 $(BINDIR)%.o: $(SRCDIR)%.c $(HEADER)
-	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c $(BRINCLUDE) -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(PARSEDIR)%.c $(HEADER)
-	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c $(BRINCLUDE) -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(SCENEDIR)%.c $(HEADER)
-	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c $(BRINCLUDE) -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
 
 $(BINDIR)%.o: $(VECTORDIR)%.c $(HEADER)
-	$(GCC) -c -I ~/.brew/include -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
+	$(GCC) -c $(BRINCLUDE) -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
 
 #$(BINDIR)%.o: $(COLORDIR)%.c $(HEADER)
 #	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@

@@ -92,7 +92,7 @@
     {
       "width": 1920,
       "height": 1080,
-      "antialias": 1,
-      "depth": 2
+      "antialias": 3,
+      "depth": 1
     }
   }
