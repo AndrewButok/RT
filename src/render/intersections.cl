@@ -119,9 +119,9 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 			* x1 + dot(ray->o - figure->vector1, figure->vector2);
 		b = dot(ray->v, figure->vector2)
 			* x2 + dot(ray->o - figure->vector1, figure->vector2);
-		if ((x1 > 0 && x2 > 0 && (b > 0 && b < figure->param2)
+		if ((x1 > 1e-3 && x2 > 1e-3 && (b > 0 && b < figure->param2)
 			&& x1 >= x2) ||
-			(x1 <= 0 && x2 > 0 && (b > 0 && b < figure->param2)
+			(x1 <= 1e-3 && x2 > 1e-3 && (b > 0 && b < figure->param2)
 			&& x1 < x2))
 		{
 			if (normal != 0)
@@ -130,9 +130,9 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 						figure->vector2));
 			return (x2);
 		}
-		else if ((x1 > 0 && x2 > 0 && (a > 0 && a < figure->param2) &&
+		else if ((x1 > 1e-3 && x2 > 1e-3 && (a > 0 && a < figure->param2) &&
 			x1 < x2)
-			|| (x1 > 0 && x2 <= 0) && (a > 0 && a < figure->param2) &&
+			|| (x1 > 1e-3 && x2 <= 1e-3) && (a > 0 && a < figure->param2) &&
 			x1 >= x2)
 		{
 			if (normal != 0)
@@ -221,9 +221,9 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 			* x1 + dot(ray->o - figure->vector1, figure->vector2);
 		b = dot(ray->v, figure->vector2)
 			* x2 + dot(ray->o - figure->vector1, figure->vector2);
-		if ((x1 > 0 && x2 > 0 && (b > figure->param2 && b < figure->param3)
+		if ((x1 > 1e-3 && x2 > 1e-3 && (b > figure->param2 && b < figure->param3)
 			&& x1 > x2) ||
-			(x1 < 0 && x2 > 0 && (b > figure->param2 && b < figure->param3)
+			(x1 < 1e-3 && x2 > 1e-3 && (b > figure->param2 && b < figure->param3)
 			&& x1 < x2))
 		{
 			if (normal != 0)
@@ -232,9 +232,9 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 						dot(ray->o + ray->v * x2 - figure->vector1, figure->vector2)));
 			return (x2);
 		}
-		if ((x1 > 0 && x2 > 0 && (a > figure->param2 && a < figure->param3) &&
+		if ((x1 > 1e-3 && x2 > 1e-3 && (a > figure->param2 && a < figure->param3) &&
 			x1 < x2) ||
-			((x1 > 0 && x2 < 0) && (a > figure->param2 && a < figure->param3) &&
+			((x1 > 1e-3 && x2 < 1e-3) && (a > figure->param2 && a < figure->param3) &&
 			x1 > x2))
 		{
 			if (normal != 0)

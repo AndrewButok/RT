@@ -174,7 +174,36 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 	if (t_max == DBL_MAX)
 		return (0);
 	local_color.color = count_light(figures, lights, params, ray, &(figures[closest_index]), normal, t_max);
-
+	
+	/*
+	int arr_colors[depth];
+	int arr_index[depth];
+	int i = 0;
+	arr_colors[i] = local_color.color;
+	arr_index[i++] = closest_index;
+	reflect_ray.o = (ray->o + (ray->v * t_max));
+	reflect_ray.v = ray->v;
+	while (depth && figures[closest_index].transparency > 0.0)
+	{
+		arr_colors[i] = cykle_rt(figures, lights, &reflect_ray, params, 0.001, DBL_MAX, depth, &normal, &t_max, &closest_index);
+		arr_index[i] = closest_index;
+		reflect_ray.o = (reflect_ray.o + (reflect_ray.v * t_max));
+		//reflect_ray.v = reflect_ray.v;
+		i++;
+		depth--;
+	}
+	while (--i)
+	{
+		local_color.color = arr_colors[i - 1];
+		reflected_color.color = arr_colors[i];
+		local_color.color = ft_change_color(local_color, (1.0f - figures[arr_index[i - 1]].transparency));
+		reflected_color.color = ft_change_color(reflected_color, (figures[arr_index[i - 1]].transparency));
+		local_color.color = ft_add_color(local_color, reflected_color);
+		arr_colors[i - 1] = local_color.color;
+	}
+	return (local_color.color);
+	*/
+	
 	int arr_colors[depth];
 	int arr_index[depth];
 	int i = 0;
