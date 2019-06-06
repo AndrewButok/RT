@@ -70,7 +70,7 @@
       {
         "type": "point",
         "position": [-3.0, -1.0, 14.0],
-        "intensity": 0.9
+        "intensity": 0.2
       },
       {
         "type": "point",
@@ -92,7 +92,7 @@
     {
       "width": 1920,
       "height": 1080,
-      "antialias": 2,
-      "depth": 1
+      "antialias": 1,
+      "depth": 2
     }
   }

@@ -241,7 +241,7 @@
   {
     "width": 1920,
     "height": 1080,
-    "antialias": 2,
-    "depth": 5
+    "antialias": 1,
+    "depth": 2
   }
 }

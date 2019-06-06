@@ -120,6 +120,35 @@ inline __attribute__((always_inline)) int ft_add_color(t_color color1, t_color c
 	return (new.color);
 }
 
+int cykle_rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
+		__global int *params, float t_min, float t_max, int depth, float3 *normal1, float *t_max1, int *closest_index1)
+{
+	int				index = -1;
+	int				closest_index = 0;
+	float3			normal;
+	float3			nbuf;
+	float			t = INFINITY;
+	t_color			local_color;
+
+	while (++index < params[2])
+	{
+		t = check_intersection(ray, &(figures[index]), &nbuf);
+		if (t >= t_min && t < t_max)
+		{
+			t_max = t;
+			normal = nbuf;
+			closest_index = index;
+		}
+	}
+	if (t_max == DBL_MAX)
+		return (0);
+	local_color.color = count_light(figures, lights, params, ray, &(figures[closest_index]), normal, t_max);
+	*normal1 = normal;
+	*t_max1 = t_max;
+	*closest_index1 = closest_index;
+	return (local_color.color);
+}
+
 int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 		__global int *params, float t_min, float t_max, int depth)
 {
@@ -137,27 +166,41 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 		t = check_intersection(ray, &(figures[index]), &nbuf);
 		if (t >= t_min && t < t_max)
 		{
-			t_max = t;//////////////////// should change
+			t_max = t;
 			normal = nbuf;
 			closest_index = index;
 		}
 	}
-	if (t == DBL_MAX)
+	if (t_max == DBL_MAX)
 		return (0);
 	local_color.color = count_light(figures, lights, params, ray, &(figures[closest_index]), normal, t_max);
 
-	if (depth < 0 || figures[closest_index].reflection < 0.0)
-		return (local_color.color);
-	reflect_ray.v = ft_reflect_ray(-ray->v, normal);
+	int arr_colors[depth];
+	int arr_index[depth];
+	int i = 0;
+	arr_colors[i] = local_color.color;
+	arr_index[i++] = closest_index;
 	reflect_ray.o = (ray->o + (ray->v * t_max));
-	reflected_color.color = rt(figures, lights, &reflect_ray, params, 0.001, DBL_MAX, depth - 1);
-	
-	local_color.color = ft_change_color(local_color, (1.0 - figures[closest_index].reflection));
+	reflect_ray.v = ft_reflect_ray(-ray->v, normal);
+	while (depth && figures[closest_index].reflection > 0.0)
+	{
+		arr_colors[i] = cykle_rt(figures, lights, &reflect_ray, params, 0.001, DBL_MAX, depth, &normal, &t_max, &closest_index);
+		arr_index[i] = closest_index;
+		reflect_ray.o = (reflect_ray.o + (reflect_ray.v * t_max));
+		reflect_ray.v = ft_reflect_ray(-reflect_ray.v, normal);
+		i++;
+		depth--;
+	}
+	while (--i)
+	{
+		local_color.color = arr_colors[i - 1];
+		reflected_color.color = arr_colors[i];
+		local_color.color = ft_change_color(local_color, (1.0f - figures[arr_index[i - 1]].reflection));
+		reflected_color.color = ft_change_color(reflected_color, (figures[arr_index[i - 1]].reflection));
+		local_color.color = ft_add_color(local_color, reflected_color);
+		arr_colors[i - 1] = local_color.color;
 
-	reflected_color.color = ft_change_color(reflected_color, (figures[closest_index].reflection));
-
-	local_color.color = ft_add_color(local_color, reflected_color);
-
+	}
 	return (local_color.color);
 }
 
