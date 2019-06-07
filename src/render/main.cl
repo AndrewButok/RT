@@ -14,9 +14,7 @@ float			check_light(float3 intersection, float3 light,
 		k = -1.0f;
 		k = check_intersection(&ray, &(figures[i]), 0);
 		if (k < 1 && k >= 1e-3)
-		{
 			transparency -= (1 - figures[i].transparency);
-		}
 		i++;
 	}
 	transparency = transparency < 0 ? 0 : transparency;
@@ -159,6 +157,16 @@ inline __attribute__((always_inline))int cykle_rt(__global t_figure *figures, __
 	return (local_color.color);
 }
 
+float3 ft_refraction_ray(float3 reflect_ray, float3 normal, float n1, float n2)
+{
+	float3 refract_ray;
+
+	reflect_ray *= n1;
+	refract_ray = reflect_ray + (sqrt(((n2 * n2 - n1 * n1) / (pow(dot(reflect_ray, normal), 2))) + 1) - 1) * dot(reflect_ray, normal) * normal;
+	refract_ray = normalize(refract_ray);
+	return (refract_ray);
+}
+
 int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 		__global int *params, float t_min, float t_max, int depth)
 {
@@ -196,7 +204,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 		arr_colors[i] = local_color.color;
 		arr_index[i++] = closest_index;
 		reflect_ray.o = (ray->o + (ray->v * t_max));
-		reflect_ray.v = ray->v;
+		reflect_ray.v = ft_refraction_ray(ray->v, normal, 1.0, figures[closest_index].density);
 		while (figures[closest_index].transparency > 0.0)
 		{
 			arr_colors[i] = cykle_rt(figures, lights, &reflect_ray, params, 0.001, INFINITY, depth--, &normal, &t_max, &closest_index);
@@ -204,7 +212,10 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 			if (t_max == INFINITY || depth <= 0)
 				break ;
 			reflect_ray.o = (reflect_ray.o + (reflect_ray.v * t_max));
-			reflect_ray.v = reflect_ray.v;
+			if (closest_index == arr_index[i - 2])
+				reflect_ray.v = ft_refraction_ray(reflect_ray.v, normal, figures[closest_index].density, 1.0);
+			else
+				reflect_ray.v = ft_refraction_ray(reflect_ray.v, normal, 1.0, figures[closest_index].density);
 		}
 		while (--i)
 		{

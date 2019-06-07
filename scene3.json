@@ -48,23 +48,25 @@
     },
     {
       "type": "sphere",
-      "center": [0, -1, 0],
-      "radius": 1,
+      "center": [-2, -1, 5],
+      "radius": 2,
       "color": "0xffff00",
       "spectacular": 0,
       "reflection": 0.0,
-      "transparency": 0.5
+      "transparency": 0.7,
+      "density": 1.33
     },
     {
       "type": "cylinder",
       "radius": 0.5,
-      "point": [1, 0, 8],
-      "vector": [0, -1, 1],
+      "point": [1, 2, 2],
+      "vector": [0, -1, 0],
       "height": 4,
       "color": "0xff00",
       "spectacular": 10,
       "reflection": 0.0,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1.33
     }
   ],
   "lights":
