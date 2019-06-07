@@ -1,21 +1,26 @@
-int				check_intersections(float3 intersection, float3 light,
+float			check_light(float3 intersection, float3 light,
 	  __global t_figure *figures, __global int *params, __global t_figure *cf)
 {
 	int		i = 0;
 	float	k;
+	float	transparency;
 	t_ray	ray;
 
 	ray.o = intersection;
 	ray.v = light;
-	while (i < params[2])
+	transparency = 1;
+	while (i < params[2] && transparency > 0)
 	{
 		k = -1.0f;
 		k = check_intersection(&ray, &(figures[i]), 0);
 		if (k < 1 && k >= 1e-3)
-			return (1);
+		{
+			transparency -= (1 - figures[i].transparency);
+		}
 		i++;
 	}
-		return (0);
+	transparency = transparency < 0 ? 0 : transparency;
+	return (transparency);
 }
 
 inline __attribute__((always_inline)) int set_spectrum_brightness(int val, float bright,
@@ -71,6 +76,7 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 				light;
 	float	bright = 0, reflected = 0;
 	int		i;
+	float	transparency;
 
 	if (dot(normal, ray->v) >= 0)
 		normal = normal * (-1);
@@ -82,10 +88,11 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 		if (lights[i].type == Point)
 		{
 			light = lights[i].position - intersection;
-			if (!check_intersections(intersection, light, figures, params, figure))
+			transparency = check_light(intersection, light, figures, params, figure);
+			if (transparency != 0)
 			{
 				if (dot(normal, light) > 0)
-					bright += lights[i].intensity * dot(normal, light) /
+					bright += lights[i].intensity * transparency * dot(normal, light) /
 						length(light);
 				if (dot(normal, light) > 0 && figure->spectacular > 0)
 					reflected += trace_spectacular(light, normal, ray->v * (-1),
