@@ -6,7 +6,7 @@
 #    By: abutok <abutok@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/06/06 13:36:10 by abutok           ###   ########.fr        #
+#    Updated: 2019/06/07 20:19:01 by abutok           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,8 @@ PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
 				get_infinite_plane.c \
 				get_infinite_cone.c get_infinite_cylinder.c \
 				get_light.c get_cam.c get_params.c get_cylinder.c get_cone.c \
-				get_triangle.c get_ellipsoid.c get_figure_params.c get_figure_texture.c
+				get_triangle.c get_ellipsoid.c get_figure_params.c get_figure_texture.c \
+				get_direct_light.c
 #	Header folder
 INCLUDE = ./includes
 #   Header file

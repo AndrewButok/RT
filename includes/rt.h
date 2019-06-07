@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   rt.h                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudyi <arudyi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/06 12:46:27 by arudyi           ###   ########.fr       */
+/*   Updated: 2019/06/07 20:17:56 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,8 @@ enum			e_light
 {
 	BadLight = -1,
 	Ambient = 0,
-	Point = 1
+	Point = 1,
+	Direct = 2
 };
 
 typedef struct	s_light
@@ -134,6 +135,7 @@ void			get_triangle(t_figure *figure, JSON_Object *obj,
 void			get_ellipsoid(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
 void			get_lights(t_view *view, JSON_Object *root);
+void			get_direct_light(t_light *light, JSON_Object *obj);
 void			get_cam(t_view *view, JSON_Object *root);
 void			get_params(t_view *view, JSON_Object *root);
 t_figure		sphere_init();

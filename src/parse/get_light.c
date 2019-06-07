@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_space.c                                        :+:      :+:    :+:   */
+/*   get_light.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/07 20:19:37 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,14 +55,16 @@ void	get_light(t_view *view, JSON_Object *obj, size_t i)
 			get_ambient_light(&(view->lights[i]), obj);
 		else if (ft_strequ(type, "point"))
 			get_point_light(&(view->lights[i]), obj);
+		else if (ft_strequ(type, "direct"))
+			get_direct_light(&(view->lights[i]), obj);
 		else
 		{
-			ft_putendl_fd("Unknown figure found.Skipped.", STDERR_FILENO);
+			ft_putendl_fd("Unknown light found. Skipped.", STDERR_FILENO);
 			view->lights[i].type = BadLight;
 		}
 	}
 	else
-		ft_putendl_fd("Unknown figure type.Skipped.", STDERR_FILENO);
+		ft_putendl_fd("Unknown light type.Skipped.", STDERR_FILENO);
 }
 
 void	choose_light_parse(t_view *view, JSON_Value *value)
@@ -101,7 +103,7 @@ void	get_lights(t_view *view, JSON_Object *root)
 	val = json_object_get_value(root, "lights");
 	if (val == NULL)
 	{
-		ft_putendl_fd("Figures not found in your file.", STDERR_FILENO);
+		ft_putendl_fd("Lights is not found.", STDERR_FILENO);
 		return ;
 	}
 	choose_light_parse(view, val);
