@@ -83,9 +83,12 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 	{
 		if (lights[i].type == Ambient)
 			bright += lights[i].intensity;
-		if (lights[i].type == Point)
+		else
 		{
-			light = lights[i].position - intersection;
+			if (lights[i].type == Point)
+				light = lights[i].position - intersection;
+			else if (lights[i].type == Direct)
+				light = lights[i].position;
 			transparency = check_light(intersection, light, figures, params, figure);
 			if (transparency != 0)
 			{
