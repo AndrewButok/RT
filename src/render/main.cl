@@ -1,5 +1,5 @@
 float			check_light(float3 intersection, float3 light,
-	  __global t_figure *figures, __global int *params, __global t_figure *cf)
+	  __global t_figure *figures, __global int *params, __global t_figure *cf, float max, float min)
 {
 	int		i = 0;
 	float	k;
@@ -13,7 +13,7 @@ float			check_light(float3 intersection, float3 light,
 	{
 		k = -1.0f;
 		k = check_intersection(&ray, &(figures[i]), 0);
-		if (k < 1 && k >= 1e-3)
+		if (k < max && k >= min)
 			transparency -= (1 - figures[i].transparency);
 		i++;
 	}
@@ -86,19 +86,24 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 		else
 		{
 			if (lights[i].type == Point)
-				light = lights[i].position - intersection;
-			else if (lights[i].type == Direct)
-				light = lights[i].position;
-			transparency = check_light(intersection, light, figures, params, figure);
-			if (transparency != 0)
 			{
-				if (dot(normal, light) > 0)
-					bright += lights[i].intensity * transparency * dot(normal, light) /
-						length(light);
-				if (dot(normal, light) > 0 && figure->spectacular > 0)
-					reflected += trace_spectacular(light, normal, ray->v * (-1),
-						(float3)(lights[i].intensity, figure->spectacular, 0.0f));
+				light = lights[i].position - intersection;
+				transparency = check_light(intersection, light, figures, params, figure, 1, 1e-3);
 			}
+			else if (lights[i].type == Parallel)
+			{
+				light = -lights[i].position;
+				transparency = check_light(intersection, light, figures, params, figure, INFINITY, 1e-3);
+			}
+			if (transparency != 0)
+				{
+					if (dot(normal, light) > 0)
+						bright += lights[i].intensity * transparency * dot(normal, light) /
+							length(light);
+					if (dot(normal, light) > 0 && figure->spectacular > 0)
+						reflected += trace_spectacular(light, normal, ray->v * (-1),
+							(float3)(lights[i].intensity, figure->spectacular, 0.0f));
+				}
 		}
 		i++;
 	}

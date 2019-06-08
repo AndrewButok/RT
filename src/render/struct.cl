@@ -29,7 +29,7 @@ enum			e_light
 	BadLight = -1,
 	Ambient = 0,
 	Point = 1,
-	Direct = 2
+	Parallel = 2
 };
 
 typedef union			u_color

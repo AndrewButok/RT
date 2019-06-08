@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/07 20:19:37 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/08 13:41:19 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ void	get_light(t_view *view, JSON_Object *obj, size_t i)
 			get_ambient_light(&(view->lights[i]), obj);
 		else if (ft_strequ(type, "point"))
 			get_point_light(&(view->lights[i]), obj);
-		else if (ft_strequ(type, "direct"))
-			get_direct_light(&(view->lights[i]), obj);
+		else if (ft_strequ(type, "parallel"))
+			get_parallel_light(&(view->lights[i]), obj);
 		else
 		{
 			ft_putendl_fd("Unknown light found. Skipped.", STDERR_FILENO);
