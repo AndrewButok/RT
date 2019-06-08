@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/08 13:41:28 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/08 15:13:59 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,6 +106,7 @@ typedef struct	s_view
 	cl_int			height;
 	cl_int			antialiasing;
 	cl_int			depth;
+	cl_int			filter;
 	t_ray			*cam;
 	t_cl			*cl;
 }				t_view;

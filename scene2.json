@@ -187,8 +187,8 @@
     },
     {
       "type": "ellipsoid",
-      "center1": [0, -2, 6],
-      "center2": [0, 0, 6],
+      "center1": [0, -2, 7],
+      "center2": [0, 0, 7],
       "radius": 3,
       "color": "0xff0000",
       "spectacular": 10,
@@ -289,7 +289,8 @@
   {
     "width": 1920,
     "height": 1080,
-    "antialias": 1,
-    "depth": 3
+    "antialias": 3,
+    "depth": 3,
+    "filter": "0x7700aa"
   }
 }

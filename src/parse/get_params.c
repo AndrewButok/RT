@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_config.c                                       :+:      :+:    :+:   */
+/*   get_params.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/08 15:18:52 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,16 @@ static void		get_wh(t_view *view, JSON_Object *params)
 				"Default applied", STDERR_FILENO);
 }
 
+void			get_filter(t_view *view, JSON_Object *params)
+{
+	if (json_object_has_value_of_type(params, "filter", JSONString) &&
+		check_hex(json_object_get_string(params, "filter")))
+		view->filter = ft_hexatoi(json_object_get_string(params, "filter"));
+	else
+		ft_putendl_fd("Unknown or invalid color filter. Default applied",
+				STDERR_FILENO);
+}
+
 void			get_params(t_view *view, JSON_Object *root)
 {
 	JSON_Object	*val;
@@ -82,9 +92,11 @@ void			get_params(t_view *view, JSON_Object *root)
 	view->height = 600;
 	view->antialiasing = 1;
 	view->depth = 0;
+	view->filter = 0;
 	val = json_object_get_object(root, "params");
 	if (val != NULL)
 	{
+		get_filter(view, val);
 		get_wh(view, val);
 		get_rays(view, val);
 		get_depth(view, val);

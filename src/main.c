@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/03 15:08:32 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/08 16:13:44 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,34 @@ void		view_init(t_view **view_ptr, char *filename)
 	free(event);
 }
 
+void		make_screenshot(t_view *view)
+{
+	SDL_Surface *screenshot;
+
+	SDL_LockSurface(view->surface);
+	screenshot = SDL_CreateRGBSurface(0, view->width,
+		view->height, 32, 0, 0, 0, 0);
+	ft_memcpy(screenshot->pixels, view->surface->pixels,
+		screenshot->h * screenshot->pitch);
+	SDL_SaveBMP(screenshot, "screenshot.bmp");
+	SDL_UnlockSurface(view->surface);
+	SDL_FreeSurface(screenshot);
+}
+
+void		event_manager(t_view *view, SDL_Event *event, int *exit)
+{
+	if ((event->type == SDL_KEYDOWN &&
+				event->key.keysym.sym == SDLK_ESCAPE) ||
+				(event->type == SDL_WINDOWEVENT &&
+				event->window.event == SDL_WINDOWEVENT_CLOSE))
+		*exit = 1;
+	else if (event->type == SDL_WINDOWEVENT_EXPOSED)
+		SDL_UpdateWindowSurface(view->window);
+	else if (event->type == SDL_KEYDOWN &&
+				event->key.keysym.sym == SDLK_p)
+		make_screenshot(view);
+}
+
 int			main(int argc, char **argv)
 {
 	t_view		*view;
@@ -52,13 +80,7 @@ int			main(int argc, char **argv)
 		while (exit_flag == 0)
 		{
 			while (SDL_PollEvent(&event_iterator))
-				if ((event_iterator.type == SDL_KEYDOWN &&
-				event_iterator.key.keysym.sym == SDLK_ESCAPE) ||
-				(event_iterator.type == SDL_WINDOWEVENT &&
-				event_iterator.window.event == SDL_WINDOWEVENT_CLOSE))
-					exit_flag = 1;
-				else if (event_iterator.type == SDL_WINDOWEVENT_EXPOSED)
-					SDL_UpdateWindowSurface(view->window);
+				event_manager(view, &event_iterator, &exit_flag);
 		}
 	}
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cl.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: arudyi <arudyi@student.42.fr>              +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/06 17:06:49 by arudyi           ###   ########.fr       */
+/*   Updated: 2019/06/08 15:15:36 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ static void	cl_buf_init(t_view *view)
 			sizeof(t_ray), view->cam, &err);
 	params_init(view);
 	view->cl->buf_param = clCreateBuffer(view->cl->context,
-			CL_MEM_COPY_HOST_PTR, sizeof(cl_int) * 6, view->params, &err);
+			CL_MEM_COPY_HOST_PTR, sizeof(cl_int) * 7, view->params, &err);
 }
 
 static void	cl_kernel_buf_assign(t_view *view)

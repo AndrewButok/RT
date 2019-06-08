@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cl2.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.unit.ua>            +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2018/04/18 16:44:20 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/08 15:15:30 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,14 @@
 
 void	params_init(t_view *view)
 {
-	view->params = (cl_int*)malloc(sizeof(cl_int) * 6);
+	view->params = (cl_int*)malloc(sizeof(cl_int) * 7);
 	view->params[0] = view->width;
 	view->params[1] = view->height;
 	view->params[2] = (int)view->figures_count;
 	view->params[3] = (int)view->lights_count;
 	view->params[4] = view->antialiasing;
 	view->params[5] = view->depth;
+	view->params[6] = view->filter;
 }
 
 void	cl_run_kernel(t_view *view)

@@ -319,5 +319,14 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 	buf.spectrum.red = r > 255 ? 255 : r;
 	buf.spectrum.green = g > 255 ? 255 : g;
 	buf.spectrum.blue = b > 255 ? 255 : b;
+	if (params[6] != 0)
+	{
+		float intensity = (buf.spectrum.red + buf.spectrum.blue + buf.spectrum.green) / (3.0f * 255);
+		t_color pattern;
+		pattern.color = params[6];
+		buf.spectrum.red = pattern.spectrum.red * intensity;
+		buf.spectrum.green = pattern.spectrum.green * intensity;
+		buf.spectrum.blue = pattern.spectrum.blue * intensity;
+	}
 	scene[i] = buf.color;
 }
