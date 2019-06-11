@@ -13,7 +13,8 @@
         0
       ],
       "color": "0xaaaaaa",
-      "spectacular": 100
+      "spectacular": 100,
+      "texture": "resources/rubble.jpg"
     },
     {
       "type": "sphere",
@@ -22,7 +23,7 @@
       "color": "0xffffff",
       "spectacular": 10,
       "reflection": 0.1,
-      "texture": "resources/world.jpg"
+      "texture": "resources/wood.jpg"
     },
     {
       "type": "sphere",
@@ -30,8 +31,7 @@
       "radius": 1,
       "color": "0xffaafb",
       "spectacular": 10,
-      "reflection": 0.1,
-      "texture": "resources/world.jpg"
+      "reflection": 0.1
     },
     {
       "type": "sphere",
@@ -39,8 +39,7 @@
       "radius": 1,
       "color": "0xf5ffbf",
       "spectacular": 10,
-      "reflection": 0.1,
-      "texture": "resources/world.jpg"
+      "reflection": 0.1
     },
     {
       "type": "plane",
@@ -55,7 +54,8 @@
         0
       ],
       "color": "0xffffff",
-      "spectacular": 100
+      "spectacular": 100,
+      "texture": "resources/wood.jpg"
     },
     {
       "type": "plane",
@@ -70,7 +70,8 @@
         20
       ],
       "color": "0x00000aa",
-      "spectacular": 0
+      "spectacular": 0,
+      "texture": "resources/lava.jpg"
     },
     {
       "type": "plane",
@@ -85,7 +86,8 @@
         0
       ],
       "color": "0x00000aa",
-      "spectacular": 0
+      "spectacular": 0,
+      "texture": "resources/wood.jpg"
     },
     {
       "type": "plane",
@@ -100,7 +102,8 @@
         0
       ],
       "color": "0x00000aa",
-      "spectacular": 0
+      "spectacular": 0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "cone",
@@ -151,6 +154,6 @@
   "params": {
     "width": 1440,
     "height": 900,
-    "antialias": 1
+    "antialias": 2
   }
 }

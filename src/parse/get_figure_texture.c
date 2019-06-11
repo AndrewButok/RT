@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_figure_texture.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/03 14:49:30 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/11 19:09:56 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ void	get_figure_texture(t_figure *figure, JSON_Object *obj,
 		s = sdl_load_image(filename, pf, s);
 		if (s != NULL)
 		{
-			figure->texture = (int*)malloc(sizeof(int) * s->w * s->h);
+			figure->texture = (int*)malloc(sizeof(int) * (s->w * s->h));
 			figure->texture = ft_memcpy(figure->texture, s->pixels,
-										sizeof(int) * s->w * s->h);
+										sizeof(int) * (s->w * s->h));
 			figure->t_size.x = s->w;
 			figure->t_size.y = s->h;
 			SDL_FreeSurface(s);

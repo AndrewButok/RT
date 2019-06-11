@@ -289,8 +289,8 @@
   {
     "width": 1920,
     "height": 1080,
-    "antialias": 3,
-    "depth": 3,
+    "antialias": 1,
+    "depth": 1,
     "filter": "0x7700aa"
   }
 }
