@@ -67,6 +67,12 @@ inline __attribute__((always_inline)) float			trace_spectacular(float3 l, float3
 		return (0);
 }
 
+inline __attribute__((always_inline)) int	uv_sphere_map(const float3 n, int *tex, int2 t_size) {
+	const int2	uv = { (0.5 + atan2(n.z, n.x) / (2.0 * M_PI_F)) * t_size.x,
+						((0.5 - asin(n.y) / M_PI_F) * t_size.y) };
+	return tex[uv.y * t_size.x + uv.x];
+}
+
 int				count_light(__global t_figure *figures, __global t_light *lights,
 __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, float len)
 {
@@ -107,6 +113,8 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 		}
 		i++;
 	}
+	if (figure->texture && Sphere == figure->type)
+		return set_brightness(uv_sphere_map(normalize((ray->o + ray->v * len) - figure->vector1), figure->texture, figure->t_size), bright, reflected);
 	return (set_brightness(figure->color, bright, reflected));
 }
 
