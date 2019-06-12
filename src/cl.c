@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cl.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/08 15:15:36 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/12 13:33:01 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ static char	*get_kernel(void)
 	return (ft_strdup("#include \"./src/render/struct.cl\"\n"
 	"#include \"./src/render/intersections.cl\"\n"
 	"#include \"./src/render/cam.cl\"\n"
+	"#include \"./src/render/uv_mapping.cl\"\n"
 	"#include \"./src/render/main.cl\""));
 }
 
