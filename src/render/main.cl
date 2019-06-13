@@ -255,10 +255,10 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 		closest_index = closest_index1;
 		t_max = t_max1;
 		normal = normal1;
-		local_color.color = local_color1;
 	}
 	if (depth > 0 && figures[closest_index].reflection > 0.0)
 	{
+		local_color.color = local_color1;
 		depth++;
 		int arr_colors1[depth];
 		int arr_index1[depth];
