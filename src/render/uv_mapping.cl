@@ -35,8 +35,6 @@ int	uv_cylinder_map(const float3 intersection, __global t_figure *figure)
 	float u = acos(dot(intersection - (figure->vector1 + figure->vector2 * dot(z, intersection)), x) / (figure->param1 * 2 * M_PI_F));
 	u = fabs(u - 2);
 	int s = v * figure->t_size.x + (int)(u * figure->t_size.x);
-	if (s < 0 || s > figure->t_size.x* figure->t_size.y)
-		printf("oops");
 	return figure->texture[s];
 }
 
