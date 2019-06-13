@@ -115,13 +115,22 @@
       "vertex": [
         0,
         1,
-        6
+        0
       ],
       "dist1": -1,
       "dist2": 2,
       "radius": 1,
       "color": "0x00000aa",
       "spectacular": 10
+    },
+    {
+      "type": "infinite_cylinder",
+      "point": [3.0, 0.0, 3],
+      "vector": [0.0, 1.0, 0.0],
+      "radius": 0.625,
+      "color": "0xffffff",
+      "spectacular": 200,
+      "texture": "resources/world.jpg"
     }
   ],
   "lights": [

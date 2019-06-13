@@ -117,6 +117,8 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 			out_clr = uv_sphere_map(normalize((p) - figure->vector1), figure->texture, figure->t_size);
 		if (InfinitePlane == figure->type)
 			out_clr = uv_plane_map(p, figure);
+		if (InfiniteCylinder == figure->type)
+			out_clr = uv_cylinder_map(p, figure);
 	}
 	return (set_brightness(out_clr, bright, reflected));
 }
