@@ -60,7 +60,8 @@
       "spectacular": 200,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "infinite_cylinder",
@@ -71,7 +72,8 @@
       "spectacular": 200,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/wood.jpg"
     },
     {
       "type": "infinite_cylinder",
@@ -82,7 +84,8 @@
       "spectacular": 200,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/lava.jpg"
     },
     {
       "type": "infinite_cylinder",
@@ -93,7 +96,8 @@
       "spectacular": 200,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -103,7 +107,8 @@
       "spectacular": 10,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -113,7 +118,8 @@
       "spectacular": 10,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -133,7 +139,8 @@
       "spectacular": 10,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -143,7 +150,8 @@
       "spectacular": 10,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -153,7 +161,8 @@
       "spectacular": 10,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -163,7 +172,8 @@
       "spectacular": 10,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -173,7 +183,8 @@
       "spectacular": 10,
       "reflection": 0.5,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "sphere",
@@ -183,7 +194,8 @@
       "spectacular": 10,
       "reflection": 0.1,
       "transparency": 0.5,
-      "density": 1.0
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "ellipsoid",
@@ -289,8 +301,8 @@
   {
     "width": 1920,
     "height": 1080,
-    "antialias": 1,
-    "depth": 1,
-    "filter": "0x7700aa"
+    "antialias": 2,
+    "depth": 2,
+    "filter": "0xffffff"
   }
 }
