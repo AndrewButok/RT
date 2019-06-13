@@ -32,10 +32,12 @@ int	uv_cylinder_map(const float3 intersection, __global t_figure *figure)
 	if (v > 0)
 		v = figure->t_size.y - v;
 	v = abs(v);
-	float u = acos(dot(intersection - figure->vector1, x) / (figure->param1 * 2 * M_PI_F));
-	if (dot(intersection, y) < 0.0f)
-		u = u - 1;
-	return figure->texture[v * figure->t_size.x + (int)(u * figure->t_size.x)];
+	float u = acos(dot(intersection - (figure->vector1 + figure->vector2 * dot(z, intersection)), x) / (figure->param1 * 2 * M_PI_F));
+	u = fabs(u - 2);
+	int s = v * figure->t_size.x + (int)(u * figure->t_size.x);
+	if (s < 0 || s > figure->t_size.x* figure->t_size.y)
+		printf("oops");
+	return figure->texture[s];
 }
 
 int	uv_sphere_map(const float3 n, int *tex, int2 t_size) {

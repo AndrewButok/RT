@@ -126,7 +126,7 @@
     {
       "type": "infinite_cylinder",
       "point": [3.0, 0.0, 3],
-      "vector": [0.0, 1.0, 0.0],
+      "vector": [1.0, 0.6, 0.5],
       "radius": 0.625,
       "color": "0xffffff",
       "spectacular": 200,
