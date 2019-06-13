@@ -264,9 +264,10 @@
       "height": 4,
       "color": "0xff00",
       "spectacular": 10,
-      "reflection": 0.5,
-      "transparency": 0.5,
-      "density": 1.0
+      "reflection": 0,
+      "transparency": 0,
+      "density": 1.0,
+      "texture": "resources/world.jpg"
     }
   ],
   "lights":
@@ -301,7 +302,7 @@
   {
     "width": 1920,
     "height": 1080,
-    "antialias": 2,
-    "depth": 2
+    "antialias": 1,
+    "depth": 1
   }
 }

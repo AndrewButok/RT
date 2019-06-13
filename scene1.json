@@ -121,11 +121,12 @@
       "dist2": 2,
       "radius": 1,
       "color": "0x00000aa",
-      "spectacular": 10
+      "spectacular": 10,
+      "texture": "resources/world.jpg"
     },
     {
       "type": "infinite_cylinder",
-      "point": [3.0, 0.0, 3],
+      "vertex": [3.0, 0.0, 3],
       "vector": [1.0, 0.6, 0.5],
       "radius": 0.625,
       "color": "0xffffff",

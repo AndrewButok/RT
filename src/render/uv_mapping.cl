@@ -17,7 +17,7 @@ int	uv_plane_map(const float3 n, const __global t_figure *figure) {
 	return figure->texture[uv.y * figure->t_size.x + uv.x];
 }
 
-int	uv_cylinder_map(const float3 intersection, __global t_figure *figure)
+int	uv_infinite_cylinder_map(const float3 intersection, __global t_figure *figure)
 {
 	float3 z = normalize(figure->vector2);
 	float3 x = normalize((float3){figure->vector2.y, figure->vector2.x, 0});
