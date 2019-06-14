@@ -7,13 +7,13 @@
 			"spectacular": 100,
 			"reflection": 0.2,
 			"transparency": 0.0,
-			"texture": "resources/decorated_parquet.jpg"
+			"texture": "resources/snow.jpg"
 		}, {
 			"type": "infinite_cylinder",
 			"point": [2.5, 0.0, -5],
 			"vector": [0.0, 1.0, 0.4],
 			"radius": 0.625,
-			"color": "0xffffff",
+			"color": "0xffa0a0",
 			"spectacular": 200,
 			"reflection": 1.0,
 			"transparency": 0.5,
@@ -23,7 +23,7 @@
 			"point": [-2.5, 0.0, -5],
 			"vector": [0.0, 1.0, 0.4],
 			"radius": 0.625,
-			"color": "0xffffff",
+			"color": "0xffa0a0",
 			"spectacular": 200,
 			"reflection": 1.0,
 			"transparency": 0.5,
@@ -32,18 +32,17 @@
 			"type": "sphere",
 			"center": [0, 0, 4],
 			"radius": 1,
-			"color": "0xffaa00",
+			"color": "0x0aaaff",
 			"spectacular": 1000,
 			"reflection": 0.5,
 			"transparency": 0.0,
-			"texture": "resources/snow.jpg"
-		},
-		{
+			"texture": "resources/decorated_parquet.jpg"
+		}, {
 			"type": "infinite_cone",
 			"vector": [0.0, 1.0, 0.0],
 			"vertex": [0, 0, 10],
 			"radius": 0.625,
-			"color": "0xffffff",
+			"color": "0xffaa00",
 			"spectacular": 200,
 			"reflection": 1.0,
 			"transparency": 0.5,
@@ -52,9 +51,12 @@
 		}
 	],
 	"lights": [ {
+			"type": "ambient",
+			"intensity": 0.35
+		},{
 			"type": "point",
 			"position": [0.0, -2.0, 0.0],
-			"intensity": 0.84
+			"intensity": 0.21
 		}, {
 			"type": "point",
 			"position": [5.0, 2.0, 4.0],
