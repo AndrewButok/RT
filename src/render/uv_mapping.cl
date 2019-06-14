@@ -34,6 +34,12 @@ int	uv_infinite_cylinder_map(const float3 intersection, __global t_figure *figur
 	v = abs(v);
 	float u = acos(dot(intersection - (figure->vector1 + figure->vector2 * dot(z, intersection)), x) / (figure->param1 * 2 * M_PI_F));
 	u = fabs(u - 2);
+	if (isnan(u) || u < 0)
+		u = 0;
+	else if (u > 1)
+		u = 1;
+	if (u > 1 || u < 0)
+		printf("%f\n", u);
 	int s = v * figure->t_size.x + (int)(u * figure->t_size.x);
 	return figure->texture[s];
 }
