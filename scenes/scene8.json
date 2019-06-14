@@ -1,0 +1,62 @@
+{
+	"figures": [ {
+			"type": "sphere",
+			"center": [5, 0, 4],
+			"radius": 1,
+			"color": "0x0aaaff",
+			"spectacular": 1000,
+			"reflection": 0.5,
+			"transparency": 0.0,
+			"texture": "resources/decorated_parquet.jpg"
+		}, {
+			"type": "cone",
+			"vector": [0.0, 1.0, 1.0],
+			"vertex": [1, 0, 1],
+			"dist1": -1,
+			"dist2": 1,
+			"radius": 0.625,
+			"color": "0xffaa00",
+			"spectacular": 200,
+			"reflection": 1.0,
+			"transparency": 0.5,
+			"density": 1.0,
+			"texture": "resources/world.jpg"
+		}, {
+			"type": "cylinder",
+			"vector": [0.0, 1.0, 0.0],
+			"vertex": [0, 0, 1],
+			"dist1": -1,
+			"dist2": 1,
+			"radius": 0.625,
+			"color": "0xffaa00",
+			"spectacular": 200,
+			"reflection": 1.0,
+			"transparency": 0.5,
+			"density": 1.0,
+			"texture": "resources/wood.jpg"
+		}
+	],
+	"lights": [ {
+			"type": "ambient",
+			"intensity": 0.15
+		},{
+			"type": "point",
+			"position": [0.0, -2.0, -5.0],
+			"intensity": 0.84
+		}, {
+			"type": "point",
+			"position": [1.0, 2.0, -1.0],
+			"intensity": 0.42
+		}
+	],
+	"cam": {
+	  "position": [0.0, 0, -10.0],
+	  "rotation": [0.0, 0.0, 0.0]
+	},
+	"params": {
+	  "width": 2000,
+	  "height": 1000,
+	  "antialias": 2,
+	  "depth": 2
+	}
+}
