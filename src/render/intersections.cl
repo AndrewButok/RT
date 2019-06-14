@@ -104,8 +104,8 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 		x1 = dot(figure->vector2, figure->vector1 - ray->o) / dot(figure->vector2, ray->v);
 		x2 = dot(figure->vector2, figure->vector1 +
 				(figure->vector2 * figure->param2) - ray->o) / dot(figure->vector2, ray->v);
-		x1 = x1 < x2 ? x1 : x2;
-		cap_center = x1 < x2 ? figure->vector1 : (figure->vector1 + (figure->vector2 * figure->param2));
+		x1 = (x1 < x2 && x1 > 1e-3) || x2 < 1e-3 ? x1 : x2;
+		cap_center = (x1 < x2 && x1 > 1e-3) || x2 ? figure->vector1 : (figure->vector1 + (figure->vector2 * figure->param2));
 		intersection = ray->v * (x1) + ray->o;
 		if (length(cap_center - intersection) < figure->param1)
 		{
@@ -201,7 +201,7 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 				(figure->vector2 * figure->param2) - ray->o) / dot(figure->vector2, ray->v);
 		x2 = dot(figure->vector2, figure->vector1 +
 				(figure->vector2 * figure->param3) - ray->o) / dot(figure->vector2, ray->v);
-		if (x1 < x2)
+		if ((x1 < x2 && x1 > 1e-3) || x2 < 1e-3)
 			cap_distance = figure->param2;
 		else {
 			x1 = x2;
