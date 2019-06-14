@@ -38,8 +38,6 @@ int	uv_infinite_cylinder_map(const float3 intersection, __global t_figure *figur
 		u = 0;
 	else if (u > 1)
 		u = 1;
-	if (u > 1 || u < 0)
-		printf("%f\n", u);
 	int s = v * figure->t_size.x + (int)(u * figure->t_size.x);
 	return figure->texture[s];
 }
