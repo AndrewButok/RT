@@ -47,7 +47,7 @@
 			"reflection": 1.0,
 			"transparency": 0.5,
 			"density": 1.0,
-			"texture": "resources/world.jpg"
+			"texture": "resources/wood.jpg"
 		}
 	],
 	"lights": [ {
