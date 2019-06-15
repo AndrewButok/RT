@@ -201,9 +201,9 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 				(figure->vector2 * figure->param2) - ray->o) / dot(figure->vector2, ray->v);
 		x2 = dot(figure->vector2, figure->vector1 +
 				(figure->vector2 * figure->param3) - ray->o) / dot(figure->vector2, ray->v);
-		if ((x1 < x2 && x1 > 1e-3) || x2 < 1e-3)
+		if ((x1 < x2 || x2 < 1e-3) && x1 > 1e-3)
 			cap_distance = figure->param2;
-		else {
+		else if ((x1 > x2 || x1 < 1e-3) && x2 > 1e-3){
 			x1 = x2;
 			cap_distance = figure->param3;
 		}
