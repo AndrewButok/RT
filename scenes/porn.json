@@ -7,7 +7,39 @@
 			"color": "0xff",
 			"spectacular": 0,
 			"reflection": 0,
-			"density": 0,
+			"density": 1,
+			"transparency": 0
+		},
+		{
+			"type": "plane",
+			"point": [0, -3 , 0],
+			"normal": [0, -1, 0],
+			"color": "0xff",
+			"spectacular": 0,
+			"reflection": 0,
+			"density": 1,
+			"transparency": 0
+		},
+		{
+			"type": "infinite_cone",
+			"vertex": [0, 1.0, 2],
+			"vector": [0, -1, 0],
+			"radius": 0.5,
+			"color": "0xff",
+			"spectacular": 0,
+			"reflection": 0,
+			"density": 1,
+			"transparency": 0
+		},
+		{
+			"type": "infinite_cylinder",
+			"point": [0, 1.0, 2],
+			"vector": [0, -1, 0],
+			"radius": 0.5,
+			"color": "0xff",
+			"spectacular": 0,
+			"reflection": 0,
+			"density": 1,
 			"transparency": 0
 		}
 	],

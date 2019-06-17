@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 12:23:42 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 15:23:25 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,11 +137,11 @@ void			get_figure_texture(t_figure *figure, JSON_Object *obj,
 bool			get_space(t_view *view, char *filename);
 bool			get_sphere(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_infinite_plane(t_figure *figure, JSON_Object *obj,
+bool			get_infinite_plane(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_infinite_cone(t_figure *figure, JSON_Object *obj,
+bool			get_infinite_cone(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_infinite_cylinder(t_figure *figure, JSON_Object *obj,
+bool			get_infinite_cylinder(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
 void			get_cone(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
