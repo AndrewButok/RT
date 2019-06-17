@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cl.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/12 13:33:01 by tmaluh           ###   ########.fr       */
+/*   Updated: 2019/06/17 18:34:24 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ static void	cl_kernel_init(t_view *view)
 	view->cl->kernel = clCreateKernel(view->cl->program, "do_rt", &err);
 	if (err != 0)
 	{
-		ft_putendl_fd("Ok, you have change it. It not works. What's next?", 2);
-		printf("%d\n", err);
+		ft_putendl_fd("Ok, you have change it. It not works. What's next?",
+			STDERR_FILENO);
 		exit(0);
 	}
 	cl_buf_init(view);

@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 15:23:25 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 18:36:06 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,17 +143,17 @@ bool			get_infinite_cone(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
 bool			get_infinite_cylinder(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_cone(t_figure *figure, JSON_Object *obj,
+bool			get_cone(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_cylinder(t_figure *figure, JSON_Object *obj,
+bool			get_cylinder(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_triangle(t_figure *figure, JSON_Object *obj,
+bool			get_triangle(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_ellipsoid(t_figure *figure, JSON_Object *obj,
+bool			get_ellipsoid(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_lights(t_view *view, JSON_Object *root);
-void			get_parallel_light(t_light *light, JSON_Object *obj);
-void			get_cam(t_view *view, JSON_Object *root);
+bool			get_lights(t_view *view, JSON_Object *root);
+bool			get_parallel_light(t_light *light, JSON_Object *obj);
+bool			get_cam(t_view *view, JSON_Object *root);
 bool			get_params(t_view *view, JSON_Object *root);
 t_figure		sphere_init();
 t_figure		cylinder_init();

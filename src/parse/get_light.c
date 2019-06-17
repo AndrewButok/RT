@@ -6,105 +6,91 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/08 13:41:19 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 18:43:39 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void	get_ambient_light(t_light *light, JSON_Object *obj)
+bool	get_parallel_light(t_light *light, JSON_Object *obj)
+{
+	*light = light_init(Parallel, (cl_float3){{0, 0, 0}}, 0);
+	if (!(json_object_has_value_of_type(obj, "intensity", JSONNumber) &&
+		json_object_has_value_of_type(obj, "vector", JSONArray)))
+		return (false);
+	light->intensity = (cl_float)json_object_get_number(obj, "intensity");
+	if (light->intensity < 0 || light->intensity > 1)
+		return (false);
+	if (!get_vector(json_object_get_array(obj, "vector"), &(light->position)))
+		return (false);
+	light->position = normalize(light->position);
+	return (true);
+}
+
+bool	get_ambient_light(t_light *light, JSON_Object *obj)
 {
 	*light = light_init(Ambient, (cl_float3){{0, 0, 0}}, 0);
-	if (json_object_has_value_of_type(obj, "intensity", JSONNumber))
-		light->intensity = (cl_float)json_object_get_number(obj, "intensity");
-	else
-		ft_putendl_fd("Intensity parameter not found. Default applied.",
-				STDERR_FILENO);
-	ft_putendl("\x1b[32mAmbient light parsed.");
+	if (!(json_object_has_value_of_type(obj, "intensity", JSONNumber)))
+		return (false);
+	light->intensity = (cl_float)json_object_get_number(obj, "intensity");
+	if (light->intensity < 0 || light->intensity > 1)
+		return (false);
+	return (true);
 }
 
-void	get_point_light(t_light *light, JSON_Object *obj)
+bool	get_point_light(t_light *light, JSON_Object *obj)
 {
 	*light = light_init(Point, (cl_float3){{0, 0, 0}}, 0);
-	if (json_object_has_value_of_type(obj, "intensity", JSONNumber))
-		light->intensity = (cl_float)json_object_get_number(obj, "intensity");
-	else
-		ft_putendl_fd("Intensity parameter not found. Default applied.",
-				STDERR_FILENO);
-	if (json_object_has_value_of_type(obj, "position", JSONArray))
-		light->position = get_vector(json_object_get_array(obj, "position"),
-				light->position);
-	else
-		ft_putendl_fd("Position not found. Default applied.",
-				STDERR_FILENO);
-	ft_putendl("\x1b[32mPoint light parsed.");
+	if (!(json_object_has_value_of_type(obj, "intensity", JSONNumber) &&
+		json_object_has_value_of_type(obj, "position", JSONArray)))
+		return (false);
+	light->intensity = (cl_float)json_object_get_number(obj, "intensity");
+	if (light->intensity < 0 || light->intensity > 1)
+		return (false);
+	if (!get_vector(json_object_get_array(obj, "position"), &(light->position)))
+		return (false);
+	return (true);
 }
 
-void	get_light(t_view *view, JSON_Object *obj, size_t i)
+bool	get_light(t_light *light, JSON_Value *val)
 {
 	const char		*type;
+	JSON_Object		*obj;
 
-	if (view->lights == NULL && i == 0)
-	{
-		view->lights = (t_light*)malloc(sizeof(t_light));
-		view->lights_count = 1;
-	}
-	if ((type = json_object_get_string(obj, "type")) != NULL)
-	{
-		if (ft_strequ(type, "ambient"))
-			get_ambient_light(&(view->lights[i]), obj);
-		else if (ft_strequ(type, "point"))
-			get_point_light(&(view->lights[i]), obj);
-		else if (ft_strequ(type, "parallel"))
-			get_parallel_light(&(view->lights[i]), obj);
-		else
-		{
-			ft_putendl_fd("Unknown light found. Skipped.", STDERR_FILENO);
-			view->lights[i].type = BadLight;
-		}
-	}
-	else
-		ft_putendl_fd("Unknown light type.Skipped.", STDERR_FILENO);
+	if (val == NULL || json_value_get_type(val) != JSONObject)
+		return (false);
+	obj = json_value_get_object(val);
+	if (obj == NULL || !json_object_has_value_of_type(obj, "type", JSONString))
+		return (false);
+	type = json_object_get_string(obj, "type");
+	if (ft_strequ(type, "ambient"))
+		return (get_ambient_light(light, obj));
+	if (ft_strequ(type, "point"))
+		return (get_point_light(light, obj));
+	if (ft_strequ(type, "parallel"))
+		return (get_parallel_light(light, obj));
+	return (false);
 }
 
-void	choose_light_parse(t_view *view, JSON_Value *value)
+bool	get_lights(t_view *view, JSON_Object *obj)
 {
+	bool		err;
 	JSON_Array	*arr;
-	JSON_Object	*fig;
-	size_t		i;
+	int			i;
+	int			total;
 
-	if (json_value_get_type(value) == JSONArray)
-	{
-		arr = json_value_get_array(value);
-		view->lights_count = json_array_get_count(arr);
-		view->lights = (t_light*)malloc(sizeof(t_light) *
-				view->lights_count);
-		i = view->lights_count;
-		while (i > 0)
-		{
-			if ((fig = json_array_get_object(arr, --i)) != NULL)
-				get_light(view, fig, i);
-		}
-		return ;
-	}
-	if (json_value_get_type(value) == JSONObject)
-	{
-		get_light(view, json_value_get_object(value), 0);
-		return ;
-	}
-	ft_putendl_fd("Wrong light obj type. It must be obj or array.",
-			STDERR_FILENO);
-}
-
-void	get_lights(t_view *view, JSON_Object *root)
-{
-	JSON_Value	*val;
-
-	val = json_object_get_value(root, "lights");
-	if (val == NULL)
-	{
-		ft_putendl_fd("Lights is not found.", STDERR_FILENO);
-		return ;
-	}
-	choose_light_parse(view, val);
+	err = true;
+	if (!json_object_has_value_of_type(obj, "lights", JSONArray))
+		return (false);
+	arr = json_object_get_array(obj, "lights");
+	if (arr == NULL || (total = json_array_get_count(arr)) <= 0)
+		return (false);
+	if ((view->lights = (t_light*)malloc(sizeof(t_light) * total)) == NULL)
+		return (false);
+	view->lights_count = total;
+	i = -1;
+	while (++i < total && err)
+		err = get_light(&(view->lights[i]),
+			json_array_get_value(arr, i));
+	return (err);
 }

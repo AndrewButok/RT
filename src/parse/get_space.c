@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 15:23:00 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 18:43:22 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,20 @@ t_parse_function	get_parse_function(const char *type)
 		return (&get_infinite_cone);
 	else if (ft_strequ(type, "infinite_cylinder"))
 		return (&get_infinite_cylinder);
-	// else if (ft_strequ(type, "cylinder"))
-	// 	return (&get_cylinder);
-	// else if (ft_strequ(type, "cone"))
-	// 	return (&get_cone);
-	// else if (ft_strequ(type, "triangle"))
-	// 	return (&get_triangle);
-	// else if (ft_strequ(type, "ellipsoid"))
-	// 	return (&get_ellipsoid);
+	else if (ft_strequ(type, "cylinder"))
+		return (&get_cylinder);
+	else if (ft_strequ(type, "cone"))
+		return (&get_cone);
+	else if (ft_strequ(type, "triangle"))
+		return (&get_triangle);
+	else if (ft_strequ(type, "ellipsoid"))
+		return (&get_ellipsoid);
 	else
 		return (NULL);
 }
 
-static bool			get_figure(t_figure *figure, JSON_Value *val, SDL_PixelFormat *px)
+static bool			get_figure(t_figure *figure, JSON_Value *val,
+	SDL_PixelFormat *px)
 {
 	JSON_Object			*obj;
 	t_parse_function	parse_figure;
@@ -58,7 +59,7 @@ static bool			get_figures(t_view *view, JSON_Object *obj)
 	JSON_Array	*arr;
 	int			i;
 	int			total;
-	
+
 	err = true;
 	if (!json_object_has_value_of_type(obj, "figures", JSONArray))
 		return (false);
@@ -67,6 +68,7 @@ static bool			get_figures(t_view *view, JSON_Object *obj)
 		return (false);
 	if ((view->figures = (t_figure*)malloc(sizeof(t_figure) * total)) == NULL)
 		return (false);
+	view->figures_count = total;
 	i = -1;
 	while (++i < total && err)
 		err = get_figure(&(view->figures[i]),
@@ -82,14 +84,12 @@ bool				get_space(t_view *view, char *filename)
 	if ((root = json_parse_file(filename)) == NULL)
 		return (false);
 	robj = json_value_get_object(root);
-	if (!(get_params(view, robj) && get_figures(view, robj)))
+	if (!(get_params(view, robj) && get_figures(view, robj)
+		&& get_lights(view, robj) && get_cam(view, robj)))
 	{
 		json_value_free(root);
 		return (false);
 	}
-	// get_params(view, robj);
-	// get_lights(view, robj);
-	// get_cam(view, robj);
 	json_value_free(root);
 	return (true);
 }

@@ -41,8 +41,72 @@
 			"reflection": 0,
 			"density": 1,
 			"transparency": 0
+		},
+		{
+			"type": "cylinder",
+			"point": [0, 1.0, 2],
+			"vector": [0, -1, 0],
+			"radius": 0.5,
+			"height": -2,
+			"color": "0xff",
+			"spectacular": 0,
+			"reflection": 0,
+			"density": 1,
+			"transparency": 0
+		},
+		{
+			"type": "cone",
+			"vertex": [0, 1.0, 2],
+			"vector": [0, -1, 0],
+			"radius": 0.5,
+			"dist1": -2,
+			"dist2": 1,
+			"color": "0xff",
+			"spectacular": 0,
+			"reflection": 0,
+			"density": 1,
+			"transparency": 0
+		},
+		{
+			"type": "triangle",
+			"points": [
+				[0, 0, 0],
+				[1, 0, 0],
+				[0, 0, 1]
+			],
+			"color": "0xff",
+			"spectacular": 0,
+			"reflection": 0,
+			"density": 1,
+			"transparency": 0
+		},
+		{
+			"type": "ellipsoid",
+			"center1": [1, 0, 0],
+			"center2": [0, 0, 1],
+			"radius": 3,
+			"color": "0xff",
+			"spectacular": 0,
+			"reflection": 0,
+			"density": 1,
+			"transparency": 0
 		}
 	],
+	"lights": [
+		{
+			"type": "ambient",
+			"intensity": 0
+		},
+		{
+			"type": "point",
+			"position": [0, 3, 0],
+			"intensity": 1
+		}
+	],
+	"cam": {
+		"position": [0, 0, -10],
+		"rotation": [0, 0, 0]
+	},
 	"params": {
 		"width": 800,
 		"height": 600,
