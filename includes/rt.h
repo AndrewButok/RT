@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/08 15:13:59 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 01:42:17 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,22 @@
 # include <OpenCL/cl.h>
 # include <SDL2/SDL.h>
 # include <SDL2/SDL_image.h>
+
+enum	e_bool {false, true} __attribute__((packed));
+
+# ifdef FREE
+#  undef FREE
+# endif
+
+# define FREE(trash, fn_del) if ((trash)) {fn_del((trash)); (trash) = NULL;}
+
+# ifdef BOOL
+#  undef BOOL
+# endif
+
+# define BOOL typedef enum e_bool bool
+
+BOOL;
 
 enum			e_figure
 {
@@ -118,8 +134,8 @@ void			get_figure_params(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
 void			get_figure_texture(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
-void			get_space(t_view *view, char *filename);
-void			get_sphere(t_figure *figure, JSON_Object *obj,
+bool			get_space(t_view *view, char *filename);
+bool			get_sphere(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
 void			get_infinite_plane(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
@@ -138,7 +154,7 @@ void			get_ellipsoid(t_figure *figure, JSON_Object *obj,
 void			get_lights(t_view *view, JSON_Object *root);
 void			get_parallel_light(t_light *light, JSON_Object *obj);
 void			get_cam(t_view *view, JSON_Object *root);
-void			get_params(t_view *view, JSON_Object *root);
+bool			get_params(t_view *view, JSON_Object *root);
 t_figure		sphere_init();
 t_figure		cylinder_init();
 t_figure		infinite_plane_init();
@@ -156,26 +172,6 @@ cl_float3		sub(cl_float3 a, cl_float3 b);
 void			cl_init(t_view *view);
 void			cl_run_kernel(t_view *view);
 void			params_init(t_view *view);
-
-/*
-**	Ya _ipal etot C: structs
-*/
-
-enum	e_bool {false, true} __attribute__((packed));
-
-# ifdef FREE
-#  undef FREE
-# endif
-
-# define FREE(trash, fn_del) if ((trash)) {fn_del((trash)); (trash) = NULL;}
-
-# ifdef BOOL
-#  undef BOOL
-# endif
-
-# define BOOL typedef enum e_bool bool
-
-BOOL;
 
 /*
 **	Ya _ipal etot C: funcs

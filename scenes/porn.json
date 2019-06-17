@@ -1,0 +1,14 @@
+{
+	"figures": [
+		{
+			"type": "sphere"
+		}
+	],
+	"params": {
+		"width": 800,
+		"height": 600,
+		"filter": "",
+		"antialias": 1,
+		"depth": 0
+	}
+}

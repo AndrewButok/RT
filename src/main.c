@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/08 16:13:44 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/16 10:26:01 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,12 @@ void		view_init(t_view **view_ptr, char *filename)
 	view->lights_count = 0;
 	view->figures = NULL;
 	view->lights = NULL;
-	get_space(view, filename);
-	cl_init(view);
+	if (!get_space(view, filename))
+	{
+		ft_putendl_fd("Parse error. Check your file", STDERR_FILENO);
+		exit(-1);
+	}
+	//cl_init(view);
 	event = (SDL_Event*)malloc(sizeof(SDL_Event));
 	event->type = SDL_WINDOWEVENT_EXPOSED;
 	SDL_PushEvent(event);

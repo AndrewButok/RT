@@ -65,15 +65,14 @@
     },
     {
       "type": "cone",
-      "vector": [0, 1 ,0],
-      "vertex": [0, -1, 0],
-      "dist1": -1,
+      "vector": [0, -1 , 0.5],
+      "vertex": [0, 2, 0],
+      "dist1": -0.5,
       "dist2": 2,
       "radius": 1,
       "color": "0x00000aa",
       "spectacular": 10,
-      "reflection": 0.5,
-      "transparency": 0.5
+      "reflection": 0.5
     }
   ],
   "lights":
@@ -95,8 +94,8 @@
   },
   "params":
   {
-    "width": 1920,
-    "height": 1080,
+    "width": 800,
+    "height": 600,
     "antialias": 2,
     "depth": 2
   }
