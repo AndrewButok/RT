@@ -6,95 +6,48 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/06 17:34:47 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 12:26:47 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-static void	get_transparency(t_figure *figure, JSON_Object *obj)
+static bool	get_rdt(t_figure *figure, JSON_Object *obj)
 {
-	if (json_object_has_value_of_type(obj, "transparency", JSONNumber))
-		figure->transparency = (cl_float)json_object_get_number(obj,
-				"transparency");
-	else
-		ft_putendl_fd("Unknown or invalid transparency. Default applied",
-				STDERR_FILENO);
-	if (figure->transparency < 0.0f)
-	{
-		ft_putendl_fd("Transparency less than 0. 0 applied",
-				STDERR_FILENO);
-		figure->transparency = 0;
-	}
-	if (figure->transparency > 1.0f)
-	{
-		ft_putendl_fd("Transparency greater than 1. 1 applied",
-				STDERR_FILENO);
-		figure->transparency = 1;
-	}
-}
-
-static void	get_density(t_figure *figure, JSON_Object *obj)
-{
-	if (json_object_has_value_of_type(obj, "density", JSONNumber))
-		figure->density = (cl_float)json_object_get_number(obj,
-				"density");
-	else
-		ft_putendl_fd("Unknown or invalid density. Default applied",
-				STDERR_FILENO);
-	if (figure->density < 1.0f)
-	{
-		ft_putendl_fd("Density less than 1. 1 applied",
-				STDERR_FILENO);
-		figure->transparency = 1;
-	}
-	if (figure->density > 2.0f)
-	{
-		ft_putendl_fd("Density greater than 2. 2 applied",
-				STDERR_FILENO);
-		figure->transparency = 2;
-	}
-}
-
-static void	get_reflection(t_figure *figure, JSON_Object *obj)
-{
-	if (json_object_has_value_of_type(obj, "reflection", JSONNumber))
-		figure->reflection = (cl_float)json_object_get_number(obj,
+	if (!json_object_has_value_of_type(obj, "reflection", JSONNumber))
+		return (false);
+	figure->reflection = (cl_float)json_object_get_number(obj,
 				"reflection");
-	else
-		ft_putendl_fd("Unknown or invalid reflection. Default applied",
-				STDERR_FILENO);
-	if (figure->reflection < 0.0f)
-	{
-		ft_putendl_fd("Reflection less than 0. 0 applied",
-				STDERR_FILENO);
-		figure->reflection = 0;
-	}
-	if (figure->reflection > 1.0f)
-	{
-		ft_putendl_fd("Reflection greater than 1. 1 applied",
-				STDERR_FILENO);
-		figure->reflection = 1;
-	}
+	if (figure->reflection < 0.0f || figure->reflection > 1.0f)
+		return (false);
+	if (!json_object_has_value_of_type(obj, "transparency", JSONNumber))
+		return (false);
+	figure->transparency = (cl_float)json_object_get_number(obj,
+				"transparency");
+	if (figure->transparency < 0.0f && figure->transparency > 1.0f)
+		return (false);
+	if (!json_object_has_value_of_type(obj, "density", JSONNumber))
+		return (false);
+	figure->density = (cl_float)json_object_get_number(obj,
+				"density");
+	if (figure->density < 1.0f && figure->density > 2.0f)
+		return (false);
+	return (true);
 }
 
-void		get_figure_params(t_figure *figure, JSON_Object *obj,
+bool		get_figure_params(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf)
 {
-	if (json_object_has_value_of_type(obj, "color", JSONString) &&
-		check_hex(json_object_get_string(obj, "color")))
-		figure->color = ft_hexatoi(json_object_get_string(obj, "color"));
-	else
-		ft_putendl_fd("Unknown or invalid color. Default applied",
-				STDERR_FILENO);
-	if (json_object_has_value_of_type(obj, "spectacular", JSONNumber))
-		figure->spectacular = (cl_float)json_object_get_number(obj,
-				"spectacular");
-	else
-		ft_putendl_fd("Unknown or invalid spectacular. Default applied",
-				STDERR_FILENO);
-	get_reflection(figure, obj);
-	get_density(figure, obj);
-	get_transparency(figure, obj);
+	if (!(json_object_has_value_of_type(obj, "color", JSONString) &&
+		check_hex(json_object_get_string(obj, "color")) &&
+		json_object_has_value_of_type(obj, "spectacular", JSONNumber)))
+		return (false);
+	figure->color = ft_hexatoi(json_object_get_string(obj, "color"));
+	if ((figure->spectacular =
+		(cl_float)json_object_get_number(obj, "spectacular")) < 0)
+		return (false);
+	if (!get_rdt(figure, obj))
+		return (false);
 	get_figure_texture(figure, obj, pf);
+	return (true);
 }

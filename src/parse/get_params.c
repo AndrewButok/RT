@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 01:51:33 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 12:26:19 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,6 @@ static bool		get_depth(t_view *view, JSON_Object *params)
 
 static bool		get_wh(t_view *view, JSON_Object *params)
 {
-	cl_int buf;
-
 	if (!(json_object_has_value_of_type(params, "width", JSONNumber) &&
 		json_object_has_value_of_type(params, "height", JSONNumber)))
 		return (false);
@@ -61,7 +59,8 @@ bool			get_params(t_view *view, JSON_Object *root)
 {
 	JSON_Object	*val;
 
-	if (root == NULL || !json_object_has_value_of_type(root, "params", JSONObject))
+	if (root == NULL ||
+	!json_object_has_value_of_type(root, "params", JSONObject))
 		return (false);
 	val = json_object_get_object(root, "params");
 	if (val == NULL || !(get_filter(view, val)

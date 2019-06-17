@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 01:42:17 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/17 12:23:42 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -129,8 +129,8 @@ typedef struct	s_view
 
 int				check_hex(const char *str);
 int				ft_hexatoi(const char *str);
-cl_float3		get_vector(JSON_Array *arr, cl_float3 def);
-void			get_figure_params(t_figure *figure, JSON_Object *obj,
+bool			get_vector(JSON_Array *arr, cl_float3 *def);
+bool			get_figure_params(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
 void			get_figure_texture(t_figure *figure, JSON_Object *obj,
 		SDL_PixelFormat *pf);
