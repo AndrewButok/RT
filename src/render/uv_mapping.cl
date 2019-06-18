@@ -14,6 +14,14 @@ int	uv_plane_map(const float3 n, const __global t_figure *figure) {
 	uv %= figure->t_size;
 	uv = (int2){uv.x < 0 ? figure->t_size.x - abs(uv.x) : uv.x,
 				uv.y < 0 ? figure->t_size.y - abs(uv.y) : uv.y};
+	if (uv.x < 0)
+		uv.x = 0;
+	if (uv.x >= figure->t_size.x)
+		uv.x = figure->t_size.x;
+	if (uv.y < 0)
+		uv.y = 0;
+	if (uv.y >= figure->t_size.y)
+		uv.y = figure->t_size.y;
 	return figure->texture[uv.y * figure->t_size.x + uv.x];
 }
 

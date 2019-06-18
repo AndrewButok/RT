@@ -7,6 +7,7 @@
 			"spectacular": 1000,
 			"reflection": 0.5,
 			"transparency": 0.0,
+			"density": 1,
 			"texture": "resources/decorated_parquet.jpg"
 		}, {
 			"type": "cone",
@@ -24,9 +25,8 @@
 		}, {
 			"type": "cylinder",
 			"vector": [0.0, 1.0, 0.0],
-			"vertex": [0, 0, 1],
-			"dist1": -1,
-			"dist2": 1,
+			"point": [0, 0, 1],
+			"height": 1,
 			"radius": 0.625,
 			"color": "0xffaa00",
 			"spectacular": 200,
@@ -57,6 +57,7 @@
 	  "width": 2000,
 	  "height": 1000,
 	  "antialias": 2,
-	  "depth": 2
+	  "depth": 2,
+	  "filter": "0"
 	}
 }

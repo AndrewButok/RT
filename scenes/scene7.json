@@ -7,6 +7,7 @@
 			"spectacular": 100,
 			"reflection": 0.2,
 			"transparency": 0.0,
+			"density": 1,
 			"texture": "resources/snow.jpg"
 		}, {
 			"type": "infinite_cylinder",
@@ -36,6 +37,7 @@
 			"spectacular": 1000,
 			"reflection": 0.5,
 			"transparency": 0.0,
+			"density": 1,
 			"texture": "resources/decorated_parquet.jpg"
 		}, {
 			"type": "infinite_cone",
@@ -75,6 +77,7 @@
 	  "width": 2000,
 	  "height": 1000,
 	  "antialias": 2,
-	  "depth": 2
+	  "depth": 2,
+	  "filter": "0"
 	}
 }
