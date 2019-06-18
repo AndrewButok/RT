@@ -59,8 +59,8 @@
 			"vertex": [0, 1.0, 2],
 			"vector": [0, -1, 0],
 			"radius": 0.5,
-			"dist1": -2,
-			"dist2": 1,
+			"dist1": 0.999,
+			"dist2": 0.98,
 			"color": "0xff",
 			"spectacular": 0,
 			"reflection": 0,
@@ -84,7 +84,7 @@
 			"type": "ellipsoid",
 			"center1": [1, 0, 0],
 			"center2": [0, 0, 1],
-			"radius": 300,
+			"radius": 3,
 			"color": "0xff",
 			"spectacular": 0,
 			"reflection": 0,
@@ -100,11 +100,6 @@
 		{
 			"type": "point",
 			"position": [0, 3, 0],
-			"intensity": 0
-		},
-		{
-			"type": "parallel",
-			"vector": [1, -1, 0],
 			"intensity": 1
 		}
 	],
@@ -113,8 +108,8 @@
 		"rotation": [0, 0, 0]
 	},
 	"params": {
-		"width": 1920,
-		"height": 1080,
+		"width": 800,
+		"height": 600,
 		"filter": "",
 		"antialias": 1,
 		"depth": 0

@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/18 16:12:27 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/18 16:19:44 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool		get_cone(t_figure *figure, JSON_Object *obj, SDL_PixelFormat *pf)
 	if (!get_figure_params(figure, obj, pf))
 		return (false);
 	figure->vector2 = normalize(figure->vector2);
-	if (abs(figure->param2 - figure->param1) < 1e-2)
+	if (fabs(figure->param2 - figure->param3) < 0.01f)
 		return (false);
 	if (figure->param2 > figure->param3)
 		ft_swap(&(figure->param2), &(figure->param3), sizeof(cl_float));
