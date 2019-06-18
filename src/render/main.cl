@@ -197,7 +197,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 	int				closest_index;
 	float3			normal;
 	float3			nbuf;
-	float			t = DBL_MAX;
+	float			t = INFINITY;
 	t_color			local_color;
 	t_color			reflected_color;
 	t_ray			reflect_ray;
@@ -213,7 +213,7 @@ int				rt(__global t_figure *figures, __global t_light *lights, t_ray *ray,
 			closest_index = index;
 		}
 	}
-	if (t_max == DBL_MAX)
+	if (t_max == INFINITY)
 		return (0);
 	local_color.color = count_light(figures, lights, params, ray, &(figures[closest_index]), normal, t_max);
 
@@ -303,7 +303,7 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 	t_color			buf;
 	unsigned int	r = 0,g = 0,b = 0;
 	int				depth = params[5];
-	float			t_max = DBL_MAX;
+	float			t_max = INFINITY;
 
 	k = 0;
 	while (k < params[4])
@@ -318,7 +318,7 @@ __kernel void	do_rt(__global t_figure *figures, __global t_light *lights,
 					(i / params[0] - params[1] / 2 + k * step)) / params[0];
 			ray.v.z = 1;
 			cam_rotate(&ray, cam->v);
-			t_max = DBL_MAX;
+			t_max = INFINITY;
 			buf.color = rt(figures, lights, &ray, params, 0.001, t_max, depth);
 			r += buf.spectrum.red;
 			g += buf.spectrum.green;
