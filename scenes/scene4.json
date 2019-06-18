@@ -8,7 +8,8 @@
 		"color": "0x0f0fff",
 		"spectacular": 100,
 		"reflection": 0.0,
-		"transparency": 0.0
+		"transparency": 0.0,
+		"density": 1.0
 	  },
 	  {
 		"type": "plane",
@@ -17,7 +18,8 @@
 		"color": "0x0ffff0",
 		"spectacular": 100,
 		"reflection": 0.0,
-		"transparency": 0.0
+		"transparency": 0.0,
+		"density": 1.0
 	  },
 	  {
 		"type": "plane",
@@ -26,7 +28,8 @@
 		"color": "0xf0ff0f",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.0
+		"transparency": 0.0,
+		"density": 1.0
 	  },
 	  {
 		"type": "plane",
@@ -35,7 +38,8 @@
 		"color": "0x00ffff",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.0
+		"transparency": 0.0,
+		"density": 1.0
 	  },
 	  {
 		"type": "plane",
@@ -44,7 +48,8 @@
 		"color": "0xff00ff",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.0
+		"transparency": 0.0,
+		"density": 1.0
 	  },
 	  {
 		"type": "sphere",
@@ -53,7 +58,8 @@
 		"color": "0xffff00",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.9
+		"transparency": 0.9,
+		"density":1.0
 	  },
 	  {
 		"type": "sphere",
@@ -62,7 +68,8 @@
 		"color": "0xffff00",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.9
+		"transparency": 0.8,
+		"density":1.0
 	  },
 	  {
 		"type": "sphere",
@@ -71,7 +78,8 @@
 		"color": "0xffff00",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.9
+		"transparency": 0.7,
+		"density":1.0
 	  },
 	  {
 		"type": "sphere",
@@ -80,7 +88,8 @@
 		"color": "0xffff00",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.9
+		"transparency": 0.6,
+		"density":1.0
 	  },
 	  {
 		"type": "sphere",
@@ -89,7 +98,8 @@
 		"color": "0xffff00",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.9
+		"transparency": 0.5,
+		"density":1.0
 	  },
 	  {
 		"type": "sphere",
@@ -98,7 +108,8 @@
 		"color": "0xffff00",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.9
+		"transparency": 0.4,
+		"density":1.0
 	  },
 	  {
 		"type": "sphere",
@@ -107,7 +118,28 @@
 		"color": "0xffff00",
 		"spectacular": 0,
 		"reflection": 0.0,
-		"transparency": 0.9
+		"transparency": 0.3,
+		"density":1.0
+	  },
+	  {
+		"type": "sphere",
+		"center": [4, -2, 5],
+		"radius": 1.0,
+		"color": "0xffff00",
+		"spectacular": 0,
+		"reflection": 0.0,
+		"transparency": 0.2,
+		"density":1.0
+	  },
+	  {
+		"type": "sphere",
+		"center": [4, -2, 2],
+		"radius": 1.0,
+		"color": "0xffff00",
+		"spectacular": 0,
+		"reflection": 0.0,
+		"transparency": 0.1,
+		"density":1.0
 	  }
 	],
 	"lights":
@@ -133,6 +165,7 @@
 	  "width": 1920,
 	  "height": 1080,
 	  "antialias": 1,
-	  "depth": 1
+		"depth": 1,
+		"filter": "0x"
 	}
   }

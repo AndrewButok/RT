@@ -57,8 +57,8 @@
       "color": "0x3300aa",
       "spectacular": 0,
       "reflection": 0.5,
-      "transparency": 0.5,
-      "density": 1
+      "density": 1,
+      "transparency": 0.5
     },
     {
       "type": "plane",
@@ -88,7 +88,7 @@
   [
     {
       "type": "ambient",
-      "intensity": 0.15
+      "intensity": 0
     },
     {
       "type": "point",

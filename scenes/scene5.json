@@ -290,6 +290,7 @@
 	  "width": 1920,
 	  "height": 1080,
 	  "antialias": 2,
-	  "depth": 2
+		"depth": 2,
+		"filter": "0x"
 	}
   }

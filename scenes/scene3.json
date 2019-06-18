@@ -8,7 +8,8 @@
       "color": "0x0f0fff",
       "spectacular": 100,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "plane",
@@ -17,7 +18,8 @@
       "color": "0x0ffff0",
       "spectacular": 100,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "plane",
@@ -26,7 +28,8 @@
       "color": "0xf0ff0f",
       "spectacular": 0,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "plane",
@@ -35,7 +38,8 @@
       "color": "0x00ffff",
       "spectacular": 0,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "plane",
@@ -44,7 +48,8 @@
       "color": "0xff00ff",
       "spectacular": 0,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "sphere",
@@ -80,6 +85,7 @@
     "width": 1920,
     "height": 1080,
     "antialias": 2,
-    "depth": 2
+    "depth": 2,
+    "filter": "0x"
   }
 }
