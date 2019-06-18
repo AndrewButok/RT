@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 18:42:30 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/18 15:14:55 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ bool	get_cam(t_view *view, JSON_Object *root)
 		json_object_has_value_of_type(cam, "rotation", JSONArray)))
 		return (false);
 	view->cam = (t_ray*)malloc(sizeof(t_ray));
-	get_vector(json_object_get_array(cam, "position"), &(view->cam->o));
-	get_vector(json_object_get_array(cam, "rotation"), &(view->cam->v));
+	if (!get_vector(json_object_get_array(cam, "position"), &(view->cam->o)))
+		return (false);
+	if (!get_vector(json_object_get_array(cam, "rotation"), &(view->cam->v)))
+		return (false);
 	return (true);
 }
