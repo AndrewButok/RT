@@ -7,7 +7,8 @@
       "color": "0xaaaaaa",
       "spectacular": 100,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "sphere",
@@ -16,7 +17,8 @@
       "color": "0xffffff",
       "spectacular": 10,
       "reflection": 0.5,
-      "transparency": 0.0
+      "transparency": 0.0,
+      "density": 1
     },
     {
       "type": "sphere",
@@ -25,7 +27,8 @@
       "color": "0xf5ffbf",
       "spectacular": 10,
       "reflection": 0.0,
-      "transparency": 0.8
+      "transparency": 0.8,
+      "density": 1
     },
     {
       "type": "plane",
@@ -34,7 +37,8 @@
       "color": "0x00ffff",
       "spectacular": 100,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "plane",
@@ -43,7 +47,8 @@
       "color": "0x00000aa",
       "spectacular": 0,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "plane",
@@ -52,7 +57,8 @@
       "color": "0x3300aa",
       "spectacular": 0,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "plane",
@@ -61,7 +67,8 @@
       "color": "0x00000aa",
       "spectacular": 0,
       "reflection": 0.5,
-      "transparency": 0.5
+      "transparency": 0.5,
+      "density": 1
     },
     {
       "type": "cone",
@@ -72,7 +79,9 @@
       "radius": 1,
       "color": "0x00000aa",
       "spectacular": 10,
-      "reflection": 0.5
+      "reflection": 0.5,
+      "density": 1,
+      "transparency": 0
     }
   ],
   "lights":
@@ -97,6 +106,7 @@
     "width": 800,
     "height": 600,
     "antialias": 2,
-    "depth": 2
+    "depth": 2,
+    "filter": "0"
   }
 }
