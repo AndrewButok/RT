@@ -3,16 +3,17 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: abutok <abutok@student.42.fr>              +#+  +:+       +#+         #
+#    By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2018/03/22 16:24:00 by abutok            #+#    #+#              #
-#    Updated: 2019/06/17 18:44:33 by abutok           ###   ########.fr        #
+#    Updated: 2019/06/18 16:36:44 by tmaluh           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = RT
 PARSON = ./parson/libparson.a
 #	C compiler and his default flags
+GCC_DEBUG := gcc -march=native -mtune=native -g3 -D DEBUG -fsanitize=address
 GCC = gcc -Wall -Wextra -Werror -Ofast -flto -pipe -march=native -mtune=native
 #	Libft and parson linking
 LINKLIBFT = -L ./libft -lft
@@ -37,7 +38,7 @@ PARSEFILES = ft_hexatoi.c get_space.c  get_sphere.c get_vector.c \
 				get_infinite_cylinder.c get_cylinder.c get_cone.c \
 				get_triangle.c get_ellipsoid.c\
 				get_light.c get_cam.c
-				
+
 #	Header folder
 INCLUDE = ./includes
 #   Header file
@@ -71,7 +72,6 @@ $(NAME): $(BINDIR) $(BIN)
 $(BINDIR):
 	@if [ ! -d "$(BINDIR)" ]; then mkdir $(BINDIR); fi
 
-
 $(BINDIR)%.o: $(SRCDIR)%.c $(HEADER)
 	$(GCC) -c $(BRINCLUDE) -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) $< -o $@
 
@@ -91,6 +91,24 @@ $(BINDIR)%.o: $(VECTORDIR)%.c $(HEADER)
 #	$(GCC) -c -I $(INCLUDE) -I $(LIBFTINCLUDE) -I $(PARSONINCLUDE) -I $(SDLINCLUDE) -I $(SDLIINCLUDE) $< -o $@
 
 #
+
+# _ipal part of make:
+
+del:
+	@rm -f $(BIN)
+	@rm -f $(NAME)
+
+pre: del $(NAME)
+	@echo "$(INVERT)$(GREEN)Successed re-build.$(WHITE)"
+
+set_cc_debug:
+	@$(eval GCC=$(GCC_DEBUG))
+debug_all: set_cc_debug pre
+	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+debug: set_cc_debug all
+	@echo "$(INVERT)$(NAME) $(GREEN)ready for debug.$(WHITE)"
+
+# End of _ipal part of make.
 
 clean:
 	make -C ./libft/ clean
