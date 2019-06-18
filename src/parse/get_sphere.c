@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 12:22:52 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/18 16:31:13 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ bool	get_sphere(t_figure *figure, JSON_Object *obj, SDL_PixelFormat *pf)
 	if (!get_vector(json_object_get_array(obj, "center"), &(figure->vector1)))
 		return (false);
 	if ((figure->param1 =
-		(cl_float)json_object_get_number(obj, "radius")) <= 0)
+		(cl_float)json_object_get_number(obj, "radius")) <= 0.01)
 		return (false);
 	if (!get_figure_params(figure, obj, pf))
 		return (false);

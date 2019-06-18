@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/18 16:19:44 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/18 16:30:37 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ bool		get_cone(t_figure *figure, JSON_Object *obj, SDL_PixelFormat *pf)
 	if (!get_vector(json_object_get_array(obj, "vector"), &(figure->vector2)))
 		return (false);
 	figure->param1 = (cl_float)json_object_get_number(obj, "radius");
-	if (figure->param1 <= 0)
+	if (figure->param1 <= 0.01)
 		return (false);
 	figure->param2 = (cl_float)json_object_get_number(obj, "dist1");
 	figure->param3 = (cl_float)json_object_get_number(obj, "dist2");
