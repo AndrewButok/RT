@@ -84,7 +84,7 @@
 			"type": "ellipsoid",
 			"center1": [1, 0, 0],
 			"center2": [0, 0, 1],
-			"radius": 3,
+			"radius": 300,
 			"color": "0xff",
 			"spectacular": 0,
 			"reflection": 0,
@@ -100,11 +100,11 @@
 		{
 			"type": "point",
 			"position": [0, 3, 0],
-			"intensity": 1
+			"intensity": 0
 		},
 		{
 			"type": "parallel",
-			"vector": [0, 0, 1],
+			"vector": [1, -1, 0],
 			"intensity": 1
 		}
 	],
@@ -113,8 +113,8 @@
 		"rotation": [0, 0, 0]
 	},
 	"params": {
-		"width": 800,
-		"height": 600,
+		"width": 1920,
+		"height": 1080,
 		"filter": "",
 		"antialias": 1,
 		"depth": 0
