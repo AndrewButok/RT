@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 15:37:42 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/18 16:26:22 by abutok           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ bool	get_cylinder(t_figure *figure, JSON_Object *obj, SDL_PixelFormat *pf)
 	if (figure->param1 <= 0)
 		return (false);
 	figure->param2 = (cl_float)json_object_get_number(obj, "height");
+	if (figure->param2 <= 0)
+		return (false);
 	if (!get_figure_params(figure, obj, pf))
 		return (false);
 	figure->vector2 = normalize(figure->vector2);
