@@ -101,6 +101,11 @@
 			"type": "point",
 			"position": [0, 3, 0],
 			"intensity": 1
+		},
+		{
+			"type": "parallel",
+			"vector": [0, 0, 1],
+			"intensity": 1
 		}
 	],
 	"cam": {
