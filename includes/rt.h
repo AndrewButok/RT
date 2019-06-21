@@ -6,7 +6,7 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/17 18:36:06 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/21 22:14:34 by arudyi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@
 # include "get_next_line.h"
 # include "parson.h"
 # include <errno.h>
-# include <stdio.h>
 # include <math.h>
 # include <fcntl.h>
 # include <OpenCL/cl.h>
@@ -25,12 +24,6 @@
 # include <SDL2/SDL_image.h>
 
 enum	e_bool {false, true} __attribute__((packed));
-
-# ifdef FREE
-#  undef FREE
-# endif
-
-# define FREE(trash, fn_del) if ((trash)) {fn_del((trash)); (trash) = NULL;}
 
 # ifdef BOOL
 #  undef BOOL
