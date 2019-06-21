@@ -1,20 +1,32 @@
 {
 	"figures": [ {
-			"type": "sphere",
-			"center": [5, 0, 4],
-			"radius": 1,
-			"color": "0x0aaaff",
-			"spectacular": 1000,
-			"reflection": 0.5,
-			"transparency": 0.0,
-			"density": 1,
-			"texture": "resources/decorated_parquet.jpg"
+		  "type": "ellipsoid",
+		  "center1": [0, -3, 7],
+		  "center2": [0, 0, 7],
+		  "radius": 3,
+		  "color": "0xcccccc",
+		  "spectacular": 10,
+		  "reflection": 0.5,
+		  "transparency": 0.5,
+		  "density": 1.0
 		}, {
 			"type": "cone",
-			"vector": [0.0, 1.0, 1.0],
-			"vertex": [1, 0, 1],
+			"vector": [0, 5, 0.0],
+			"vertex": [0, 1, 1],
 			"dist1": -1,
-			"dist2": 1,
+			"dist2": 15,
+			"radius": 0.625,
+			"color": "0xffaabb",
+			"spectacular": 2000,
+			"reflection": 1.0,
+			"transparency": 0.5,
+			"density": 1.0,
+			"texture": "resources/world.jpg"
+		}, {
+			"type": "cylinder",
+			"vector": [0.0, 1.0, 0.0],
+			"point": [0, -5, 1],
+			"height": 5,
 			"radius": 0.625,
 			"color": "0xffaa00",
 			"spectacular": 200,
@@ -23,30 +35,35 @@
 			"density": 1.0,
 			"texture": "resources/world.jpg"
 		}, {
-			"type": "cylinder",
-			"vector": [0.0, 1.0, 0.0],
-			"point": [0, 0, 1],
-			"height": 1,
-			"radius": 0.625,
-			"color": "0xffaa00",
-			"spectacular": 200,
-			"reflection": 1.0,
-			"transparency": 0.5,
-			"density": 1.0,
-			"texture": "resources/wood.jpg"
+			"type": "plane",
+			"normal": [1, 0, 0],
+			"point": [1, 5, 0],
+			"color": "0xffbbaa",
+			"spectacular": 10,
+			"reflection": 0.2,
+			"transparency": 0.84,
+			"density": 1,
+			"texture": "resources/snow.jpg"
+		}, {
+			"type": "plane",
+			"normal": [1, 0, 0],
+			"point": [-1, 5, 0],
+			"color": "0xffbbaa",
+			"spectacular": 10,
+			"reflection": 0.2,
+			"transparency": 0.84,
+			"density": 1,
+			"texture": "resources/snow.jpg"
 		}
 	],
 	"lights": [ {
-			"type": "ambient",
-			"intensity": 0.15
-		},{
 			"type": "point",
-			"position": [0.0, -2.0, -5.0],
-			"intensity": 0.84
+			"position": [0.0, 0, 0],
+			"intensity": 1.0
 		}, {
 			"type": "point",
-			"position": [1.0, 2.0, -1.0],
-			"intensity": 0.42
+			"position": [0.0, 0, 0],
+			"intensity": 1.0
 		}
 	],
 	"cam": {
@@ -56,8 +73,8 @@
 	"params": {
 	  "width": 2000,
 	  "height": 1000,
-	  "antialias": 2,
-	  "depth": 2,
+	  "antialias": 3,
+	  "depth": 3,
 	  "filter": "0"
 	}
 }
