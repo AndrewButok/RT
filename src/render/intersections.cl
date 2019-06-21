@@ -223,7 +223,7 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 		{
 			if ((x1 < x2 || x2 < 1e-3) && x1 > 1e-3)
 				cap_distance = figure->param2;
-			else if ((x1 > x2 || x1 < 1e-3) && x2 > 1e-3)
+			else
 			{
 				x1 = x2;
 				cap_distance = figure->param3;
@@ -240,34 +240,26 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 		b = dot(ray->v, figure->vector2)
 			* x2 + dot(ray->o - figure->vector1, figure->vector2);
 		if (((x1 > 1e-3 && x2 > 1e-3 && x1 > x2) ||
-			(x1 < 1e-3 && x2 > 1e-3)) && b > figure->param2 && b < figure->param3)
+			(x2 > 1e-3)) &&
+			b > figure->param2 && b < figure->param3)
 		{
-			if (cd >= x2)
-			{
+			
 				if (normal != 0)
 					*normal = normalize(ray->o + ray->v * x2 - figure->vector1 - figure->vector2 *
 						(dot(ray->o + ray->v * x2 - figure->vector1, ray->o + ray->v * x2 - figure->vector1) /
 							dot(ray->o + ray->v * x2 - figure->vector1, figure->vector2)));
 				return (x2);
-			}
-			if (normal != 0)
-				*normal = figure->vector2;
-			return (cd);
+			
 		}
 		else if (((x1 > 1e-3 && x2 > 1e-3 && x1 < x2) ||
-			(x1 > 1e-3 && x2 < 1e-3)) && a > figure->param2 && a < figure->param3)
+			(x1 > 1e-3)) && a > figure->param2 && a < figure->param3)
 		{
-			if (cd >= x1)
-			{
+
 				if (normal != 0)
 					*normal = normalize(ray->o + ray->v * x1 - figure->vector1 - figure->vector2 *
 						(dot(ray->o + ray->v * x1 - figure->vector1, ray->o + ray->v * x1 - figure->vector1) /
 							dot(ray->o + ray->v * x1 - figure->vector1, figure->vector2)));
 				return (x1);
-			}
-			if (normal != 0)
-				*normal = figure->vector2;
-			return (cd);
 		}
 		else if (cd > 1e-3 && cd != INFINITY)
 		{

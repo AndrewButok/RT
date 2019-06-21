@@ -72,14 +72,14 @@
     },
     {
       "type": "cone",
-      "vector": [0, -1 , 0],
-      "vertex": [0, 2, 0],
-      "dist1": 0,
+      "vector": [0, 0, 1],
+      "vertex": [0, 0, 0],
+      "dist1": 1,
       "dist2": 2,
       "radius": 1,
       "color": "0x000ffaa",
       "spectacular": 10,
-      "reflection": 0.5,
+      "reflection": 0,
       "density": 1,
       "transparency": 0
     }
@@ -88,25 +88,25 @@
   [
     {
       "type": "ambient",
-      "intensity": 0
+      "intensity": 0.1
     },
     {
       "type": "point",
-      "position": [0, 3,  0],
+      "position": [0, 3,  -3],
       "intensity": 1
     }
   ],
   "cam":
   {
     "position": [0,0,-15.0],
-    "rotation": [0.0,0.0,0.0]
+    "rotation": [0.0,0,0.0]
   },
   "params":
   {
     "width": 1920,
     "height": 1080,
     "antialias": 2,
-    "depth": 2,
+    "depth": 0,
     "filter": "0"
   }
 }
