@@ -6,12 +6,11 @@
 /*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/25 14:08:10 by abutok            #+#    #+#             */
-/*   Updated: 2017/10/25 17:14:37 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/21 22:14:50 by arudyi           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 {
