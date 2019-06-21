@@ -5,7 +5,7 @@
 		  "center2": [0, 0, 7],
 		  "radius": 3,
 		  "color": "0xcccccc",
-		  "spectacular": 10,
+		  "spectacular": 100,
 		  "reflection": 0.5,
 		  "transparency": 0.5,
 		  "density": 1.0
@@ -49,7 +49,7 @@
 			"normal": [1, 0, 0],
 			"point": [-1, 5, 0],
 			"color": "0xffbbaa",
-			"spectacular": 10,
+			"spectacular": 100,
 			"reflection": 0.2,
 			"transparency": 0.84,
 			"density": 1,
@@ -58,11 +58,11 @@
 	],
 	"lights": [ {
 			"type": "point",
-			"position": [0.0, 0, 0],
+			"position": [0.0, 0, -10],
 			"intensity": 1.0
 		}, {
 			"type": "point",
-			"position": [0.0, 0, 0],
+			"position": [0.0, 0, -10],
 			"intensity": 1.0
 		}
 	],

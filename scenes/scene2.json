@@ -287,8 +287,8 @@
   },
   "params":
   {
-    "width": 800,
-    "height": 600,
+    "width": 1920,
+    "height": 1080,
     "antialias": 2,
     "depth": 2,
     "filter": "0x00ffff"

@@ -27,8 +27,8 @@ float			check_sphere_intersection(t_ray *ray, __global t_figure *figure, float3 
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		x1 = x1 <= 1e-3 ? x2 :
-				(x2 <= 1e-3 ? x1 :
+		x1 = x1 <= 1e-2 ? x2 :
+				(x2 <= 1e-2 ? x1 :
 				(x1 <= x2 ? x1 : x2));
 		if (normal != 0)
 			*normal = normalize(ray->o + ray->v * x2 - figure->vector1);
@@ -39,9 +39,9 @@ float			check_sphere_intersection(t_ray *ray, __global t_figure *figure, float3 
 
 float			check_infinite_plane_intersection(t_ray *ray, __global t_figure *figure, float3 *normal)
 {
-	if (figure->vector1.x >= 1e-3 || figure->vector1.x <= -1e-3 ||
-		figure->vector1.y >= 1e-3 || figure->vector1.y <= -1e-3 ||
-		figure->vector1.z >= 1e-3 || figure->vector1.z <= -1e-3)
+	if (figure->vector1.x >= 1e-2 || figure->vector1.x <= -1e-2 ||
+		figure->vector1.y >= 1e-2 || figure->vector1.y <= -1e-2 ||
+		figure->vector1.z >= 1e-2 || figure->vector1.z <= -1e-2)
 	{
 		if (normal != 0)
 			*normal = figure->vector1;
@@ -70,8 +70,8 @@ float			check_infinite_cylinder_intersection(t_ray *ray, __global t_figure *figu
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		x1 = x1 <= 1e-3 ? x2 :
-				(x2 <= 1e-3 ? x1 :
+		x1 = x1 <= 1e-2 ? x2 :
+				(x2 <= 1e-2 ? x1 :
 				(x1 <= x2 ? x1 : x2));
 		if (normal != 0)
 			*normal = normalize(ray->o + ray->v * x1 - figure->vector1 -
@@ -107,8 +107,8 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 		cd = INFINITY;
 		if (x1 || x2)
 		{
-			x1 = (x1 < x2 || x2 < 1e-3) && x1 > 1e-3  ? x1 : x2;
-			cap_center = (x1 < x2 || x2 < 1e-3) && x1 > 1e-3 ?
+			x1 = (x1 < x2 || x2 < 1e-2) && x1 > 1e-2  ? x1 : x2;
+			cap_center = (x1 < x2 || x2 < 1e-2) && x1 > 1e-2 ?
 				figure->vector1 :
 				(figure->vector1 + (figure->vector2 * figure->param2));
 			intersection = ray->v * (x1) + ray->o;
@@ -121,8 +121,8 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 			* x1 + dot(ray->o - figure->vector1, figure->vector2);
 		b = dot(ray->v, figure->vector2)
 			* x2 + dot(ray->o - figure->vector1, figure->vector2);
-		if (((x1 > 1e-3 && x2 > 1e-3 && x1 >= x2) ||
-			(x1 <= 1e-3 && x2 > 1e-3)) && (b > 0 && b < figure->param2))
+		if (((x1 > 1e-2 && x2 > 1e-2 && x1 >= x2) ||
+			(x1 <= 1e-2 && x2 > 1e-2)) && (b > 0 && b < figure->param2))
 		{
 			if (cd > x2)
 			{
@@ -136,8 +136,8 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 				*normal = figure->vector2;
 			return (cd);
 		}
-		else if (((x1 > 1e-3 && x2 > 1e-3 && x1 < x2) ||
-			(x1 > 1e-3 && x2 <= 1e-3))
+		else if (((x1 > 1e-2 && x2 > 1e-2 && x1 < x2) ||
+			(x1 > 1e-2 && x2 <= 1e-2))
 			&& (a > 0 && a < figure->param2))
 		{
 			if (cd > x1)
@@ -152,7 +152,7 @@ float			check_cylinder_intersection(t_ray *ray, __global t_figure *figure, float
 				*normal = figure->vector2;
 			return (cd);
 		}
-		else if (cd > 1e-3 && cd != INFINITY)
+		else if (cd > 1e-2 && cd != INFINITY)
 		{
 			if (normal != 0)
 				*normal = figure->vector2;
@@ -181,8 +181,8 @@ float			check_infinite_cone_intersection(t_ray *ray, __global t_figure *figure, 
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		x1 = x1 <= 1e-3 ? x2 :
-				(x2 <= 1e-3 ? x1 :
+		x1 = x1 <= 1e-2 ? x2 :
+				(x2 <= 1e-2 ? x1 :
 				(x1 <= x2 ? x1 : x2));
 		if (normal != 0)
 			*normal = normalize(ray->o + ray->v * x1 - figure->vector1 - figure->vector2 *
@@ -221,9 +221,9 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 		cd = INFINITY;
 		if (x1 || x2)
 		{
-			if ((x1 < x2 || x2 < 1e-3) && x1 > 1e-3)
+			if ((x1 < x2 || x2 < 1e-2) && x1 > 1e-2)
 				cap_distance = figure->param2;
-			else if ((x1 > x2 || x1 < 1e-3) && x2 > 1e-3)
+			else if ((x1 > x2 || x1 < 1e-2) && x2 > 1e-2)
 			{
 				x1 = x2;
 				cap_distance = figure->param3;
@@ -239,10 +239,10 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 			* x1 + dot(ray->o - figure->vector1, figure->vector2);
 		b = dot(ray->v, figure->vector2)
 			* x2 + dot(ray->o - figure->vector1, figure->vector2);
-		if (((x1 > 1e-3 && x2 > 1e-3 && x1 > x2) ||
-			(x1 < 1e-3 && x2 > 1e-3)) && b > figure->param2 && b < figure->param3)
+		if (((x1 > 1e-2 && x2 > 1e-2 && x1 > x2) ||
+			(x1 < 1e-2 && x2 > 1e-2)) && b > figure->param2 && b < figure->param3)
 		{
-			if (cd > x2)
+			if (cd >= x2)
 			{
 				if (normal != 0)
 					*normal = normalize(ray->o + ray->v * x2 - figure->vector1 - figure->vector2 *
@@ -254,10 +254,10 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 				*normal = figure->vector2;
 			return (cd);
 		}
-		else if (((x1 > 1e-3 && x2 > 1e-3 && x1 < x2) ||
-			(x1 > 1e-3 && x2 < 1e-3)) && a > figure->param2 && a < figure->param3)
+		else if (((x1 > 1e-2 && x2 > 1e-2 && x1 < x2) ||
+			(x1 > 1e-2 && x2 < 1e-2)) && a > figure->param2 && a < figure->param3)
 		{
-			if (cd > x1)
+			if (cd >= x1)
 			{
 				if (normal != 0)
 					*normal = normalize(ray->o + ray->v * x1 - figure->vector1 - figure->vector2 *
@@ -269,7 +269,7 @@ float			check_cone_intersection(t_ray *ray, __global t_figure *figure, float3 *n
 				*normal = figure->vector2;
 			return (cd);
 		}
-		else if (cd > 1e-3 && cd != INFINITY)
+		else if (cd > 1e-2 && cd != INFINITY)
 		{
 			if (normal != 0)
 				*normal = figure->vector2;
@@ -288,9 +288,9 @@ float			check_triangle_intersection(t_ray *ray, __global t_figure *figure, float
 	float	distance;
 
 	n = normalize(cross(figure->vector1 - figure-> vector2, figure->vector3 - figure->vector2));
-	if (n.x >= 1e-3 || n.x <= -1e-3 ||
-		n.y >= 1e-3 || n.y <= -1e-3 ||
-		n.z >= 1e-3 || n.z <= -1e-3)
+	if (n.x >= 1e-2 || n.x <= -1e-2 ||
+		n.y >= 1e-2 || n.y <= -1e-2 ||
+		n.z >= 1e-2 || n.z <= -1e-2)
 	{
 		if (normal != 0)
 			*normal = n;
@@ -320,8 +320,8 @@ float			check_ellipsoid_intersection(t_ray *ray, __global t_figure *figure, floa
 	{
 		x1 = ((-b) + sqrt(d)) / a;
 		x2 = ((-b) - sqrt(d)) / a;
-		x1 = x1 < 1e-3 ? x2 :
-	 		(x2 < 1e-3 ? x1 :
+		x1 = x1 < 1e-2 ? x2 :
+	 		(x2 < 1e-2 ? x1 :
 	 		(x1 < x2 ? x1 : x2));
 		if (normal != 0)
 		{
