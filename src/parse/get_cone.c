@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_cone.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: abutok <abutok@student.42.fr>              +#+  +:+       +#+        */
+/*   By: tmaluh <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/03/16 10:12:00 by abutok            #+#    #+#             */
-/*   Updated: 2019/06/21 17:27:25 by abutok           ###   ########.fr       */
+/*   Updated: 2019/06/21 22:32:24 by tmaluh           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ bool		get_cone(t_figure *figure, JSON_Object *obj, SDL_PixelFormat *pf)
 	if (!get_figure_params(figure, obj, pf))
 		return (false);
 	figure->vector2 = normalize(figure->vector2);
-	if (fabs(figure->param2 - figure->param3) < 0.01f &&
+	if (fabs(figure->param2 - figure->param3) < 0.01f ||
 		(figure->param2 < 0 || figure->param3 < 0))
 		return (false);
 	if (figure->param2 > figure->param3)
