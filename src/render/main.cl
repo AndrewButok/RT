@@ -61,7 +61,7 @@ inline __attribute__((always_inline)) float			trace_spectacular(float3 l, float3
 
 	h = view + l;
 	d = dot(h, normal);
-	if (d > 1e-2)
+	if (d > 1e-3)
 		return (buf.x * pow(d / length(h), buf.y));
 	else
 		return (0);
@@ -76,7 +76,7 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 	int		i;
 	float	transparency;
 
-	if (dot(normal, ray->v) >= 1e-2)
+	if (dot(normal, ray->v) >= 1e-3)
 		normal = normal * (-1);
 	i = 0;
 	while (i < params[3])
@@ -88,19 +88,19 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 			if (lights[i].type == Point)
 			{
 				light = lights[i].position - intersection;
-				transparency = check_light(intersection, light, figures, params, figure, 1, 1e-2);
+				transparency = check_light(intersection, light, figures, params, figure, 1, 1e-3);
 			}
 			else if (lights[i].type == Parallel)
 			{
 				light = -lights[i].position;
-				transparency = check_light(intersection, light, figures, params, figure, INFINITY, 1e-2);
+				transparency = check_light(intersection, light, figures, params, figure, INFINITY, 1e-3);
 			}
 			if (transparency != 0)
 				{
-					if (dot(normal, light) > 1e-2)
+					if (dot(normal, light) > 1e-3)
 						bright += lights[i].intensity * transparency * dot(normal, light) /
 							length(light);
-					if (dot(normal, light) > 1e-2 && figure->spectacular > 0)
+					if (dot(normal, light) > 1e-3 && figure->spectacular > 0)
 						reflected += trace_spectacular(light, normal, ray->v * (-1),
 							(float3)(lights[i].intensity, figure->spectacular, 0.0f));
 				}
