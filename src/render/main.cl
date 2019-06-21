@@ -13,7 +13,7 @@ float			check_light(float3 intersection, float3 light,
 	{
 		k = -1.0f;
 		k = check_intersection(&ray, &(figures[i]), 0);
-		if (k < max && k >= min)
+		if (k <= max && k >= min)
 			transparency -= (1 - figures[i].transparency);
 		i++;
 	}
@@ -61,7 +61,7 @@ inline __attribute__((always_inline)) float			trace_spectacular(float3 l, float3
 
 	h = view + l;
 	d = dot(h, normal);
-	if (d > 0)
+	if (d > 1e-3)
 		return (buf.x * pow(d / length(h), buf.y));
 	else
 		return (0);
@@ -76,7 +76,7 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 	int		i;
 	float	transparency;
 
-	if (dot(normal, ray->v) >= 0)
+	if (dot(normal, ray->v) >= 1e-3)
 		normal = normal * (-1);
 	i = 0;
 	while (i < params[3])
@@ -97,10 +97,10 @@ __global int *params, t_ray *ray, __global t_figure *figure, float3 normal, floa
 			}
 			if (transparency != 0)
 				{
-					if (dot(normal, light) > 0)
+					if (dot(normal, light) > 1e-3)
 						bright += lights[i].intensity * transparency * dot(normal, light) /
 							length(light);
-					if (dot(normal, light) > 0 && figure->spectacular > 0)
+					if (dot(normal, light) > 1e-3 && figure->spectacular > 0)
 						reflected += trace_spectacular(light, normal, ray->v * (-1),
 							(float3)(lights[i].intensity, figure->spectacular, 0.0f));
 				}
